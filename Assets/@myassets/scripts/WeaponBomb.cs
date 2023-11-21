@@ -7,14 +7,22 @@ using UnityEngine;
 public class WeaponBomb : Weapon
 {
     [SerializeField]
+    float explosionRad = 30f;
+    [SerializeField]
+    float damage = 100f;
+    [SerializeField]
     float launchSpeed = 1;
     [SerializeField]
     GameObject testThing;
+    bool bombDropped = false;
+
+
+    Rigidbody myRigidBody;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        myRigidBody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -23,9 +31,12 @@ public class WeaponBomb : Weapon
         GetBombImpactPoint(0);
     }
 
-    public override void Launch()
+    public override void Launch(Vector3 inSpeed)
     {
-
+        bombDropped = false;
+        transform.parent = null;
+        myRigidBody.isKinematic = false;
+        myRigidBody.velocity = transform.forward * (launchSpeed + inSpeed.magnitude);
     }
 
     public Vector3 GetBombImpactPoint(float currentSpeed)
@@ -53,4 +64,16 @@ public class WeaponBomb : Weapon
         return impactPoint;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag=="Ground" || other.tag == "Enemy")
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public override LockType ReturnLockType()
+    {
+        return LockType.UNGUIDED;
+    }
 }

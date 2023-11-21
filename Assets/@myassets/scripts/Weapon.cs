@@ -8,6 +8,8 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
+    public enum LockType { UNGUIDED, ALL, AIR, GROUND };
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,5 +22,6 @@ public abstract class Weapon : MonoBehaviour
         
     }
 
-    public abstract void Launch();
+    public abstract void Launch(Vector3 inSpeed);
+    public abstract LockType ReturnLockType();
 }
