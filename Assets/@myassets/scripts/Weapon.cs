@@ -24,4 +24,9 @@ public abstract class Weapon : MonoBehaviour
 
     public abstract void Launch(Vector3 inSpeed);
     public abstract LockType ReturnLockType();
+
+    public virtual void SetTarget(Transform targetTrans)
+    {
+
+    }
 }
