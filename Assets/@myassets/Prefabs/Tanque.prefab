@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &482734133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 482734134}
+  m_Layer: 0
+  m_Name: PosicionDisparo
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &482734134
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482734133}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.046, y: 0.536, z: 0.707}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5827310229119602960}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5827310228858861729
 GameObject:
   m_ObjectHideFlags: 0
@@ -49,6 +80,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   torreta: {fileID: 5827310229119602975}
+  coolDown: 6
+  spawnPoint: {fileID: 482734133}
+  misil: {fileID: 3763984019793927996, guid: 315fd3574bdd1654bacb07939da53174, type: 3}
+  launchSpeed: 1000
 --- !u!54 &1606837101
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -107,6 +142,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6292789519539941299}
+  - {fileID: 482734134}
   m_Father: {fileID: 5827310228858861730}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
