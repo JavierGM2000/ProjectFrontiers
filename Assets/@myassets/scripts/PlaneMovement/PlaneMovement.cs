@@ -13,6 +13,20 @@ public class PlaneMovement : MonoBehaviour
     public float velocityMultiplier;
     public InputAction thrustAction;
 
+    [SerializeField]
+    private float pitchMultiplier;
+    [SerializeField]
+    private float yawMultiplier;
+    [SerializeField]
+    private float rollMultiplier;
+
+    [SerializeField]
+    private float speedMultiplier;
+    [SerializeField]
+    private float maxVel;
+    [SerializeField]
+    private float thrustIncrementMultiplier;
+
 
     private void Awake()
     {
@@ -43,9 +57,9 @@ public class PlaneMovement : MonoBehaviour
         Debug.Log("Thrust = " + thrustAction.ReadValue<float>());
         Debug.Log("Velocity = " + velocityMultiplier);*/
 
-        velocityMultiplier += thrustAction.ReadValue<float>()*0.2f * Time.deltaTime;
-        velocityMultiplier = Mathf.Clamp(velocityMultiplier, 0, 1);
-        transform.position += transform.forward * velocityMultiplier*Time.deltaTime*15;
-        transform.Rotate(new Vector3(-1*pitchAction.ReadValue<float>()* Time.deltaTime*90, yawAction.ReadValue<float>() * Time.deltaTime * 50, -1*rollAction.ReadValue<float>() * Time.deltaTime * 90));
+        velocityMultiplier += thrustAction.ReadValue<float>()*thrustIncrementMultiplier * Time.deltaTime;
+        velocityMultiplier = Mathf.Clamp(velocityMultiplier, 0, maxVel);
+        transform.position += transform.forward * velocityMultiplier*Time.deltaTime*speedMultiplier;
+        transform.Rotate(new Vector3(-1*pitchAction.ReadValue<float>()* Time.deltaTime*pitchMultiplier, yawAction.ReadValue<float>() * Time.deltaTime * yawMultiplier, -1*rollAction.ReadValue<float>() * Time.deltaTime * rollMultiplier));
     }
 }
