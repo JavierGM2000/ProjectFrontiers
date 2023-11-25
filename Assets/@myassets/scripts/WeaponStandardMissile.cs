@@ -25,21 +25,23 @@ public class WeaponStandardMissile : Weapon
     [SerializeField]
     float targetSpeed = 400f;
     [SerializeField]
-    float accelerationTime = 1.0f;
-    float necessaryforce;
+    float acceleration = 200f;
 
+
+    [SerializeField]
     Transform target;
     Rigidbody targetRigidbody;
 
     Rigidbody myRigidBody;
 
-    
+    Vector3 previousPos;
 
     // Start is called before the first frame update
     void Start()
     {
         aliveTime += activationTime;
         myRigidBody = GetComponent<Rigidbody>();
+        targetRigidbody = target.GetComponent<Rigidbody>(); // DEBUG ONLY REMOVE LATER
     }
 
     // Update is called once per frame
@@ -48,9 +50,9 @@ public class WeaponStandardMissile : Weapon
         if (isLaunched)
         {
             activationTimer += Time.deltaTime;
-            if (activationTime <= activationTimer)
+            if (activationTime <= activationTimer && !isActive)
             {
-                isActive = true;
+                missileActivate();
             }
             if (isActive)
             {
@@ -61,27 +63,69 @@ public class WeaponStandardMissile : Weapon
             }
             if (activationTimer > aliveTime)
             {
-                //KILL MISSILE
+                Destroy(this.gameObject);
             }
             
         } 
     }
 
+    private void missileActivate()
+    {
+        myRigidBody.useGravity = false;
+        previousPos = target.position;
+        isActive = true;
+        
+    }
+
     private void ActiveMissileUpdate()
     {
         float distanceToTarget = (target.position - transform.position).magnitude;
-        Debug.Log(distanceToTarget);
+        //Debug.Log(distanceToTarget);
         if (distanceToTarget <= distanceFuze)
         {
             Debug.Log("Distance Fuze Activated");
             Destroy(gameObject);
         }
+        float currentMaxTurn = (myRigidBody.velocity.magnitude / targetSpeed) * maxTurnRate;
+
+        float distaceToPrevious = (previousPos - transform.position).magnitude;
+        float secondsAway = distaceToPrevious / myRigidBody.velocity.magnitude;
+
+        Vector3 trackedDirection = targetRigidbody.velocity.normalized; // Where enemy is going
+        float trackedSpeed = targetRigidbody.velocity.magnitude; // How fast the enemy is going
+        Vector3 newObjectivePost = target.position + trackedDirection * (trackedSpeed * secondsAway); // where the enemy will be when we arrive
+        Debug.Log(Vector3.Angle(transform.forward, newObjectivePost - transform.position));
+        if(Vector3.Angle(transform.forward, (target.position - transform.position).normalized) >= lockAngle)
+        {
+            Debug.Log("Lost lock");
+            lostLock = true;
+            return;
+        }
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, newObjectivePost - transform.position, currentMaxTurn * Mathf.Deg2Rad * Time.deltaTime, 0.0f);
+        transform.rotation = Quaternion.LookRotation(newDirection);
+
+        if (myRigidBody.velocity.magnitude < targetSpeed)
+        {
+            myRigidBody.velocity = transform.forward * (myRigidBody.velocity.magnitude + (acceleration * Time.deltaTime));
+        }
+        else
+        {
+            myRigidBody.velocity = transform.forward * myRigidBody.velocity.magnitude;
+        }
+        previousPos = target.position;
+    }
+
+    public void LaunchTest()
+    {
+        Launch(new Vector3(0, 0, 0));
     }
 
     public override void Launch(Vector3 inSpeed)
     {
         transform.parent = null;
         myRigidBody.isKinematic = false;
+        myRigidBody.velocity = inSpeed;
+        isLaunched = true;
     }
 
     public override LockType ReturnLockType()
