@@ -77,11 +77,12 @@ public class PlaneMovementV2 : MonoBehaviour
     void Update()
     {
         HandleInput();
+        
         float angleDown = Vector3.Angle(Vector3.down, transform.forward);
-        throttleText.text = "Throttle: " + throttle + " gravForce : " + (gravity - (rb.velocity.magnitude * 9.8f / 30f) + " gravAngle : "+ (gravity - (angleDown * 9.8f / 90)).ToString("F1"));
+        throttleText.text = "Throttle: " + throttle;// + " gravForce : " + (gravity - (rb.velocity.magnitude * 9.8f / 30f) + " gravAngle : "+ (gravity - (angleDown * 9.8f / 90)).ToString("F1"));
         velocityText.text = "Velocity: " + rb.velocity.magnitude + "Potencial: " + potencial; 
         angleWithFloorText.text = "Angle: " + Vector3.Angle(Vector3.down, transform.forward);
-
+        
         
         Vector3 rotation = new Vector3(-45*pitchAction.ReadValue<float>(),45*yawAction.ReadValue<float>()  ,-45 * rollAction.ReadValue<float>() );
        
@@ -91,7 +92,7 @@ public class PlaneMovementV2 : MonoBehaviour
     private void FixedUpdate()
     {   float angleDown = Vector3.Angle(Vector3.down, transform.forward);
 
-        float appliedGravityForce = gravity - (rb.velocity.magnitude * 9.8f / 30f);
+        float appliedGravityForce = gravity - (rb.velocity.magnitude * 9.8f / 40f);
 
         
         rb.AddForce(transform.forward * (maxThrust * throttle)*Time.deltaTime* deltaTimeFixMultiplier*2);
@@ -102,24 +103,24 @@ public class PlaneMovementV2 : MonoBehaviour
 
         //rb.AddForce(Vector3.up * rb.velocity.magnitude * lift );
         
-        if (angleDown < 90)
+        if (angleDown < 80)
         {
             if (potencial >= maxPotencial)
             {
                 potencial = maxPotencial;
             }
             else { 
-                 potencial += (1-(angleDown * 1f / 90))* Time.deltaTime/2;
+                 potencial += (1-(angleDown * 1f / 90))* Time.deltaTime;
             }
-            if (potencial <= 0.1f && potencial > 0) {
-                rb.AddForce(Vector3.up * -appliedGravityForce * Time.deltaTime * deltaTimeFixMultiplier, ForceMode.Acceleration);
+            if (potencial <= 0.06f && potencial > 0) {
+                rb.AddForce(Vector3.up * -appliedGravityForce * 2 * Time.deltaTime * deltaTimeFixMultiplier, ForceMode.Acceleration);
             }
 
             //rb.AddForce(transform.forward * (gravity - (angleDown * 9.8f / 90))*5, ForceMode.Acceleration);
         }
         else {
 
-            rb.AddForce(Vector3.up * -appliedGravityForce*Time.deltaTime * deltaTimeFixMultiplier, ForceMode.Acceleration);
+            rb.AddForce(Vector3.up * -appliedGravityForce*2*Time.deltaTime * deltaTimeFixMultiplier, ForceMode.Acceleration);
             rb.AddForce(transform.forward * gravity * potencial * 2 * Time.deltaTime * deltaTimeFixMultiplier);
            // rb.AddForce(-rb.velocity.normalized * ((angleDown * 3f / 90)), ForceMode.Acceleration);
 
@@ -130,7 +131,7 @@ public class PlaneMovementV2 : MonoBehaviour
         }
         else
         {
-            potencial -= (angleDown * 1f / 180) * Time.deltaTime/2;
+            potencial -= (angleDown * 1f / 180) * Time.deltaTime/4;
         }
        
         rb.AddForce(transform.forward * gravity * potencial*5*Time.deltaTime * deltaTimeFixMultiplier, ForceMode.Acceleration);
@@ -145,6 +146,7 @@ public class PlaneMovementV2 : MonoBehaviour
         pitch = pitchAction.ReadValue<float>();
         yaw = yawAction.ReadValue<float>();
         roll = rollAction.ReadValue<float>();
+
         throttle += throttleAction.ReadValue<float>() * throttleIncrement*Time.deltaTime;
         throttle = Mathf.Clamp(throttle, 0f, 100f);
     }
