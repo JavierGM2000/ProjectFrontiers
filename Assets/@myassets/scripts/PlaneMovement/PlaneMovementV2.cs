@@ -80,7 +80,7 @@ public class PlaneMovementV2 : MonoBehaviour
         
         float angleDown = Vector3.Angle(Vector3.down, transform.forward);
         throttleText.text = "Throttle: " + throttle;// + " gravForce : " + (gravity - (rb.velocity.magnitude * 9.8f / 30f) + " gravAngle : "+ (gravity - (angleDown * 9.8f / 90)).ToString("F1"));
-        velocityText.text = "Velocity: " + rb.velocity.magnitude + "Potencial: " + potencial; 
+        velocityText.text = "Velocity: " + rb.velocity.magnitude /*+ "Potencial: " + potencial*/; 
         angleWithFloorText.text = "Angle: " + Vector3.Angle(Vector3.down, transform.forward);
         
         

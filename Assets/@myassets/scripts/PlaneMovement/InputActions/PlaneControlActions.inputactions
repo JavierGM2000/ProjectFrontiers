@@ -34,12 +34,12 @@
                 },
                 {
                     "name": "Thrust",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "14567627-5db7-4b6b-a156-c6cf7014e598",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -212,6 +212,39 @@
                     "name": "positive",
                     "id": "d286737f-1631-46a4-ab8b-6abf8647a2b0",
                     "path": "<XRController>{LeftHand}/trigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Thrust",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "fa8d47a1-f5fb-470c-b35d-e7c715657264",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Thrust",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "1825cb04-93fa-4466-8ba0-61fc59f7f84c",
+                    "path": "<HID::Thrustmaster T.16000M>/hat/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Thrust",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "66dbc74b-3437-4838-87d5-1b14e60f46ed",
+                    "path": "<HID::Thrustmaster T.16000M>/hat/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
