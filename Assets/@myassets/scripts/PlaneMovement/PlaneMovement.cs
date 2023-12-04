@@ -44,6 +44,7 @@ public class PlaneMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         velocityMultiplier = 0;
     }
 
