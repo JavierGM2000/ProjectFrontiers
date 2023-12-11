@@ -8,7 +8,7 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
-    public enum LockType { UNGUIDED, ALL, AIR, GROUND };
+    public enum LockType { ALL, AIR, GROUND, GROUND_UNGUIDED };
 
     // Start is called before the first frame update
     void Start()
@@ -23,10 +23,20 @@ public abstract class Weapon : MonoBehaviour
     }
 
     public abstract void Launch(Vector3 inSpeed);
-    public abstract LockType ReturnLockType();
+    public abstract LockType getLockType();
 
     public virtual void SetTarget(Transform targetTrans)
     {
 
+    }
+
+    public virtual float getLockAngle()
+    {
+        return -1;
+    }
+
+    public virtual float getLockDistance()
+    {
+        return -1;
     }
 }

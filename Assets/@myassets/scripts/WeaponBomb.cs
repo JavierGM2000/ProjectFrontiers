@@ -72,8 +72,8 @@ public class WeaponBomb : Weapon
         }
     }
 
-    public override LockType ReturnLockType()
+    public override LockType getLockType()
     {
-        return LockType.UNGUIDED;
+        return LockType.GROUND_UNGUIDED;
     }
 }

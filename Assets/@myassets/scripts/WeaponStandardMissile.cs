@@ -12,6 +12,8 @@ public class WeaponStandardMissile : Weapon
     bool lostLock = false;
 
     [SerializeField]
+    private float lockDistance = 2800;
+    [SerializeField]
     float activationTime = 0.5f;
     float activationTimer;
     [SerializeField]
@@ -179,7 +181,7 @@ public class WeaponStandardMissile : Weapon
         isLaunched = true;
     }
 
-    public override LockType ReturnLockType()
+    public override LockType getLockType()
     {
         return LockType.ALL;
     }
@@ -188,6 +190,16 @@ public class WeaponStandardMissile : Weapon
     {
         target = targetTrans;
         targetRigidbody = target.GetComponent<Rigidbody>();
+    }
+
+    public override float getLockAngle()
+    {
+        return lockAngle;
+    }
+
+    public virtual float getLockDistance()
+    {
+        return lockDistance;
     }
 
     private void OnCollisionEnter(Collision collision)
