@@ -1,31 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using TMPro;
 public class PlaneMovement : MonoBehaviour
 {
+    public float deltaTimeFixMultiplier = 10f;
+    public float maxThrust = 1000f;
+    public float throttleIncrement = 0.1f;
+    public float responsiveness = 10f;
+
+    public float speedFactor = 1.0f;
+ 
+    private float maxSpeed = 300;
+    public float sigmoidOffset = 0.3f;
+    public float lowThrottleSpeedFactor = 1.5f;
+
+
 
     public PlaneControlActions planeControls;
     public InputAction pitchAction;
     public InputAction rollAction;
     public InputAction yawAction;
-    public float velocityMultiplier;
-    public InputAction thrustAction;
+    public InputAction throttleAction;
+    private float throttle;
+    private float roll;
+    private float pitch;
+    private float yaw;
+    
 
     [SerializeField]
-    private float pitchMultiplier;
+    private TMP_Text throttleText;
     [SerializeField]
-    private float yawMultiplier;
-    [SerializeField]
-    private float rollMultiplier;
+    private TMP_Text velocityText;
+    private float responseModifier
+    {
+        get
+        {
+            return (rb.mass / 10f) * responsiveness;
+        }
 
-    [SerializeField]
-    private float speedMultiplier;
-    [SerializeField]
-    private float maxVel;
-    [SerializeField]
-    private float thrustIncrementMultiplier;
+    }
+
+    Rigidbody rb;
+
+
 
 
     private void Awake()
@@ -34,33 +51,58 @@ public class PlaneMovement : MonoBehaviour
         pitchAction = planeControls.PlaneMap.Pitch;
         rollAction = planeControls.PlaneMap.Roll;
         yawAction = planeControls.PlaneMap.Yaw;
-        thrustAction = planeControls.PlaneMap.Thrust;
+        throttleAction = planeControls.PlaneMap.Thrust;
         pitchAction.Enable();
         rollAction.Enable();
         yawAction.Enable();
-        thrustAction.Enable();
-
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-        velocityMultiplier = 0;
+        throttleAction.Enable();
+        rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
+    {
+        throttle = 0;
+    }
+
+
+    private void Update()
+    {
+        HandleInput();
+        handleThrottle();
+        throttleText.text = "Throttle: " + throttle;
+        velocityText.text = "Velocity: " + rb.velocity.magnitude;
+    }
+
+    private void FixedUpdate()
     {
         
-        /*Debug.Log("Pitch = "+pitchAction.ReadValue<float>());
-        Debug.Log("Yaw = " + yawAction.ReadValue<float>());
-        Debug.Log("Roll = " + rollAction.ReadValue<float>());
-        Debug.Log("Thrust = " + thrustAction.ReadValue<float>());
-        Debug.Log("Velocity = " + velocityMultiplier);*/
+        float currentSpeed = rb.velocity.magnitude;
+        float adjustedThrottle = Mathf.Clamp01(rb.velocity.magnitude / maxSpeed);
+        float adjustedThrust = maxThrust * throttle * CustomSigmoid(adjustedThrottle);
+       
+        rb.AddTorque(transform.up * yaw * responseModifier * Time.deltaTime * deltaTimeFixMultiplier / 1.4f);
+        rb.AddTorque(-transform.right * pitch * responseModifier * Time.deltaTime * deltaTimeFixMultiplier);
+        rb.AddTorque(-transform.forward * roll * responseModifier * Time.deltaTime * deltaTimeFixMultiplier);
 
-        velocityMultiplier += thrustAction.ReadValue<float>()*thrustIncrementMultiplier * Time.deltaTime;
-        velocityMultiplier = Mathf.Clamp(velocityMultiplier, 0, maxVel);
-        transform.position += transform.forward * velocityMultiplier*Time.deltaTime*speedMultiplier;
-        transform.Rotate(new Vector3(-1*pitchAction.ReadValue<float>()* Time.deltaTime*pitchMultiplier, yawAction.ReadValue<float>() * Time.deltaTime * yawMultiplier, -1*rollAction.ReadValue<float>() * Time.deltaTime * rollMultiplier));
+        rb.AddForce(transform.forward * adjustedThrust * Time.deltaTime, ForceMode.Acceleration);
+    }
+    private float CustomSigmoid(float x)
+    {
+        return 1.0f / (1.0f + Mathf.Exp(-responsiveness * (x - sigmoidOffset)));
+    }
+
+
+    private void HandleInput()
+    {
+        pitch = pitchAction.ReadValue<float>();
+        yaw = yawAction.ReadValue<float>();
+        roll = rollAction.ReadValue<float>();
+
+
+    }
+    private void handleThrottle()
+    {
+        throttle += throttleAction.ReadValue<float>() * throttleIncrement * Time.deltaTime;
+        throttle = Mathf.Clamp(throttle, 0f, 100f);
     }
 }

@@ -6,7 +6,9 @@ using TMPro;
 
 public class PlaneMovementV2 : MonoBehaviour
 {
-    public  float deltaTimeFixMultiplier = 10f;
+    public throttleController throttleObject;
+
+    public  float deltaTimeFixMultiplier = 10f; 
 
     public float throttleIncrement = 0.1f;
 
@@ -23,6 +25,8 @@ public class PlaneMovementV2 : MonoBehaviour
 
     private float currentSpeed;
     public float accelerationSpeed = 100f;
+    private float targetThrottle = 0f;
+    public float throttleSmoothSpeed = 2f;
 
     [SerializeField]
     private TMP_Text throttleText;
@@ -99,14 +103,14 @@ public class PlaneMovementV2 : MonoBehaviour
         if (stall)
         {
             if (stallObject.gameObject.active == false) {
-                stallObject.gameObject.active = true;
+               // stallObject.gameObject.active = true;
             }
         }
         else
         {
             if (stallObject.gameObject.active == true)
             {
-                stallObject.gameObject.active = false;
+                //stallObject.gameObject.active = false;
             }
             
 
@@ -116,7 +120,7 @@ public class PlaneMovementV2 : MonoBehaviour
         Debug.Log("Velocity = " + rb.velocity.magnitude);
         
         float angleDown = Vector3.Angle(Vector3.down, transform.forward);
-        throttleText.text = "Throttle: " + throttle;// + " gravForce : " + (gravity - (rb.velocity.magnitude * 9.8f / 30f) + " gravAngle : "+ (gravity - (angleDown * 9.8f / 90)).ToString("F1"));
+        // + " gravForce : " + (gravity - (rb.velocity.magnitude * 9.8f / 30f) + " gravAngle : "+ (gravity - (angleDown * 9.8f / 90)).ToString("F1"));
         velocityText.text = "Velocity: " + rb.velocity.magnitude /*+ "Potencial: " + potencial*/; 
         angleWithFloorText.text = "Angle: " + Vector3.Angle(Vector3.down, transform.forward) + "Stall: " + stall;
         
@@ -136,31 +140,32 @@ public class PlaneMovementV2 : MonoBehaviour
         float angleDown = Vector3.Angle(Vector3.down, transform.forward);
 
         float appliedGravityForce = gravity - (rb.velocity.magnitude * 9.8f / 100f);
+       // appliedGravityForce = Mathf.Clamp(appliedGravityForce, 0f, gravity);
 
         if (stall)
         {
-            //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDirection), 0.4f*Time.deltaTime);
+            
+            rb.AddForce(Vector3.up * -gravity  * Time.deltaTime * deltaTimeFixMultiplier, ForceMode.Acceleration);
+            rb.AddForce(-rb.velocity.normalized * 10f * Time.deltaTime, ForceMode.Acceleration);
+            rb.angularDrag = 4f;
 
             rb.AddTorque(transform.up * yaw * responseModifier * Time.deltaTime * deltaTimeFixMultiplier / 4.4f);
             rb.AddTorque(-transform.right * pitch * responseModifier * Time.deltaTime * deltaTimeFixMultiplier/2);
             rb.AddTorque(-transform.forward * roll * responseModifier * Time.deltaTime * deltaTimeFixMultiplier/2);
-
-
-
         }
-        else { 
-            
+        else {
+            rb.angularDrag = 1.5f;
             rb.AddTorque(transform.up * yaw * responseModifier *Time.deltaTime * deltaTimeFixMultiplier/2.2f);
             rb.AddTorque(-transform.right * pitch * responseModifier *Time.deltaTime * deltaTimeFixMultiplier);
             rb.AddTorque(-transform.forward * roll * responseModifier * Time.deltaTime * deltaTimeFixMultiplier);
         
         }
         float throttleAdjusted = Mathf.Pow(throttle, 2) / 100f;
-        rb.AddForce(transform.forward * (maxThrust * throttleAdjusted) * Time.deltaTime, ForceMode.Acceleration);
-        //float targetSpeed = throttleAction.ReadValue<float>() * maxThrust;
-        //currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, accelerationSpeed * Time.deltaTime);
-        //rb.AddForce(transform.forward * currentSpeed * Time.deltaTime*deltaTimeFixMultiplier, ForceMode.Acceleration);
-        //rb.AddForce(Vector3.up * rb.velocity.magnitude * lift );
+        //float acceleration = CalculateAcceleration(rb.velocity.magnitude);
+
+       // rb.AddForce(transform.forward * (maxThrust * throttleAdjusted * acceleration) * Time.deltaTime, ForceMode.Acceleration);
+        rb.AddForce(transform.forward * (maxThrust * throttle) * Time.deltaTime, ForceMode.Acceleration);
+        
 
         if (angleDown < 80)
         {
@@ -181,7 +186,9 @@ public class PlaneMovementV2 : MonoBehaviour
 
             rb.AddForce(Vector3.up * -appliedGravityForce*2*Time.deltaTime * deltaTimeFixMultiplier, ForceMode.Acceleration);
             rb.AddForce(transform.forward * gravity * potencial * 2 * Time.deltaTime * deltaTimeFixMultiplier);
-           // rb.AddForce(-rb.velocity.normalized * ((angleDown * 3f / 90)), ForceMode.Acceleration);
+            
+
+            // rb.AddForce(-rb.velocity.normalized * ((angleDown * 3f / 90)), ForceMode.Acceleration);
 
         }
         if (potencial <=0)
@@ -197,7 +204,19 @@ public class PlaneMovementV2 : MonoBehaviour
     
     
     }
+    private float CalculateAcceleration(float velocityMagnitude)
+    {
+        // Ajusta estos valores según tus necesidades
+        float a = 1f;  // Altura máxima de la función
+        float b = 0.5f;  // Altura mínima de la función
+        float k = 1f;  // Pendiente de la curva
+        float x0 = 50f;  // Punto medio de la transición
 
+        // Aplica la función sigmoidal modificada
+        float sigmoidal = a / (0 + Mathf.Exp(-k * (velocityMagnitude - x0))) + b;
+
+        return sigmoidal;
+    }
 
 
 
@@ -209,8 +228,13 @@ public class PlaneMovementV2 : MonoBehaviour
        
     }
     private void handleThrottle() {
-        throttle += throttleAction.ReadValue<float>() * throttleIncrement * Time.deltaTime;
-        throttle = Mathf.Clamp(throttle, 0f, 100f);
+        float targetThrottleInput = throttleAction.ReadValue<float>();
+        targetThrottle += targetThrottleInput * throttleIncrement * Time.deltaTime;
+        targetThrottle = Mathf.Clamp(targetThrottle, 0f,  100);
+
+        // Smoothly adjust the current throttle towards the target
+        throttle = Mathf.Lerp(throttle, targetThrottle, Time.deltaTime * throttleSmoothSpeed);
+        throttleText.text = "Throttle: " + targetThrottle;
     }
 
 
