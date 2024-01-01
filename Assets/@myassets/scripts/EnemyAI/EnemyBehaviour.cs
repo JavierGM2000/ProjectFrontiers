@@ -23,6 +23,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Update()
     {
+        currentGridPosition = transform.position;
         Debug.LogError("counter = "+ counter);
         counter += Time.deltaTime;
         if (counter >= pathRefreshCooldown) { 
