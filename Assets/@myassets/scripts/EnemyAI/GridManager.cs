@@ -57,18 +57,33 @@ public class GridManager : MonoBehaviour
         return grid[x, y, z];
     }
 
-    List<GridMarkerBehaviour> RetracePath(GridMarkerBehaviour startNode, GridMarkerBehaviour endNode)
+    List<Vector3> RetracePath(GridMarkerBehaviour startNode, GridMarkerBehaviour endNode)
     {
-        List<GridMarkerBehaviour> path = new List<GridMarkerBehaviour>();
+        List<Vector3> path = new List<Vector3>();
         GridMarkerBehaviour currentNode = endNode;
 
         while (currentNode != startNode)
         {
-            path.Add(currentNode);
+            path.Add(currentNode.transform.position);
             currentNode = currentNode.parentNode;
         }
-
-        path.Reverse();
+        Debug.Log("path = " + path.Count);
+        int g = 0;
+        foreach (Vector3 marker in path)
+        {
+            Debug.Log("node " + g + " = " + marker.x + ", " + marker.y + ", " + marker.z + ")");
+            g++;
+        }
+        
+       
+        path.Reverse(); 
+        Debug.Log("reversePath = " + path.Count);
+        g = 0;
+        foreach (Vector3 marker in path)
+        {
+            Debug.Log("node " + g + " = " + marker.x + ", " + marker.y + ", " + marker.z + ")");
+            g++;
+        }
         return path;
     }
     List<GridMarkerBehaviour> GetNeighbors(GridMarkerBehaviour currentNode)
@@ -112,21 +127,24 @@ public class GridManager : MonoBehaviour
     {
         GridMarkerBehaviour startNode = GetGridMarkerFromPosition(startPos);
         GridMarkerBehaviour targetNode = GetGridMarkerFromPosition(targetPos);
+        Debug.Log("target = (" + targetNode.x + ", " + targetNode.y + ", " + targetNode.z + ")");
 
         List<GridMarkerBehaviour> openSet = new List<GridMarkerBehaviour>();
         HashSet<GridMarkerBehaviour> closedSet = new HashSet<GridMarkerBehaviour>();
 
 
-        startNode = startNode;
-        targetNode = targetNode;
+        
         openSet.Add(startNode);
-        openSet = openSet;
+      
         while (openSet.Count > 0)
         {
             GridMarkerBehaviour currentNode = openSet[0];
-            for (int i = 1; i < openSet.Count; i++)
+            //Debug.Log("currentNode = (" + currentNode.x + ", " + currentNode.y + ", " + currentNode.z+ ")");
+            
+            
+                for (int i = 1; i < openSet.Count; i++)
             {
-
+                //Debug.Log("currentNode = (" + currentNode.x + ", " + currentNode.y + ", " + currentNode.z);
                 if (openSet[i].fCost < currentNode.fCost || openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost)
                 {
                     currentNode = openSet[i];
@@ -135,9 +153,18 @@ public class GridManager : MonoBehaviour
 
             openSet.Remove(currentNode);
             closedSet.Add(currentNode);
+            Debug.Log( "Openset = " +openSet.Count);
+            Debug.Log("Closedset = "+closedSet.Count);
+            int g = 0;
+            foreach (GridMarkerBehaviour marker in closedSet)
+            {
+                Debug.Log("node " + g + " = " + marker.x + ", " + marker.y + ", " + marker.z + ")");
+                g++;
+                    }
 
             if (currentNode == targetNode)
             {
+                Debug.Log("finalizao");
                 return RetracePath(startNode, targetNode);
             }
 
@@ -145,6 +172,7 @@ public class GridManager : MonoBehaviour
             {
                 if (!neighbor.isNavigable || closedSet.Contains(neighbor))
                 {
+                    Debug.Log("patata");
                     continue;
                 }
 
@@ -162,7 +190,7 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
-
+        
         return null; // No se encontró un camino válido
     }
     float GetDistance(GridMarkerBehaviour nodeA, GridMarkerBehaviour nodeB)
