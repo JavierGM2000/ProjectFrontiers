@@ -58,7 +58,64 @@ public class GridManager : MonoBehaviour
         }
 
         path.Reverse();
+
+        path = SmoothPath(path);
+
         return path;
+    }
+
+
+    public List<GridMarkerBehaviour> SmoothPath(List<GridMarkerBehaviour> path)
+    {
+        if (path == null || path.Count < 4)
+        {
+            return path;
+        }
+
+        List<GridMarkerBehaviour> smoothedPath = new List<GridMarkerBehaviour>();
+        smoothedPath.Add(path[0]);
+
+        for (int i = 1; i < path.Count - 2; i++)
+        {
+            GridMarkerBehaviour pointA = path[i - 1];
+            GridMarkerBehaviour pointB = path[i];
+            GridMarkerBehaviour pointC = path[i + 1];
+            GridMarkerBehaviour pointD = path[i + 2];
+
+            // Interpola entre los puntos A, B, C y D utilizando interpolación cúbica
+            Vector3 interpolatedPosition = CubicBezierInterpolate(pointA.transform.position, pointB.transform.position, pointC.transform.position, pointD.transform.position, 0.5f);
+
+            // Crea un nuevo nodo con la posición interpolada
+            GridMarkerBehaviour interpolatedNode = new GameObject("InterpolatedNode").AddComponent<GridMarkerBehaviour>();
+            interpolatedNode.transform.position = interpolatedPosition;
+
+            smoothedPath.Add(interpolatedNode);
+        }
+
+        smoothedPath.Add(path[path.Count - 1]); // Añadir el último nodo
+        return smoothedPath;
+    }
+
+
+    Vector3 CubicBezierInterpolate(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
+    {
+        float u = 1 - t;
+        float tt = t * t;
+        float uu = u * u;
+        float uuu = uu * u;
+        float ttt = tt * t;
+
+        Vector3 p = uuu * p0; // (1-t)^3 * p0
+        p += 3 * uu * t * p1; // 3 * (1-t)^2 * t * p1
+        p += 3 * u * tt * p2; // 3 * (1-t) * t^2 * p2
+        p += ttt * p3; // t^3 * p3
+
+        return p;
+    }
+
+    Vector3 Interpolate(Vector3 a, Vector3 b, float t)
+    {
+        return a + (b - a) * t;
     }
 
     List<GridMarkerBehaviour> GetNeighbors(GridMarkerBehaviour currentNode)
