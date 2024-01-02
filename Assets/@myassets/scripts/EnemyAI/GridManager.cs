@@ -29,6 +29,7 @@ public class GridManager : MonoBehaviour
                 {
                     Vector3 markerPosition = new Vector3(column * cellSize, line * cellSize, depth * cellSize);
                     GameObject marker = Instantiate(gridMarkerObject, markerPosition, Quaternion.identity);
+                    marker.GetComponent<SphereCollider>().radius =  cellSize;
                     GridMarkerBehaviour markerBehaviour = marker.GetComponent<GridMarkerBehaviour>();
                     markerBehaviour.setGridPosition(column, line, depth);
                     grid[column, line, depth] = markerBehaviour;
@@ -86,10 +87,10 @@ public class GridManager : MonoBehaviour
             Vector3 interpolatedPosition = CubicBezierInterpolate(pointA.transform.position, pointB.transform.position, pointC.transform.position, pointD.transform.position, 0.5f);
 
             // Crea un nuevo nodo con la posición interpolada
-            GridMarkerBehaviour interpolatedNode = new GameObject("InterpolatedNode").AddComponent<GridMarkerBehaviour>();
-            interpolatedNode.transform.position = interpolatedPosition;
+            GameObject interpolatedNode =  Instantiate(gridMarkerObject, interpolatedPosition, Quaternion.identity);
+            GridMarkerBehaviour markerBehaviour = interpolatedNode.GetComponent<GridMarkerBehaviour>();
 
-            smoothedPath.Add(interpolatedNode);
+            smoothedPath.Add(markerBehaviour);
         }
 
         smoothedPath.Add(path[path.Count - 1]); // Añadir el último nodo

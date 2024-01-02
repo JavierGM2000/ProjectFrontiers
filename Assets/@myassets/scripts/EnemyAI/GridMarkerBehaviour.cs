@@ -19,12 +19,20 @@ public class GridMarkerBehaviour : MonoBehaviour
 
     public GridMarkerBehaviour parentNode;
 
+
+
+    private Renderer renderer;
     void Start()
     {
+        
         gCost = 0;
         hCost = 0;
         isNavigable = true;
-        GetComponent<Renderer>().material = navigableMaterial;
+        renderer = GetComponent<Renderer>();
+        if (renderer != null) { 
+            renderer.material = navigableMaterial;
+        }
+        
     }
 
     public void setGridPosition(int x, int y, int z)
@@ -44,7 +52,10 @@ public class GridMarkerBehaviour : MonoBehaviour
         if (isNavigable)
         {
             isNavigable = false;
-            GetComponent<Renderer>().material = notNavigableMaterial;
+            if (renderer != null)
+            {
+                renderer.material = notNavigableMaterial;
+            }
         }
     }
 
@@ -53,7 +64,10 @@ public class GridMarkerBehaviour : MonoBehaviour
         if (!isNavigable)
         {
             isNavigable = true;
-            GetComponent<Renderer>().material = navigableMaterial;
+            if (renderer != null)
+            {
+                renderer.material = navigableMaterial;
+            }
         }
     }
 
