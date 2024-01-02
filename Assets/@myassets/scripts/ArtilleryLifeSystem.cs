@@ -8,6 +8,7 @@ public class ArtilleryLifeSystem : MonoBehaviour
     private Transform explosionParticles;
 
     public int life;
+    public GameObject torreta;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,7 @@ public class ArtilleryLifeSystem : MonoBehaviour
             glowParticles.gameObject.SetActive(false);
             explosionParticles.gameObject.SetActive(true);
 
+            Destroy(torreta);
             Destroy(this);
         }
     }
