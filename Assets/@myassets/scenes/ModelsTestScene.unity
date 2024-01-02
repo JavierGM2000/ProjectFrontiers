@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1010412436
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -214,12 +214,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1010412435}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.1, y: 0.34253454, z: 0.15643644}
+  m_LocalPosition: {x: -3.04, y: 11.11, z: 38.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1010412440
 Rigidbody:
@@ -330,7 +330,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &1148787012
 MonoBehaviour:
@@ -430,7 +430,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2036305566}
   m_LocalRotation: {x: 0.2265663, y: 0, z: 0, w: 0.9739958}
-  m_LocalPosition: {x: 0, y: 24.9, z: -18.14}
+  m_LocalPosition: {x: 0, y: 8.38, z: 3.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -735,7 +735,7 @@ PrefabInstance:
     - target: {fileID: 3763984019793927984, guid: 315fd3574bdd1654bacb07939da53174,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3763984019793927984, guid: 315fd3574bdd1654bacb07939da53174,
         type: 3}
@@ -819,7 +819,7 @@ PrefabInstance:
     - target: {fileID: 4273172970497561508, guid: 4db06213c792cfd4e8a55482a38c3912,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4273172970497561508, guid: 4db06213c792cfd4e8a55482a38c3912,
         type: 3}
@@ -1014,15 +1014,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: PuntoDebilAvion
       objectReference: {fileID: 0}
+    - target: {fileID: 8568008024455479966, guid: 3977e278a7ba50b4683e283bdcf7baf7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.35
+      objectReference: {fileID: 0}
     - target: {fileID: 8801938260525315421, guid: 3977e278a7ba50b4683e283bdcf7baf7,
         type: 3}
       propertyPath: m_Name
       value: Jormungandr
       objectReference: {fileID: 0}
+    - target: {fileID: 8926518097083916188, guid: 3977e278a7ba50b4683e283bdcf7baf7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.42
+      objectReference: {fileID: 0}
     - target: {fileID: 8926518097083916191, guid: 3977e278a7ba50b4683e283bdcf7baf7,
         type: 3}
       propertyPath: m_Name
       value: PuntoDebilAvion (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8926518097338549481, guid: 3977e278a7ba50b4683e283bdcf7baf7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.14
       objectReference: {fileID: 0}
     - target: {fileID: 8926518097338549482, guid: 3977e278a7ba50b4683e283bdcf7baf7,
         type: 3}
@@ -1034,10 +1049,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: PuntoDebilAvion (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 8926518097504449807, guid: 3977e278a7ba50b4683e283bdcf7baf7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 8926518097708101153, guid: 3977e278a7ba50b4683e283bdcf7baf7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.79
+      objectReference: {fileID: 0}
     - target: {fileID: 8926518097708101154, guid: 3977e278a7ba50b4683e283bdcf7baf7,
         type: 3}
       propertyPath: m_Name
       value: PuntoDebilAvion (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8926518097730623812, guid: 3977e278a7ba50b4683e283bdcf7baf7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.79
       objectReference: {fileID: 0}
     - target: {fileID: 8926518097730623815, guid: 3977e278a7ba50b4683e283bdcf7baf7,
         type: 3}
@@ -1049,10 +1079,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: PuntoDebilAvion (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8926518097909345386, guid: 3977e278a7ba50b4683e283bdcf7baf7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 8926518098049635264, guid: 3977e278a7ba50b4683e283bdcf7baf7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.31
+      objectReference: {fileID: 0}
     - target: {fileID: 8926518098049635267, guid: 3977e278a7ba50b4683e283bdcf7baf7,
         type: 3}
       propertyPath: m_Name
       value: PuntoDebilAvion (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8926518098120046020, guid: 3977e278a7ba50b4683e283bdcf7baf7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.14
       objectReference: {fileID: 0}
     - target: {fileID: 8926518098120046023, guid: 3977e278a7ba50b4683e283bdcf7baf7,
         type: 3}
@@ -1063,6 +1108,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PuntoDebilAvion (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8926518098568045730, guid: 3977e278a7ba50b4683e283bdcf7baf7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3977e278a7ba50b4683e283bdcf7baf7, type: 3}

@@ -555,7 +555,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658604, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_Name
-      value: ArtilleriaAvion (3)
+      value: PuntoDebilAvion (3)
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
@@ -570,7 +570,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.61
+      value: 1.31
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
@@ -630,7 +630,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658604, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_Name
-      value: ArtilleriaAvion (4)
+      value: PuntoDebilAvion (4)
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
@@ -645,7 +645,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.32
+      value: 1.14
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
@@ -705,7 +705,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658604, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_Name
-      value: ArtilleriaAvion (1)
+      value: PuntoDebilAvion (1)
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
@@ -720,7 +720,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.79
+      value: 1.42
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
@@ -780,7 +780,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658604, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_Name
-      value: ArtilleriaAvion (6)
+      value: PuntoDebilAvion (6)
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
@@ -795,7 +795,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.79
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
@@ -855,7 +855,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658604, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_Name
-      value: ArtilleriaAvion (2)
+      value: PuntoDebilAvion (2)
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
@@ -870,7 +870,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.79
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
@@ -930,7 +930,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658604, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_Name
-      value: ArtilleriaAvion (8)
+      value: PuntoDebilAvion (8)
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
@@ -945,7 +945,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.69
+      value: 2.35
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
@@ -1005,7 +1005,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658604, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_Name
-      value: ArtilleriaAvion (7)
+      value: PuntoDebilAvion (7)
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
@@ -1020,7 +1020,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.61
+      value: 1.31
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
@@ -1080,7 +1080,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658604, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_Name
-      value: ArtilleriaAvion (9)
+      value: PuntoDebilAvion (9)
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
@@ -1095,7 +1095,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.32
+      value: 1.14
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
@@ -1155,7 +1155,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658604, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_Name
-      value: ArtilleriaAvion (5)
+      value: PuntoDebilAvion (5)
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
@@ -1170,7 +1170,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.79
+      value: 1.42
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
@@ -1255,7 +1255,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658604, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_Name
-      value: ArtilleriaAvion
+      value: PuntoDebilAvion
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
@@ -1270,7 +1270,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.69
+      value: 2.35
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
