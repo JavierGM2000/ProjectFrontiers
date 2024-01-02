@@ -64,6 +64,7 @@ public class EnemyBehaviour : MonoBehaviour
 
 
         Vector3 targetPosition = path[nextPoint].transform.position;
+        adjustRoll(targetPosition);
         adjustPitch(targetPosition);
         // Mueve al enemigo hacia el siguiente punto del camino
        // Quaternion targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
@@ -99,12 +100,23 @@ public class EnemyBehaviour : MonoBehaviour
         Debug.Log("angle = " + angle);
         float appliedTurnForce = 100 * angle / 180;
         rigidbody.AddTorque(transform.right * appliedTurnForce * responseModifier * Time.deltaTime/300 );
-        rigidbody.AddForce(transform.forward * 5f , ForceMode.Acceleration);
+        rigidbody.AddForce(transform.forward * 2f , ForceMode.Acceleration);
     }
 
-    public void adjustRoll(Vector3 targetPosition) { 
-    
-    
+    public void adjustRoll(Vector3 targetPosition) {
+       
+        Vector3 targetDirection = targetPosition - transform.position;
+
+        
+        Vector3 horizontalDirection = Vector3.ProjectOnPlane(targetDirection, transform.up).normalized;
+
+      
+        float rollAngle = Vector3.SignedAngle(transform.forward, horizontalDirection, transform.up);
+
+       
+        float rollForce = 1f * rollAngle / 180f; 
+        rigidbody.AddTorque(transform.forward * -rollForce * responseModifier * Time.deltaTime);
+
     }
 
 }
