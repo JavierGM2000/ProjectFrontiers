@@ -30,6 +30,7 @@ public class GridManager : MonoBehaviour
                     Vector3 markerPosition = new Vector3(column * cellSize, line * cellSize, depth * cellSize);
                     GameObject marker = Instantiate(gridMarkerObject, markerPosition, Quaternion.identity);
                     marker.GetComponent<SphereCollider>().radius =  cellSize;
+                    marker.transform.parent = transform;
                     GridMarkerBehaviour markerBehaviour = marker.GetComponent<GridMarkerBehaviour>();
                     markerBehaviour.setGridPosition(column, line, depth);
                     

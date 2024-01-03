@@ -4,6 +4,32 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
+    //BEHAVIOUR  VARIABLES//
+    public int agresivityLevel; //  0 -> Not tracking player / 5 -> directly attacking player  (More agressive -> more stamina lose)
+    public float maxStamina = 100f;
+    public float currentStamina; // Determines turn and speeding capability of enemy
+    public float staminaLoseCoeficient;
+
+    public float maxStress = 100f;
+    public float currentStress;
+    public float stressGainCoeficient;
+
+    public float approachDistance = 500;
+    public float trackDistance = 100;
+    public float directAttackDistance = 25;
+
+
+
+
+
+
+
+
+
+
+
+
+
     public GridManager grid;
     public Vector3 currentGridPosition;
     
@@ -14,6 +40,8 @@ public class EnemyBehaviour : MonoBehaviour
     float pathRefreshCooldown = 10f;
     public Vector3 targetGridPosition = new Vector3(9, 7, 4);
     public GameObject target;
+    private Rigidbody targetRigidbody;
+
 
     public Rigidbody rigidbody;
     public float turnForce = 5;
@@ -34,34 +62,47 @@ public class EnemyBehaviour : MonoBehaviour
     void Start()
     {
         targetGridPosition = target.transform.position;
+        targetRigidbody = target.GetComponent<Rigidbody>();
         rigidbody = GetComponent<Rigidbody>();   
         counter = 0;
         currentGridPosition = transform.position;
-        CalculatePath(targetGridPosition);
+        agresivityLevel = 3;
+
     }
 
     void Update()
     {
-        
-        currentGridPosition = transform.position;
-        Debug.LogError("counter = "+ counter);
-        counter += Time.deltaTime;
-        if (counter >= pathRefreshCooldown) { 
-            targetGridPosition = target.transform.position;
-            CalculatePath(targetGridPosition);
-            counter = 0;
+        if (Vector3.Distance(transform.position, targetGridPosition) > 100)
+        {
+            agresivityLevel = 2;
+
         }
+        else if (Vector3.Distance(transform.position, targetGridPosition) < 100 && Vector3.Distance(transform.position, targetGridPosition) > 30)
+        {
+            agresivityLevel = 3;
+
+        }
+        else {
+            agresivityLevel = 4;
+        }
+        currentGridPosition = transform.position;
+        //Debug.LogError("counter = "+ counter);
+        counter += Time.deltaTime;
+        if (counter > pathRefreshCooldown + 2)
+            counter = pathRefreshCooldown;
+
+        playBehaviour();
+
         
-        MoveEnemy();
     }
 
     public void CalculatePath(Vector3 finalGridPosition)
     {
-        //ClearPath();
+        
         path = grid.FindPath(currentGridPosition, finalGridPosition);
     }
 
-    public void MoveEnemy()
+    public void MoveEnemyPath()
     {
         if (path == null || path.Count == 0 || nextPoint >= path.Count)
             return;
@@ -138,4 +179,115 @@ public class EnemyBehaviour : MonoBehaviour
         // Reinicia el índice nextPoint
         nextPoint = 0;
     }
+
+
+    public void BehaviourPatrolling() { 
+    
+    
+    }
+    public void BehaviourApproachPlayer()
+    {   
+       
+        targetGridPosition = target.transform.position;
+        Debug.DrawLine(transform.position, targetGridPosition, Color.yellow);
+        adjustRoll(targetGridPosition);
+        adjustPitch(targetGridPosition);
+        moveForward();
+        
+
+    }
+    public void BehaviourTrackPlayer()
+    {
+        if (counter >= pathRefreshCooldown)
+        {
+            targetGridPosition = target.transform.position;
+            CalculatePath(targetGridPosition);
+            counter = 0;
+        }
+
+        MoveEnemyPath();
+
+    }
+    public void BehaviourDirectAttackPlayer()
+    {
+        targetGridPosition = target.transform.position + (targetRigidbody.velocity);
+        Debug.DrawLine(transform.position, targetGridPosition, Color.red);
+        adjustRoll(targetGridPosition);
+        adjustPitch(targetGridPosition);
+        moveForward();
+
+    }
+    public void BehaviourRunAway()
+    {
+
+
+    }
+
+
+
+
+    public void playBehaviour() {
+
+        switch (agresivityLevel)
+        {
+            case 1:
+                BehaviourPatrolling();
+                break;
+            case 2:
+                BehaviourApproachPlayer();
+                break;
+            case 3:
+                BehaviourTrackPlayer();
+                break;
+            case 4:
+                BehaviourDirectAttackPlayer();
+                break;
+            case 5:
+                BehaviourRunAway();
+                break;
+            default:
+                BehaviourPatrolling();////
+                break;
+        }
+
+    }
+
+    public void switchBehaviour() {
+
+        if (currentStress <= 0 ) {
+            currentStress = 0;
+            if(agresivityLevel != 5)
+            agresivityLevel = 5;
+            return;
+        }
+        float distance = Vector3.Distance(target.transform.position, transform.position);
+        if (distance <= approachDistance && distance > trackDistance)
+        {
+            if (agresivityLevel != 2)
+                agresivityLevel = 2;
+            return;
+        }
+        else if (distance <= trackDistance && distance > directAttackDistance)
+        {
+            if (agresivityLevel != 3)
+                agresivityLevel = 3;
+            return;
+        }
+        else if (distance <= directAttackDistance)
+        {
+            if (agresivityLevel != 4)
+                agresivityLevel = 4;
+            return;
+        }
+        else {
+            if (agresivityLevel != 1)
+                agresivityLevel = 1;
+            return;
+
+
+        }
+
+    }
+
+
 }

@@ -220,6 +220,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a3ff3f593af5c41bc924b964d31f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agresivityLevel: 0
+  maxStamina: 0
+  currentStamina: 0
+  staminaLoseCoeficient: 0
+  maxStress: 0
+  currentStress: 0
+  stressGainCoeficient: 0
+  approachDistance: 500
+  trackDistance: 0
+  directAttackDistance: 0
   grid: {fileID: 907782278}
   currentGridPosition: {x: 0, y: 0, z: 0}
   pathRefreshCooldown: 1
@@ -577,6 +587,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a3ff3f593af5c41bc924b964d31f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agresivityLevel: 0
+  maxStamina: 0
+  currentStamina: 0
+  staminaLoseCoeficient: 0
+  maxStress: 0
+  currentStress: 0
+  stressGainCoeficient: 0
+  approachDistance: 500
+  trackDistance: 0
+  directAttackDistance: 0
   grid: {fileID: 907782278}
   currentGridPosition: {x: 0, y: 0, z: 0}
   pathRefreshCooldown: 1
@@ -795,6 +815,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a3ff3f593af5c41bc924b964d31f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agresivityLevel: 0
+  maxStamina: 0
+  currentStamina: 0
+  staminaLoseCoeficient: 0
+  maxStress: 0
+  currentStress: 0
+  stressGainCoeficient: 0
+  approachDistance: 500
+  trackDistance: 0
+  directAttackDistance: 0
   grid: {fileID: 907782278}
   currentGridPosition: {x: 0, y: 0, z: 0}
   pathRefreshCooldown: 1
@@ -1285,6 +1315,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a3ff3f593af5c41bc924b964d31f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agresivityLevel: 0
+  maxStamina: 0
+  currentStamina: 0
+  staminaLoseCoeficient: 0
+  maxStress: 0
+  currentStress: 0
+  stressGainCoeficient: 0
+  approachDistance: 500
+  trackDistance: 0
+  directAttackDistance: 0
   grid: {fileID: 907782278}
   currentGridPosition: {x: 0, y: 0, z: 0}
   pathRefreshCooldown: 1
@@ -1589,17 +1629,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a3ff3f593af5c41bc924b964d31f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agresivityLevel: 0
+  maxStamina: 0
+  currentStamina: 0
+  staminaLoseCoeficient: 0
+  maxStress: 0
+  currentStress: 0
+  stressGainCoeficient: 0
+  approachDistance: 500
+  trackDistance: 0
+  directAttackDistance: 0
   grid: {fileID: 907782278}
   currentGridPosition: {x: 0, y: 0, z: 0}
   pathRefreshCooldown: 1
   targetGridPosition: {x: 30, y: 13, z: 37}
-  target: {fileID: 1919132639}
+  target: {fileID: 761949955}
   rigidbody: {fileID: 0}
   turnForce: 5
   responsiveness: 10
   maxRollForce: 1
   maxPitchForce: 1
-  movementForce: 700
+  movementForce: 1000
 --- !u!54 &564688845
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1713,6 +1763,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a3ff3f593af5c41bc924b964d31f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agresivityLevel: 0
+  maxStamina: 0
+  currentStamina: 0
+  staminaLoseCoeficient: 0
+  maxStress: 0
+  currentStress: 0
+  stressGainCoeficient: 0
+  approachDistance: 500
+  trackDistance: 0
+  directAttackDistance: 0
   grid: {fileID: 907782278}
   currentGridPosition: {x: 0, y: 0, z: 0}
   pathRefreshCooldown: 1
@@ -2121,7 +2181,7 @@ PrefabInstance:
     - target: {fileID: 2128015016905357244, guid: 96a6e5f91dc77a746b0a6f5aa898dcfc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.47
+      value: 335.2
       objectReference: {fileID: 0}
     - target: {fileID: 2128015016905357244, guid: 96a6e5f91dc77a746b0a6f5aa898dcfc,
         type: 3}
@@ -2407,6 +2467,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a3ff3f593af5c41bc924b964d31f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agresivityLevel: 0
+  maxStamina: 0
+  currentStamina: 0
+  staminaLoseCoeficient: 0
+  maxStress: 0
+  currentStress: 0
+  stressGainCoeficient: 0
+  approachDistance: 500
+  trackDistance: 0
+  directAttackDistance: 0
   grid: {fileID: 907782278}
   currentGridPosition: {x: 0, y: 0, z: 0}
   pathRefreshCooldown: 1
@@ -3049,6 +3119,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a3ff3f593af5c41bc924b964d31f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agresivityLevel: 0
+  maxStamina: 0
+  currentStamina: 0
+  staminaLoseCoeficient: 0
+  maxStress: 0
+  currentStress: 0
+  stressGainCoeficient: 0
+  approachDistance: 500
+  trackDistance: 0
+  directAttackDistance: 0
   grid: {fileID: 907782278}
   currentGridPosition: {x: 0, y: 0, z: 0}
   pathRefreshCooldown: 1
@@ -3185,17 +3265,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a3ff3f593af5c41bc924b964d31f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agresivityLevel: 0
+  maxStamina: 0
+  currentStamina: 0
+  staminaLoseCoeficient: 0
+  maxStress: 0
+  currentStress: 0
+  stressGainCoeficient: 0
+  approachDistance: 500
+  trackDistance: 0
+  directAttackDistance: 0
   grid: {fileID: 907782278}
   currentGridPosition: {x: 0, y: 0, z: 0}
   pathRefreshCooldown: 1
   targetGridPosition: {x: 30, y: 13, z: 37}
-  target: {fileID: 1919132639}
+  target: {fileID: 761949955}
   rigidbody: {fileID: 0}
   turnForce: 5
   responsiveness: 10
   maxRollForce: 1
   maxPitchForce: 1
-  movementForce: 700
+  movementForce: 1000
 --- !u!54 &1118989538
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4012,17 +4102,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a3ff3f593af5c41bc924b964d31f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agresivityLevel: 0
+  maxStamina: 0
+  currentStamina: 0
+  staminaLoseCoeficient: 0
+  maxStress: 0
+  currentStress: 0
+  stressGainCoeficient: 0
+  approachDistance: 500
+  trackDistance: 0
+  directAttackDistance: 0
   grid: {fileID: 907782278}
   currentGridPosition: {x: 0, y: 0, z: 0}
   pathRefreshCooldown: 1
   targetGridPosition: {x: 30, y: 13, z: 37}
-  target: {fileID: 1919132639}
+  target: {fileID: 761949955}
   rigidbody: {fileID: 0}
   turnForce: 5
   responsiveness: 10
   maxRollForce: 1
   maxPitchForce: 1
-  movementForce: 700
+  movementForce: 1000
 --- !u!54 &1466945103
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4239,6 +4339,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a3ff3f593af5c41bc924b964d31f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agresivityLevel: 0
+  maxStamina: 0
+  currentStamina: 0
+  staminaLoseCoeficient: 0
+  maxStress: 0
+  currentStress: 0
+  stressGainCoeficient: 0
+  approachDistance: 500
+  trackDistance: 0
+  directAttackDistance: 0
   grid: {fileID: 907782278}
   currentGridPosition: {x: 0, y: 0, z: 0}
   pathRefreshCooldown: 1
@@ -4290,6 +4400,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a3ff3f593af5c41bc924b964d31f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agresivityLevel: 0
+  maxStamina: 0
+  currentStamina: 0
+  staminaLoseCoeficient: 0
+  maxStress: 0
+  currentStress: 0
+  stressGainCoeficient: 0
+  approachDistance: 500
+  trackDistance: 0
+  directAttackDistance: 0
   grid: {fileID: 907782278}
   currentGridPosition: {x: 0, y: 0, z: 0}
   pathRefreshCooldown: 1
@@ -4872,6 +4992,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a3ff3f593af5c41bc924b964d31f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agresivityLevel: 0
+  maxStamina: 0
+  currentStamina: 0
+  staminaLoseCoeficient: 0
+  maxStress: 0
+  currentStress: 0
+  stressGainCoeficient: 0
+  approachDistance: 500
+  trackDistance: 0
+  directAttackDistance: 0
   grid: {fileID: 907782278}
   currentGridPosition: {x: 0, y: 0, z: 0}
   pathRefreshCooldown: 1
