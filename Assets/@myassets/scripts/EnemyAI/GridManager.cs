@@ -32,6 +32,7 @@ public class GridManager : MonoBehaviour
                     marker.GetComponent<SphereCollider>().radius =  cellSize;
                     GridMarkerBehaviour markerBehaviour = marker.GetComponent<GridMarkerBehaviour>();
                     markerBehaviour.setGridPosition(column, line, depth);
+                    
                     grid[column, line, depth] = markerBehaviour;
                 }
             }
@@ -60,7 +61,7 @@ public class GridManager : MonoBehaviour
 
         path.Reverse();
 
-        path = SmoothPath(path);
+       //path = SmoothPath(path);
 
         return path;
     }
@@ -89,6 +90,7 @@ public class GridManager : MonoBehaviour
             // Crea un nuevo nodo con la posición interpolada
             GameObject interpolatedNode =  Instantiate(gridMarkerObject, interpolatedPosition, Quaternion.identity);
             GridMarkerBehaviour markerBehaviour = interpolatedNode.GetComponent<GridMarkerBehaviour>();
+            markerBehaviour.isTemporal = true;
 
             smoothedPath.Add(markerBehaviour);
         }

@@ -62,6 +62,15 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Value"",
+                    ""id"": ""5f31643f-996d-43f0-804a-8187a8370b9c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -273,6 +282,28 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                     ""action"": ""Roll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54d77265-2cfa-4c55-83b9-53654de5d738"",
+                    ""path"": ""<Joystick>/trigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c8765c65-369a-4b64-8572-3551499234ee"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -285,6 +316,7 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
         m_PlaneMap_Roll = m_PlaneMap.FindAction("Roll", throwIfNotFound: true);
         m_PlaneMap_Yaw = m_PlaneMap.FindAction("Yaw", throwIfNotFound: true);
         m_PlaneMap_Thrust = m_PlaneMap.FindAction("Thrust", throwIfNotFound: true);
+        m_PlaneMap_Shoot = m_PlaneMap.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -348,6 +380,7 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlaneMap_Roll;
     private readonly InputAction m_PlaneMap_Yaw;
     private readonly InputAction m_PlaneMap_Thrust;
+    private readonly InputAction m_PlaneMap_Shoot;
     public struct PlaneMapActions
     {
         private @PlaneControlActions m_Wrapper;
@@ -356,6 +389,7 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
         public InputAction @Roll => m_Wrapper.m_PlaneMap_Roll;
         public InputAction @Yaw => m_Wrapper.m_PlaneMap_Yaw;
         public InputAction @Thrust => m_Wrapper.m_PlaneMap_Thrust;
+        public InputAction @Shoot => m_Wrapper.m_PlaneMap_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_PlaneMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -377,6 +411,9 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                 @Thrust.started -= m_Wrapper.m_PlaneMapActionsCallbackInterface.OnThrust;
                 @Thrust.performed -= m_Wrapper.m_PlaneMapActionsCallbackInterface.OnThrust;
                 @Thrust.canceled -= m_Wrapper.m_PlaneMapActionsCallbackInterface.OnThrust;
+                @Shoot.started -= m_Wrapper.m_PlaneMapActionsCallbackInterface.OnShoot;
+                @Shoot.performed -= m_Wrapper.m_PlaneMapActionsCallbackInterface.OnShoot;
+                @Shoot.canceled -= m_Wrapper.m_PlaneMapActionsCallbackInterface.OnShoot;
             }
             m_Wrapper.m_PlaneMapActionsCallbackInterface = instance;
             if (instance != null)
@@ -393,6 +430,9 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                 @Thrust.started += instance.OnThrust;
                 @Thrust.performed += instance.OnThrust;
                 @Thrust.canceled += instance.OnThrust;
+                @Shoot.started += instance.OnShoot;
+                @Shoot.performed += instance.OnShoot;
+                @Shoot.canceled += instance.OnShoot;
             }
         }
     }
@@ -403,5 +443,6 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
         void OnRoll(InputAction.CallbackContext context);
         void OnYaw(InputAction.CallbackContext context);
         void OnThrust(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
 }

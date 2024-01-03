@@ -6,7 +6,7 @@ public class EnemyBehaviour : MonoBehaviour
 {
     public GridManager grid;
     public Vector3 currentGridPosition;
-    public float movementSpeed = 1f;
+    
     private List<GridMarkerBehaviour> path = new List<GridMarkerBehaviour>();
     private int nextPoint = 0;
     float counter;
@@ -19,6 +19,9 @@ public class EnemyBehaviour : MonoBehaviour
     public float turnForce = 5;
     public float responsiveness = 10f;
 
+    public float maxRollForce = 1f;
+    public float maxPitchForce = 1f;
+    public float movementForce = 4f;
 
     private float responseModifier
     {
@@ -54,6 +57,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void CalculatePath(Vector3 finalGridPosition)
     {
+        //ClearPath();
         path = grid.FindPath(currentGridPosition, finalGridPosition);
     }
 
@@ -64,21 +68,15 @@ public class EnemyBehaviour : MonoBehaviour
 
 
         Vector3 targetPosition = path[nextPoint].transform.position;
+
+
         adjustRoll(targetPosition);
         adjustPitch(targetPosition);
-        // Mueve al enemigo hacia el siguiente punto del camino
-       // Quaternion targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
-       // transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 2.5f * Time.deltaTime);
-        //transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
-
-        // Verifica si el enemigo ha llegado al siguiente punto del camino
+        moveForward();
         if (Vector3.Distance(transform.position, targetPosition) < 0.01f)
         {
-            // Avanza al siguiente punto del camino
             nextPoint++;
 
-           
-            
         }
 
         Debug.DrawLine(transform.position, path[0].transform.position, Color.blue);
@@ -98,9 +96,9 @@ public class EnemyBehaviour : MonoBehaviour
         float angle = Vector3.SignedAngle(transform.forward, movementVector, transform.right);
         
         Debug.Log("angle = " + angle);
-        float appliedTurnForce = 100 * angle / 180;
+        float appliedTurnForce =  maxPitchForce* 100 * angle / 180;
         rigidbody.AddTorque(transform.right * appliedTurnForce * responseModifier * Time.deltaTime/300 );
-        rigidbody.AddForce(transform.forward * 2f , ForceMode.Acceleration);
+       
     }
 
     public void adjustRoll(Vector3 targetPosition) {
@@ -114,9 +112,30 @@ public class EnemyBehaviour : MonoBehaviour
         float rollAngle = Vector3.SignedAngle(transform.forward, horizontalDirection, transform.up);
 
        
-        float rollForce = 1f * rollAngle / 180f; 
+        float rollForce = maxRollForce * rollAngle / 180f; 
         rigidbody.AddTorque(transform.forward * -rollForce * responseModifier * Time.deltaTime);
 
     }
+    public void moveForward()
+    {
+        rigidbody.AddForce(transform.forward * movementForce * Time.deltaTime, ForceMode.Acceleration);
+    }
 
+
+    private void ClearPath()
+    {
+        // Filtra y destruye solo los GridMarkers temporales
+        List<GridMarkerBehaviour> tempMarkers = path.FindAll(marker => marker.isTemporal);
+
+        foreach (GridMarkerBehaviour marker in tempMarkers)
+        {
+            Destroy(marker.gameObject);
+        }
+
+        // Elimina los GridMarkers temporales de la lista path
+        path.RemoveAll(marker => marker.isTemporal);
+
+        // Reinicia el índice nextPoint
+        nextPoint = 0;
+    }
 }
