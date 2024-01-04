@@ -14,8 +14,8 @@ TagManager:
   - cockpit
   - plane
   - Grid
-  - 
-  - 
+  - NotObstacle
+  - Enemy
   - 
   - 
   - 

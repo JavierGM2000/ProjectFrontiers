@@ -286,4 +286,12 @@ public class PlaneMovementV2 : MonoBehaviour
         
     
     }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 9)
+            return;
+        Destroy(gameObject);
+    }
 }

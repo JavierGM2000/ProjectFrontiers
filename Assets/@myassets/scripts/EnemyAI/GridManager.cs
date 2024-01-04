@@ -9,12 +9,50 @@ public class GridManager : MonoBehaviour
     [SerializeField] private int gridSizeZ = 10;
     [SerializeField] public int cellSize = 1;
     [SerializeField] private GameObject gridMarkerObject;
-
+    [SerializeField] private Transform player;
     private GridMarkerBehaviour[,,] grid;
 
     void Awake()
     {
         CreateGrid();
+    }
+
+
+
+    private void Update()
+    {
+        float xDes = 0;
+        float yDes = 0;
+        float zDes = 0;
+        if (player.position.x > gridSizeX*cellSize + transform.position.x)
+        {
+            xDes = gridSizeX * cellSize/2;
+
+        }
+        else if (player.position.x < transform.position.x) {
+            xDes = -gridSizeX * cellSize/2;
+        }
+        if (player.position.y > gridSizeY * cellSize + transform.position.y) {
+
+            yDes = gridSizeY * cellSize/2;
+
+        }
+        else if (player.position.y < transform.position.y)
+        {
+            yDes = -gridSizeY * cellSize/2;
+        }
+        if (player.position.z > gridSizeZ * cellSize + transform.position.z)
+        {
+            zDes = gridSizeZ * cellSize/2;
+
+        }
+        else if (player.position.z < transform.position.z)
+        {
+            zDes = -gridSizeZ * cellSize/2;
+        }
+        Vector3 movingVector = new Vector3(xDes, yDes, zDes);
+        transform.position += movingVector;
+
     }
 
     void CreateGrid()
@@ -31,6 +69,7 @@ public class GridManager : MonoBehaviour
                     GameObject marker = Instantiate(gridMarkerObject, markerPosition, Quaternion.identity);
                     marker.GetComponent<SphereCollider>().radius =  cellSize;
                     marker.transform.parent = transform;
+                    marker.layer = 9;
                     GridMarkerBehaviour markerBehaviour = marker.GetComponent<GridMarkerBehaviour>();
                     markerBehaviour.setGridPosition(column, line, depth);
                     
@@ -42,9 +81,10 @@ public class GridManager : MonoBehaviour
 
     public GridMarkerBehaviour GetGridMarkerFromPosition(Vector3 worldPosition)
     {
-        int x = Mathf.Clamp(Mathf.RoundToInt(worldPosition.x / cellSize), 0, gridSizeX - 1);
-        int y = Mathf.Clamp(Mathf.RoundToInt(worldPosition.y / cellSize), 0, gridSizeY - 1);
-        int z = Mathf.Clamp(Mathf.RoundToInt(worldPosition.z / cellSize), 0, gridSizeZ - 1);
+        Vector3 realPos = worldPosition - transform.position;
+        int x = Mathf.Clamp(Mathf.RoundToInt(realPos.x / cellSize), 0, gridSizeX - 1);
+        int y = Mathf.Clamp(Mathf.RoundToInt(realPos.y / cellSize), 0, gridSizeY - 1);
+        int z = Mathf.Clamp(Mathf.RoundToInt(realPos.z / cellSize), 0, gridSizeZ - 1);
 
         return grid[x, y, z];
     }
@@ -53,6 +93,7 @@ public class GridManager : MonoBehaviour
     {
         List<GridMarkerBehaviour> path = new List<GridMarkerBehaviour>();
         GridMarkerBehaviour currentNode = endNode;
+        
 
         while (currentNode != startNode)
         {
@@ -172,6 +213,7 @@ public class GridManager : MonoBehaviour
 
             foreach (GridMarkerBehaviour neighbor in GetNeighbors(currentNode))
             {
+                
                 if (!neighbor.isNavigable || closedSet.Contains(neighbor))
                 {
                     continue;
@@ -187,6 +229,7 @@ public class GridManager : MonoBehaviour
                     if (!openSet.Contains(neighbor))
                     {
                         openSet.Add(neighbor);
+                        
                     }
                 }
             }
@@ -194,6 +237,9 @@ public class GridManager : MonoBehaviour
 
         return null; // No se encontró un camino válido
     }
+    
+
+
 
     float GetDistance(GridMarkerBehaviour nodeA, GridMarkerBehaviour nodeB)
     {
