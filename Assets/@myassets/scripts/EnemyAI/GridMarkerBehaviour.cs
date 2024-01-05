@@ -8,6 +8,8 @@ public class GridMarkerBehaviour : MonoBehaviour
     public Material notNavigableMaterial;
 
     public bool isNavigable;
+    public bool isTemporal;
+    public float counter;
     public int x;
     public int y;
     public int z;
@@ -24,7 +26,7 @@ public class GridMarkerBehaviour : MonoBehaviour
     private Renderer renderer;
     void Start()
     {
-        
+        isTemporal = false;
         gCost = 0;
         hCost = 0;
         isNavigable = true;
@@ -49,6 +51,8 @@ public class GridMarkerBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "Player" || other.gameObject.layer == 9 || other.gameObject.layer == 10)
+            return;
         if (isNavigable)
         {
             isNavigable = false;
@@ -61,6 +65,8 @@ public class GridMarkerBehaviour : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.gameObject.layer == 7 || other.gameObject.layer == 9 || other.gameObject.layer == 10)
+            return;
         if (!isNavigable)
         {
             isNavigable = true;

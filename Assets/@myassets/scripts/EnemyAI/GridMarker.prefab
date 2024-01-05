@@ -50,7 +50,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7704623559156174304}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -114,6 +114,8 @@ MonoBehaviour:
   notNavigableMaterial: {fileID: 2100000, guid: 44bd7593e020192499a313ef63fcfd14,
     type: 2}
   isNavigable: 0
+  isTemporal: 0
+  counter: 0
   x: 0
   y: 0
   z: 0

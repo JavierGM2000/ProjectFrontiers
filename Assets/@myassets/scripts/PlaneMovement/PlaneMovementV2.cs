@@ -42,18 +42,23 @@ public class PlaneMovementV2 : MonoBehaviour
     private AudioSource windSound;
     private float volumeMultiplier;
 
+    [SerializeField]
+    private GameObject gatling;
+    private GatlinBehaviour gatlinBehaviour;
+
 
     public PlaneControlActions planeControls;
     public InputAction pitchAction;
     public InputAction rollAction;
     public InputAction yawAction;
     public InputAction throttleAction;
-
+    public InputAction SshootAction;
 
     private float throttle;
     private float roll;
     private float pitch;
     private float yaw;
+    private float shoot;
 
     private bool stall;
     public float stallVelocity = 0f;
@@ -76,17 +81,20 @@ public class PlaneMovementV2 : MonoBehaviour
     private void Awake()
     {
         //stallObject.gameObject.active = false;
-        stall = true;
+        stall = false;
         planeControls = new PlaneControlActions();
         pitchAction = planeControls.PlaneMap.Pitch;
         rollAction = planeControls.PlaneMap.Roll;
         yawAction = planeControls.PlaneMap.Yaw;
         throttleAction = planeControls.PlaneMap.Thrust;
+        SshootAction = planeControls.PlaneMap.Shoot;
         pitchAction.Enable();
         rollAction.Enable();
         yawAction.Enable();
         throttleAction.Enable();
+        SshootAction.Enable();
         rb = GetComponent<Rigidbody>();
+        gatlinBehaviour = gatling.GetComponent<GatlinBehaviour>();
     }
 
     // Start is called before the first frame update
@@ -117,6 +125,7 @@ public class PlaneMovementV2 : MonoBehaviour
         }
         HandleInput();
         handleThrottle();
+        handleShooting();
         Debug.Log("Velocity = " + rb.velocity.magnitude);
         
         float angleDown = Vector3.Angle(Vector3.down, transform.forward);
@@ -140,26 +149,32 @@ public class PlaneMovementV2 : MonoBehaviour
         float angleDown = Vector3.Angle(Vector3.down, transform.forward);
 
         float appliedGravityForce = gravity - (rb.velocity.magnitude * 9.8f / 100f);
-       // appliedGravityForce = Mathf.Clamp(appliedGravityForce, 0f, gravity);
+        // appliedGravityForce = Mathf.Clamp(appliedGravityForce, 0f, gravity);
+        /*
+         if (stall)
+         {
 
-        if (stall)
-        {
-            
-            rb.AddForce(Vector3.up * -gravity  * Time.deltaTime * deltaTimeFixMultiplier, ForceMode.Acceleration);
-            rb.AddForce(-rb.velocity.normalized * 10f * Time.deltaTime, ForceMode.Acceleration);
-            rb.angularDrag = 4f;
+             rb.AddForce(Vector3.up * -gravity  * Time.deltaTime * deltaTimeFixMultiplier, ForceMode.Acceleration);
+             rb.AddForce(-rb.velocity.normalized * 10f * Time.deltaTime, ForceMode.Acceleration);
+             rb.angularDrag = 4f;
 
-            rb.AddTorque(transform.up * yaw * responseModifier * Time.deltaTime * deltaTimeFixMultiplier / 4.4f);
-            rb.AddTorque(-transform.right * pitch * responseModifier * Time.deltaTime * deltaTimeFixMultiplier/2);
-            rb.AddTorque(-transform.forward * roll * responseModifier * Time.deltaTime * deltaTimeFixMultiplier/2);
-        }
-        else {
-            rb.angularDrag = 1.5f;
-            rb.AddTorque(transform.up * yaw * responseModifier *Time.deltaTime * deltaTimeFixMultiplier/2.2f);
-            rb.AddTorque(-transform.right * pitch * responseModifier *Time.deltaTime * deltaTimeFixMultiplier);
-            rb.AddTorque(-transform.forward * roll * responseModifier * Time.deltaTime * deltaTimeFixMultiplier);
-        
-        }
+             rb.AddTorque(transform.up * yaw * responseModifier * Time.deltaTime * deltaTimeFixMultiplier / 4.4f);
+             rb.AddTorque(-transform.right * pitch * responseModifier * Time.deltaTime * deltaTimeFixMultiplier/2);
+             rb.AddTorque(-transform.forward * roll * responseModifier * Time.deltaTime * deltaTimeFixMultiplier/2);
+         }
+         else {
+             rb.angularDrag = 1.5f;
+             rb.AddTorque(transform.up * yaw * responseModifier *Time.deltaTime * deltaTimeFixMultiplier/2.2f);
+             rb.AddTorque(-transform.right * pitch * responseModifier *Time.deltaTime * deltaTimeFixMultiplier);
+             rb.AddTorque(-transform.forward * roll * responseModifier * Time.deltaTime * deltaTimeFixMultiplier);
+
+         }
+        */
+        //rb.angularDrag = 1.5f;
+        rb.AddTorque(transform.up * yaw * responseModifier * Time.deltaTime * deltaTimeFixMultiplier / 2.2f);
+        rb.AddTorque(-transform.right * pitch * responseModifier * Time.deltaTime * deltaTimeFixMultiplier);
+        rb.AddTorque(-transform.forward * roll * responseModifier * Time.deltaTime * deltaTimeFixMultiplier * 2);
+
         float throttleAdjusted = Mathf.Pow(throttle, 2) / 100f;
         //float acceleration = CalculateAcceleration(rb.velocity.magnitude);
 
@@ -236,7 +251,30 @@ public class PlaneMovementV2 : MonoBehaviour
         throttleText.text = "Throttle: " + targetThrottle;
     }
 
+    private void handleShooting() {
+        float shooting = SshootAction.ReadValue<float>();
+        
+        if (shooting > 0)
+        {
+            gatlinBehaviour.rotatePlatForm();
+            float rayDistance = 50f; // Puedes ajustar esto según tus necesidades
 
+            // Realizar el raycast
+            RaycastHit hitInfo;
+            if (Physics.Raycast(transform.position, transform.forward, out hitInfo, rayDistance, 10))
+            {
+                Debug.DrawRay(transform.position, transform.forward * rayDistance, Color.green);
+                // Verificar si el objeto golpeado pertenece a la capa objetivo (capa 10)
+                if (hitInfo.collider.gameObject.layer == 10)
+                {
+                    
+                    Destroy(hitInfo.collider.gameObject);
+                }
+            }
+        }
+        
+
+    }
 
     public void detectStall()
     {
@@ -261,5 +299,13 @@ public class PlaneMovementV2 : MonoBehaviour
         }
         
     
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 9)
+            return;
+        Destroy(gameObject);
     }
 }
