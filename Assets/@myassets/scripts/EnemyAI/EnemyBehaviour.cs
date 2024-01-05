@@ -12,13 +12,9 @@ public class EnemyBehaviour : MonoBehaviour
     public float staminaToRunAway;
     public float minStaminaToEngage;
 
-    public float maxStress = 100f;
-    public float currentStress;
-    public float stressGainCoeficient;
-
     public float approachDistance = 500;
-    public float trackDistance = 100;
-    public float directAttackDistance = 25;
+    public float trackDistance = 30;
+    public float directAttackDistance = 15;
 
     public Transform bossPlane;
     //////////////////////////////////////////
@@ -29,7 +25,12 @@ public class EnemyBehaviour : MonoBehaviour
 
     ////////////////////
     //ENEMY ATTACK VARIABLES//
-    //public float damage;
+    public float damage;
+    public GameObject bulletPrefab;
+    public float shootingForce;
+    public float shootCooldown = 1f;
+    float timeSinceLastShot = 0f;
+    
 
     ////////////////////
 
@@ -46,6 +47,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public Rigidbody rigidbody;
     public float maxTurnForce = 1f;
+    private float directAttackTurnForce;
     public float turnForce;
     public float responsiveness = 10f;
 
@@ -77,6 +79,7 @@ public class EnemyBehaviour : MonoBehaviour
         movementForce = maxMovementForce;
         currentMaxMovementForce = maxMovementForce;
         turnForce = maxTurnForce;
+        directAttackTurnForce = turnForce * 1.3f;
     }
 
     void Update()
@@ -85,6 +88,9 @@ public class EnemyBehaviour : MonoBehaviour
         {
             return;
         }
+
+        timeSinceLastShot += Time.deltaTime;
+        
 
         targetGridPosition = target.transform.position;
         float distance = Vector3.Distance(transform.position, targetGridPosition);
@@ -132,7 +138,7 @@ public class EnemyBehaviour : MonoBehaviour
             currentGridPosition = transform.position;
         }
 
-        if (currentStamina < 50)
+        if (currentStamina < staminaToRunAway)
             agresivityLevel = 5;
 
         counter += Time.deltaTime;
@@ -147,7 +153,7 @@ public class EnemyBehaviour : MonoBehaviour
         path = grid.FindPath(transform.position, targetGridPosition);
     }
 
-    public void MoveEnemyPath()
+    public void MoveEnemyPath(Color traceColor)
     {
         if (path == null || path.Count == 0 || nextPoint >= path.Count)
             return;
@@ -155,18 +161,19 @@ public class EnemyBehaviour : MonoBehaviour
         Vector3 targetPosition = path[nextPoint].transform.position;
 
         adjustRoll(targetPosition);
-        adjustPitch(targetPosition);
-        moveForward();
+        adjustPitch(targetPosition, turnForce);
+
+        moveForward(targetPosition, currentMaxMovementForce);
 
         if (Vector3.Distance(transform.position, targetPosition) < 0.01f)
         {
             nextPoint++;
         }
 
-        Debug.DrawLine(transform.position, path[0].transform.position, Color.blue);
+        Debug.DrawLine(transform.position, path[0].transform.position, traceColor);
         for (int i = 0; i < path.Count - 1; i++)
         {
-            Debug.DrawLine(path[i].transform.position, path[i + 1].transform.position, Color.blue);
+            Debug.DrawLine(path[i].transform.position, path[i + 1].transform.position, traceColor);
         }
     }
 
@@ -175,12 +182,12 @@ public class EnemyBehaviour : MonoBehaviour
         currentGridPosition = position;
     }
 
-    public void adjustPitch(Vector3 targetPosition)
+    public void adjustPitch(Vector3 targetPosition, float turnMult)
     {
         Vector3 movementVector = targetPosition - transform.position;
         float angle = Vector3.SignedAngle(transform.forward, movementVector, transform.right);
 
-        float appliedTurnForce = turnForce * maxPitchForce * 100 * angle / 180;
+        float appliedTurnForce = turnMult * maxPitchForce * 100 * angle / 180;
         rigidbody.AddTorque(transform.right * appliedTurnForce * responseModifier * Time.deltaTime / 300);
     }
 
@@ -193,10 +200,27 @@ public class EnemyBehaviour : MonoBehaviour
         float rollForce = turnForce * maxRollForce * rollAngle / 180f;
         rigidbody.AddTorque(transform.forward * -rollForce * responseModifier * Time.deltaTime);
     }
-
-    public void moveForward()
+    public void adjustYaw(Vector3 targetPosition, float turnMult)
     {
-        rigidbody.AddForce(transform.forward * currentMaxMovementForce * Time.deltaTime, ForceMode.Acceleration);
+        Vector3 movementVector = targetPosition - transform.position;
+        float angle = Vector3.SignedAngle(transform.forward, movementVector, transform.up);
+
+        float appliedTurnForce = turnMult * maxRollForce * 100 * angle / 180;
+        rigidbody.AddTorque(transform.up * appliedTurnForce * responseModifier * Time.deltaTime / 300);
+    }
+
+    public void moveForward(Vector3 targetPosition, float appliedMovementForce)
+    {
+
+        Vector3 movementVector = targetPosition - transform.position;
+        float angle = Vector3.SignedAngle(transform.forward, movementVector, transform.right);
+
+        Debug.LogWarning(angle);
+        angle = Mathf.Abs(angle);
+       
+        float adjustedAppliedMovementForce = appliedMovementForce * Mathf.Clamp((1-(angle/180)), 0.3f, 1);
+        
+        rigidbody.AddForce(transform.forward * adjustedAppliedMovementForce * Time.deltaTime, ForceMode.Acceleration);
     }
 
     private void ClearPath()
@@ -216,8 +240,8 @@ public class EnemyBehaviour : MonoBehaviour
     {
         Debug.DrawLine(transform.position, bossPlane.position, Color.green);
         adjustRoll(bossPlane.position);
-        adjustPitch(bossPlane.position);
-        moveForward();
+        adjustPitch(bossPlane.position, turnForce);
+        moveForward(bossPlane.position,currentMaxMovementForce);
     }
 
     public void BehaviourApproachPlayer()
@@ -225,8 +249,8 @@ public class EnemyBehaviour : MonoBehaviour
         targetGridPosition = target.transform.position;
         Debug.DrawLine(transform.position, targetGridPosition, Color.yellow);
         adjustRoll(targetGridPosition);
-        adjustPitch(targetGridPosition);
-        moveForward();
+        adjustPitch(targetGridPosition, turnForce);
+        moveForward(targetGridPosition,currentMaxMovementForce);
     }
 
     public void BehaviourTrackPlayer()
@@ -238,16 +262,24 @@ public class EnemyBehaviour : MonoBehaviour
             counter = 0;
         }
 
-        MoveEnemyPath();
+        MoveEnemyPath(Color.blue);
     }
 
     public void BehaviourDirectAttackPlayer()
     {
-        targetGridPosition = target.transform.position + (targetRigidbody.velocity);
+        targetGridPosition = target.transform.position + targetRigidbody.velocity;
         Debug.DrawLine(transform.position, targetGridPosition, Color.red);
         adjustRoll(targetGridPosition);
-        adjustPitch(targetGridPosition);
-        moveForward();
+        adjustYaw(targetGridPosition, turnForce);
+        float distance = Vector3.Distance(transform.position, target.transform.position);
+        float distanceMultiplier = Mathf.Clamp01(1f - distance / directAttackDistance);
+        float appliedTurnForce = directAttackTurnForce * distanceMultiplier;
+        float appliedForce = currentMaxMovementForce * (Mathf.Clamp((distance / directAttackDistance), 0.2f, 1f));
+        adjustPitch(targetGridPosition, appliedTurnForce);
+        Debug.Log("MOvementForce = " + appliedForce);
+
+        moveForward(targetGridPosition,appliedForce);
+       
     }
 
     public void BehaviourRunAway()
@@ -255,8 +287,8 @@ public class EnemyBehaviour : MonoBehaviour
         targetGridPosition = new Vector3(0, 0, 0);
         Debug.DrawLine(transform.position, targetGridPosition, Color.cyan);
         adjustRoll(targetGridPosition);
-        adjustPitch(targetGridPosition);
-        moveForward();
+        adjustPitch(targetGridPosition, turnForce);
+        moveForward(targetGridPosition, currentMaxMovementForce);
     }
 
     public void playBehaviour()
@@ -273,11 +305,12 @@ public class EnemyBehaviour : MonoBehaviour
                 break;
             case 3:
                 BehaviourTrackPlayer();
-                reduceStamina(1f);
+                reduceStamina(0.5f);
                 break;
             case 4:
                 BehaviourDirectAttackPlayer();
-                reduceStamina(1.5f);
+                directShooting();
+                reduceStamina(0.7f);
                 break;
             case 5:
                 BehaviourRunAway();
@@ -291,13 +324,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void switchBehaviour()
     {
-        if (currentStress <= 0)
-        {
-            currentStress = 0;
-            if (agresivityLevel != 5)
-                agresivityLevel = 5;
-            return;
-        }
+        
 
         float distance = Vector3.Distance(target.transform.position, transform.position);
         if (distance <= approachDistance && distance > trackDistance)
@@ -328,17 +355,58 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void reduceStamina(float staminaLostMultiplier)
     {
+
         currentStamina -= staminaLoseCoeficient * staminaLostMultiplier * Time.deltaTime;
-        currentMaxMovementForce = maxMovementForce * (currentStamina / maxStamina);
-        turnForce = maxTurnForce * (currentStamina / maxStamina);
+        currentMaxMovementForce = maxMovementForce * Mathf.Clamp((currentStamina / maxStamina), 0.7f, 1f);
+        turnForce = maxTurnForce * Mathf.Clamp((currentStamina / maxStamina), 0.7f,1f);
+        directAttackTurnForce = turnForce * 3f;
         Debug.Log("Stamina = " + currentStamina);
     }
 
     public void recoverStamina(float staminaGainMultiplier)
     {
         currentStamina += staminaLoseCoeficient * staminaGainMultiplier * Time.deltaTime;
-        currentMaxMovementForce = maxMovementForce * (currentStamina / maxStamina);
-        turnForce = maxTurnForce * (currentStamina / maxStamina);
+        currentMaxMovementForce = maxMovementForce * Mathf.Clamp((currentStamina / maxStamina), 0.7f, 1f);
+        turnForce = maxTurnForce * Mathf.Clamp( (currentStamina / maxStamina), 0.7f, 1f);
+        directAttackTurnForce = turnForce * 3f;
         Debug.Log("Stamina = " + currentStamina);
+    }
+
+
+
+
+    public void directShooting()
+    {
+        float rayDistance = 100f; // Puedes ajustar esto según tus necesidades
+        float shootingAngleThreshold = 20f; // Tu valor específico de ángulo
+
+        Debug.DrawLine(transform.position, transform.position + transform.forward * rayDistance, Color.green);
+  
+
+           
+            
+                // Calcular el ángulo entre la dirección del enemigo y el vector al objetivo
+                Vector3 targetDirection = targetGridPosition - transform.position;
+                float angleToTarget = Vector3.Angle(transform.forward, targetDirection);
+
+                // Verificar si el ángulo es menor que el umbral
+                if (angleToTarget < shootingAngleThreshold && timeSinceLastShot >= shootCooldown)
+                {
+
+                    // Disparar un objeto con cierta fuerza
+                    ShootProjectile();
+                timeSinceLastShot = 0;
+                }
+            
+        
+    }
+
+    void ShootProjectile()
+    {
+        // Instanciar el proyectil y aplicarle fuerza
+        GameObject projectile = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        projectile.transform.parent = null;
+        Rigidbody projectileRigidbody = projectile.GetComponent<Rigidbody>();
+        projectileRigidbody.AddForce(transform.forward * shootingForce, ForceMode.Impulse);
     }
 }

@@ -257,8 +257,22 @@ public class PlaneMovementV2 : MonoBehaviour
         if (shooting > 0)
         {
             gatlinBehaviour.rotatePlatForm();
+            float rayDistance = 50f; // Puedes ajustar esto según tus necesidades
+
+            // Realizar el raycast
+            RaycastHit hitInfo;
+            if (Physics.Raycast(transform.position, transform.forward, out hitInfo, rayDistance, 10))
+            {
+                Debug.DrawRay(transform.position, transform.forward * rayDistance, Color.green);
+                // Verificar si el objeto golpeado pertenece a la capa objetivo (capa 10)
+                if (hitInfo.collider.gameObject.layer == 10)
+                {
+                    
+                    Destroy(hitInfo.collider.gameObject);
+                }
+            }
         }
-      
+        
 
     }
 
