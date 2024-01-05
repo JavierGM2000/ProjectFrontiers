@@ -11,10 +11,11 @@ public class GridManager : MonoBehaviour
     [SerializeField] private GameObject gridMarkerObject;
     [SerializeField] private Transform player;
     private GridMarkerBehaviour[,,] grid;
-
+    private Dictionary<Vector3, Dictionary<Vector3, List<GridMarkerBehaviour>>> pathCache;
     void Awake()
     {
         CreateGrid();
+        pathCache = new Dictionary<Vector3, Dictionary<Vector3, List<GridMarkerBehaviour>>>();
     }
 
 
@@ -65,14 +66,13 @@ public class GridManager : MonoBehaviour
             {
                 for (int depth = 0; depth < gridSizeZ; depth++)
                 {
-                    Vector3 markerPosition = new Vector3(column * cellSize, line * cellSize, depth * cellSize);
-                    GameObject marker = Instantiate(gridMarkerObject, markerPosition, Quaternion.identity);
-                    marker.GetComponent<SphereCollider>().radius =  cellSize;
-                    marker.transform.parent = transform;
+                    Vector3Int gridPosition = new Vector3Int(column * cellSize, line * cellSize, depth * cellSize);
+                    GameObject marker = Instantiate(gridMarkerObject, gridPosition, Quaternion.identity, transform);
+                    marker.GetComponent<SphereCollider>().radius = cellSize;
                     marker.layer = 9;
                     GridMarkerBehaviour markerBehaviour = marker.GetComponent<GridMarkerBehaviour>();
                     markerBehaviour.setGridPosition(column, line, depth);
-                    
+
                     grid[column, line, depth] = markerBehaviour;
                 }
             }
@@ -109,59 +109,10 @@ public class GridManager : MonoBehaviour
     }
 
 
-    public List<GridMarkerBehaviour> SmoothPath(List<GridMarkerBehaviour> path)
-    {
-        if (path == null || path.Count < 4)
-        {
-            return path;
-        }
-
-        List<GridMarkerBehaviour> smoothedPath = new List<GridMarkerBehaviour>();
-        smoothedPath.Add(path[0]);
-
-        for (int i = 1; i < path.Count - 2; i++)
-        {
-            GridMarkerBehaviour pointA = path[i - 1];
-            GridMarkerBehaviour pointB = path[i];
-            GridMarkerBehaviour pointC = path[i + 1];
-            GridMarkerBehaviour pointD = path[i + 2];
-
-            // Interpola entre los puntos A, B, C y D utilizando interpolación cúbica
-            Vector3 interpolatedPosition = CubicBezierInterpolate(pointA.transform.position, pointB.transform.position, pointC.transform.position, pointD.transform.position, 0.5f);
-
-            // Crea un nuevo nodo con la posición interpolada
-            GameObject interpolatedNode =  Instantiate(gridMarkerObject, interpolatedPosition, Quaternion.identity);
-            GridMarkerBehaviour markerBehaviour = interpolatedNode.GetComponent<GridMarkerBehaviour>();
-            markerBehaviour.isTemporal = true;
-
-            smoothedPath.Add(markerBehaviour);
-        }
-
-        smoothedPath.Add(path[path.Count - 1]); // Añadir el último nodo
-        return smoothedPath;
-    }
+   
 
 
-    Vector3 CubicBezierInterpolate(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
-    {
-        float u = 1 - t;
-        float tt = t * t;
-        float uu = u * u;
-        float uuu = uu * u;
-        float ttt = tt * t;
 
-        Vector3 p = uuu * p0; // (1-t)^3 * p0
-        p += 3 * uu * t * p1; // 3 * (1-t)^2 * t * p1
-        p += 3 * u * tt * p2; // 3 * (1-t) * t^2 * p2
-        p += ttt * p3; // t^3 * p3
-
-        return p;
-    }
-
-    Vector3 Interpolate(Vector3 a, Vector3 b, float t)
-    {
-        return a + (b - a) * t;
-    }
 
     List<GridMarkerBehaviour> GetNeighbors(GridMarkerBehaviour currentNode)
     {
@@ -188,6 +139,26 @@ public class GridManager : MonoBehaviour
         GridMarkerBehaviour startNode = GetGridMarkerFromPosition(startPos);
         GridMarkerBehaviour targetNode = GetGridMarkerFromPosition(targetPos);
 
+        // Consulta la caché antes de realizar el cálculo del camino
+        if (pathCache.ContainsKey(startPos) && pathCache[startPos].ContainsKey(targetPos))
+        {
+            return pathCache[startPos][targetPos];
+        }
+
+        List<GridMarkerBehaviour> path = CalculatePath(startNode, targetNode);
+
+        // Almacena el camino en la caché
+        if (!pathCache.ContainsKey(startPos))
+        {
+            pathCache[startPos] = new Dictionary<Vector3, List<GridMarkerBehaviour>>();
+        }
+        pathCache[startPos][targetPos] = path;
+
+        return path;
+    }
+
+    private List<GridMarkerBehaviour> CalculatePath(GridMarkerBehaviour startNode, GridMarkerBehaviour targetNode)
+    {
         List<GridMarkerBehaviour> openSet = new List<GridMarkerBehaviour> { startNode };
         HashSet<GridMarkerBehaviour> closedSet = new HashSet<GridMarkerBehaviour>();
 
@@ -213,7 +184,6 @@ public class GridManager : MonoBehaviour
 
             foreach (GridMarkerBehaviour neighbor in GetNeighbors(currentNode))
             {
-                
                 if (!neighbor.isNavigable || closedSet.Contains(neighbor))
                 {
                     continue;
@@ -229,7 +199,6 @@ public class GridManager : MonoBehaviour
                     if (!openSet.Contains(neighbor))
                     {
                         openSet.Add(neighbor);
-                        
                     }
                 }
             }
@@ -237,17 +206,13 @@ public class GridManager : MonoBehaviour
 
         return null; // No se encontró un camino válido
     }
-    
+
 
 
 
     float GetDistance(GridMarkerBehaviour nodeA, GridMarkerBehaviour nodeB)
     {
-        float distanceX = nodeA.x - nodeB.x;
-        float distanceY = nodeA.y - nodeB.y;
-        float distanceZ = nodeA.z - nodeB.z;
-
-        return Mathf.Sqrt(distanceX * distanceX + distanceY * distanceY + distanceZ * distanceZ);
+        return Vector3.Distance(nodeA.GetGridPosition(), nodeB.GetGridPosition());
     }
 
     public bool IsCellNavigable(int x, int y, int z)

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    //BEHAVIOUR  VARIABLES//
-    public int agresivityLevel; //  0 -> Not tracking player / 5 -> directly attacking player  (More agressive -> more stamina lose)
+    //BEHAVIOUR VARIABLES//
+    public int agresivityLevel;
     public float maxStamina = 100f;
-    public float currentStamina; // Determines turn and speeding capability of enemy
+    public float currentStamina;
     public float staminaLoseCoeficient;
     public float staminaToRunAway;
     public float minStaminaToEngage;
@@ -20,7 +20,6 @@ public class EnemyBehaviour : MonoBehaviour
     public float trackDistance = 100;
     public float directAttackDistance = 25;
 
-
     public Transform bossPlane;
     //////////////////////////////////////////
 
@@ -28,30 +27,22 @@ public class EnemyBehaviour : MonoBehaviour
     public float maxHP = 100;
     public float currentHP;
 
-
     ////////////////////
     //ENEMY ATTACK VARIABLES//
     //public float damage;
-    
-
 
     ////////////////////
 
-
-
-
     public GridManager grid;
     public Vector3 currentGridPosition;
-    
+
     private List<GridMarkerBehaviour> path = new List<GridMarkerBehaviour>();
     private int nextPoint = 0;
     float counter;
-    [SerializeField]
-    float pathRefreshCooldown = 10f;
+    [SerializeField] float pathRefreshCooldown = 10f;
     public Vector3 targetGridPosition = new Vector3(9, 7, 4);
     public GameObject target;
     private Rigidbody targetRigidbody;
-
 
     public Rigidbody rigidbody;
     public float maxTurnForce = 1f;
@@ -64,19 +55,20 @@ public class EnemyBehaviour : MonoBehaviour
     public float currentMaxMovementForce;
     public float movementForce;
 
+    
     private float responseModifier
     {
         get
         {
             return (rigidbody.mass / 10f) * responsiveness;
         }
-
     }
+
     void Start()
     {
         targetGridPosition = target.transform.position;
         targetRigidbody = target.GetComponent<Rigidbody>();
-        rigidbody = GetComponent<Rigidbody>();   
+        rigidbody = GetComponent<Rigidbody>();
         counter = 0;
         currentGridPosition = transform.position;
         agresivityLevel = 0;
@@ -93,100 +85,82 @@ public class EnemyBehaviour : MonoBehaviour
         {
             return;
         }
-        
+
         targetGridPosition = target.transform.position;
         float distance = Vector3.Distance(transform.position, targetGridPosition);
         if (agresivityLevel == 5)
         {
-
             if (currentStamina > minStaminaToEngage)
             {
-
                 if (distance < approachDistance && distance >= trackDistance)
                 {
                     agresivityLevel = 2;
-
-                } else if (distance >= approachDistance) {
-
+                }
+                else if (distance >= approachDistance)
+                {
                     agresivityLevel = 1;
                 }
                 else if (distance < trackDistance && distance >= directAttackDistance)
                 {
                     agresivityLevel = 3;
-
                 }
                 else
                 {
                     agresivityLevel = 4;
                 }
                 currentGridPosition = transform.position;
-
-
             }
-
         }
-        else {
-
+        else
+        {
             if (distance < approachDistance && distance >= trackDistance)
             {
                 agresivityLevel = 2;
-
             }
             else if (distance >= approachDistance)
             {
-
                 agresivityLevel = 1;
             }
             else if (distance < trackDistance && distance >= directAttackDistance)
             {
                 agresivityLevel = 3;
-
             }
             else
             {
                 agresivityLevel = 4;
             }
             currentGridPosition = transform.position;
-            
-
         }
 
-         if (currentStamina < 50)
+        if (currentStamina < 50)
             agresivityLevel = 5;
-       
-        //Debug.LogError("counter = "+ counter);
+
         counter += Time.deltaTime;
         if (counter > pathRefreshCooldown + 2)
             counter = pathRefreshCooldown;
 
-       
         playBehaviour();
-
-        
     }
 
     public void CalculatePath(Vector3 finalGridPosition)
     {
-        
-        path = grid.FindPath(currentGridPosition, finalGridPosition);
+        path = grid.FindPath(transform.position, targetGridPosition);
     }
 
     public void MoveEnemyPath()
     {
-        if (path == null || path.Count == 0 || nextPoint >= path.Count )
+        if (path == null || path.Count == 0 || nextPoint >= path.Count)
             return;
 
-
         Vector3 targetPosition = path[nextPoint].transform.position;
-
 
         adjustRoll(targetPosition);
         adjustPitch(targetPosition);
         moveForward();
+
         if (Vector3.Distance(transform.position, targetPosition) < 0.01f)
         {
             nextPoint++;
-
         }
 
         Debug.DrawLine(transform.position, path[0].transform.position, Color.blue);
@@ -201,41 +175,32 @@ public class EnemyBehaviour : MonoBehaviour
         currentGridPosition = position;
     }
 
-    public void adjustPitch(Vector3 targetPosition) {
+    public void adjustPitch(Vector3 targetPosition)
+    {
         Vector3 movementVector = targetPosition - transform.position;
         float angle = Vector3.SignedAngle(transform.forward, movementVector, transform.right);
-        
-        //Debug.Log("angle = " + angle);
-        float appliedTurnForce =  turnForce *maxPitchForce* 100 * angle / 180;
-        rigidbody.AddTorque(transform.right * appliedTurnForce * responseModifier * Time.deltaTime/300 );
-       
+
+        float appliedTurnForce = turnForce * maxPitchForce * 100 * angle / 180;
+        rigidbody.AddTorque(transform.right * appliedTurnForce * responseModifier * Time.deltaTime / 300);
     }
 
-    public void adjustRoll(Vector3 targetPosition) {
-       
+    public void adjustRoll(Vector3 targetPosition)
+    {
         Vector3 targetDirection = targetPosition - transform.position;
-
-        
         Vector3 horizontalDirection = Vector3.ProjectOnPlane(targetDirection, transform.up).normalized;
 
-      
         float rollAngle = Vector3.SignedAngle(transform.forward, horizontalDirection, transform.up);
-
-       
-        float rollForce = turnForce *maxRollForce * rollAngle / 180f; 
+        float rollForce = turnForce * maxRollForce * rollAngle / 180f;
         rigidbody.AddTorque(transform.forward * -rollForce * responseModifier * Time.deltaTime);
-
     }
+
     public void moveForward()
     {
-       
-        rigidbody.AddForce( transform.forward * currentMaxMovementForce * Time.deltaTime, ForceMode.Acceleration);
+        rigidbody.AddForce(transform.forward * currentMaxMovementForce * Time.deltaTime, ForceMode.Acceleration);
     }
-
 
     private void ClearPath()
     {
-        // Filtra y destruye solo los GridMarkers temporales
         List<GridMarkerBehaviour> tempMarkers = path.FindAll(marker => marker.isTemporal);
 
         foreach (GridMarkerBehaviour marker in tempMarkers)
@@ -243,32 +208,27 @@ public class EnemyBehaviour : MonoBehaviour
             Destroy(marker.gameObject);
         }
 
-        // Elimina los GridMarkers temporales de la lista path
         path.RemoveAll(marker => marker.isTemporal);
-
-        // Reinicia el índice nextPoint
         nextPoint = 0;
     }
 
-
-    public void BehaviourPatrolling() {
+    public void BehaviourPatrolling()
+    {
         Debug.DrawLine(transform.position, bossPlane.position, Color.green);
         adjustRoll(bossPlane.position);
         adjustPitch(bossPlane.position);
         moveForward();
-
     }
+
     public void BehaviourApproachPlayer()
-    {   
-       
+    {
         targetGridPosition = target.transform.position;
         Debug.DrawLine(transform.position, targetGridPosition, Color.yellow);
         adjustRoll(targetGridPosition);
         adjustPitch(targetGridPosition);
         moveForward();
-        
-
     }
+
     public void BehaviourTrackPlayer()
     {
         if (counter >= pathRefreshCooldown)
@@ -279,8 +239,8 @@ public class EnemyBehaviour : MonoBehaviour
         }
 
         MoveEnemyPath();
-
     }
+
     public void BehaviourDirectAttackPlayer()
     {
         targetGridPosition = target.transform.position + (targetRigidbody.velocity);
@@ -288,8 +248,8 @@ public class EnemyBehaviour : MonoBehaviour
         adjustRoll(targetGridPosition);
         adjustPitch(targetGridPosition);
         moveForward();
-
     }
+
     public void BehaviourRunAway()
     {
         targetGridPosition = new Vector3(0, 0, 0);
@@ -299,11 +259,8 @@ public class EnemyBehaviour : MonoBehaviour
         moveForward();
     }
 
-
-
-
-    public void playBehaviour() {
-
+    public void playBehaviour()
+    {
         switch (agresivityLevel)
         {
             case 1:
@@ -327,20 +284,21 @@ public class EnemyBehaviour : MonoBehaviour
                 recoverStamina(1f);
                 break;
             default:
-                BehaviourPatrolling();////
+                BehaviourPatrolling();
                 break;
         }
-
     }
 
-    public void switchBehaviour() {
-
-        if (currentStress <= 0 ) {
+    public void switchBehaviour()
+    {
+        if (currentStress <= 0)
+        {
             currentStress = 0;
-            if(agresivityLevel != 5)
-            agresivityLevel = 5;
+            if (agresivityLevel != 5)
+                agresivityLevel = 5;
             return;
         }
+
         float distance = Vector3.Distance(target.transform.position, transform.position);
         if (distance <= approachDistance && distance > trackDistance)
         {
@@ -360,29 +318,27 @@ public class EnemyBehaviour : MonoBehaviour
                 agresivityLevel = 4;
             return;
         }
-        else {
+        else
+        {
             if (agresivityLevel != 1)
                 agresivityLevel = 1;
             return;
-
-
         }
-
     }
 
-
-    public void reduceStamina(float staminaLostMultiplier) {
+    public void reduceStamina(float staminaLostMultiplier)
+    {
         currentStamina -= staminaLoseCoeficient * staminaLostMultiplier * Time.deltaTime;
         currentMaxMovementForce = maxMovementForce * (currentStamina / maxStamina);
         turnForce = maxTurnForce * (currentStamina / maxStamina);
         Debug.Log("Stamina = " + currentStamina);
     }
 
-    public void recoverStamina(float staminaGainMultiplier) {
+    public void recoverStamina(float staminaGainMultiplier)
+    {
         currentStamina += staminaLoseCoeficient * staminaGainMultiplier * Time.deltaTime;
         currentMaxMovementForce = maxMovementForce * (currentStamina / maxStamina);
         turnForce = maxTurnForce * (currentStamina / maxStamina);
         Debug.Log("Stamina = " + currentStamina);
     }
-    
 }
