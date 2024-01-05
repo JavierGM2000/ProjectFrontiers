@@ -10,6 +10,7 @@ public class WeaponStandardMissile : Weapon
     bool isLaunched = false;
     bool isActive = false;
     bool lostLock = false;
+    private MissileWarning targetWarning;
 
     [SerializeField]
     private float lockDistance = 2800;
@@ -49,7 +50,8 @@ public class WeaponStandardMissile : Weapon
     {
         aliveTime += activationTime;
         myRigidBody = GetComponent<Rigidbody>();
-        targetRigidbody = target.GetComponent<Rigidbody>(); // DEBUG ONLY REMOVE LATER
+        if(target)
+            targetRigidbody = target.GetComponent<Rigidbody>(); // DEBUG ONLY REMOVE LATER
     }
 
     // Update is called once per frame
@@ -83,6 +85,7 @@ public class WeaponStandardMissile : Weapon
 
     private void missileActivate()
     {
+        
         myRigidBody.useGravity = false;
         if (missileType == LockType.GROUND)
         {
@@ -179,6 +182,11 @@ public class WeaponStandardMissile : Weapon
         myRigidBody.isKinematic = false;
         myRigidBody.velocity = inSpeed;
         isLaunched = true;
+        if (target.TryGetComponent<MissileWarning>(out MissileWarning misWarn))
+        {
+            targetWarning = misWarn;
+            misWarn.addMissile(this.gameObject);
+        }
     }
 
     public override LockType getLockType()
@@ -197,7 +205,7 @@ public class WeaponStandardMissile : Weapon
         return lockAngle;
     }
 
-    public virtual float getLockDistance()
+    public override float getLockDistance()
     {
         return lockDistance;
     }
@@ -205,5 +213,14 @@ public class WeaponStandardMissile : Weapon
     private void OnCollisionEnter(Collision collision)
     {
         Destroy(this.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        if (isLaunched)
+        {
+            targetWarning.removeMissiles(this.gameObject.GetInstanceID());
+
+        }
     }
 }

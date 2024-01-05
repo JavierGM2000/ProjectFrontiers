@@ -10,7 +10,7 @@ public class WeaponPlayerControler : MonoBehaviour
     private MainGun maGun;
     [SerializeField]
     private float gunAmmo;
-
+    [SerializeField]
     private GameObject target;
 
     private bool standardSelected = true;
@@ -22,7 +22,7 @@ public class WeaponPlayerControler : MonoBehaviour
     private float lockTime;
     [SerializeField]
     private float lockdistance;
-    private bool locked = false;
+    private bool locked = true;//TODO CHANGE
 
 
     [SerializeField]
@@ -75,6 +75,7 @@ public class WeaponPlayerControler : MonoBehaviour
             {
                 if (distance <= selectedlockDistance)
                 {
+                    //Debug.Log(Vector3.Angle(transform.forward, (target.transform.position - transform.position)));
                     if (Vector3.Angle(transform.forward, (target.transform.position - transform.position).normalized) >= selectedLockAngle)
                     {
                         locked = true;
@@ -92,7 +93,7 @@ public class WeaponPlayerControler : MonoBehaviour
             {
                 float speed = gameObject.GetComponent<Rigidbody>().velocity.magnitude;
                 Vector3 leadPos;
-                maGun.getBulletImpactPoint(out leadPos, speed);
+               // maGun.getBulletImpactPoint(out leadPos, speed);
             }
         }
     }
