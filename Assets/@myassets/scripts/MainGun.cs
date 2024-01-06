@@ -25,6 +25,9 @@ public class MainGun : MonoBehaviour
     [SerializeField]
     private float cooldown = 0.3f;
     private float cooldownTimer;
+
+    [SerializeField]
+    private GameObject flash;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,11 +48,15 @@ public class MainGun : MonoBehaviour
         if (cooldownTimer <= 0)
         {
             cooldownTimer = cooldown;
-           // firingSound.Play();
+            // firingSound.Play();
+            GameObject newFlash = Instantiate(flash, planeGunPodTrans);
+            
             GameObject newBullet = Instantiate(bulletPrefab, planeGunPodTrans);
            // newBullet.transform.localPosition = new Vector3(0, 0, 0);
             newBullet.transform.parent = null;
+            newBullet.GetComponent<Rigidbody>().angularVelocity = planeGunPodTrans.forward* 0;
             newBullet.GetComponent<Rigidbody>().velocity = planeGunPodTrans.forward * bulletSpeed;
+            
         }
     }
 

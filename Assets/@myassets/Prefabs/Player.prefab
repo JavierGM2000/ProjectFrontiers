@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1198668558}
   - component: {fileID: 1198668560}
   - component: {fileID: 1198668559}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: LifeLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 2036305568}
   - component: {fileID: 2036305567}
   - component: {fileID: 2036305570}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RearCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 1341311244951378227}
   - component: {fileID: 1341311244951378229}
   - component: {fileID: 1341311244951378226}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: ThrottleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 1341311244991256704}
   - component: {fileID: 1341311244991256705}
   - component: {fileID: 1341311244991256734}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Speed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5192,7 +5192,7 @@ GameObject:
   - component: {fileID: 1341311245052779742}
   - component: {fileID: 1341311245052779712}
   - component: {fileID: 1341311245052779713}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: PanelUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5275,7 +5275,7 @@ GameObject:
   - component: {fileID: 1341311245085443443}
   - component: {fileID: 1341311245085443445}
   - component: {fileID: 1779131776}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -5495,7 +5495,7 @@ GameObject:
   - component: {fileID: 1341311245088671069}
   - component: {fileID: 1341311245088671071}
   - component: {fileID: 1341311245088671068}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: PanelUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5577,7 +5577,7 @@ GameObject:
   - component: {fileID: 1341311245141722397}
   - component: {fileID: 1341311245141722399}
   - component: {fileID: 1341311245141722396}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: placards
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5660,7 +5660,7 @@ GameObject:
   - component: {fileID: 1341311245201491434}
   - component: {fileID: 1341311245201491436}
   - component: {fileID: 1341311245201491437}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: SpeedText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5796,7 +5796,7 @@ GameObject:
   - component: {fileID: 1341311245234189898}
   - component: {fileID: 1341311245234189900}
   - component: {fileID: 1341311245234189901}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: cockpit_glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5879,7 +5879,7 @@ GameObject:
   - component: {fileID: 1341311245270781906}
   - component: {fileID: 1341311245270781908}
   - component: {fileID: 1341311245270781909}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: steering
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5962,7 +5962,7 @@ GameObject:
   - component: {fileID: 1341311245292806990}
   - component: {fileID: 1341311245292807024}
   - component: {fileID: 1341311245292807025}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: TimerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6098,7 +6098,7 @@ GameObject:
   - component: {fileID: 1341311245358202561}
   - component: {fileID: 1341311245358202563}
   - component: {fileID: 1341311245358202560}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Text (TMP) (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6234,7 +6234,7 @@ GameObject:
   - component: {fileID: 1341311245382418667}
   - component: {fileID: 1341311245382418664}
   - component: {fileID: 1341311245382418665}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: InterfazVidaVelocidad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6332,7 +6332,7 @@ GameObject:
   - component: {fileID: 1341311245519615958}
   - component: {fileID: 1341311245519615960}
   - component: {fileID: 1341311245519615961}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: CametaText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6552,7 +6552,7 @@ GameObject:
   - component: {fileID: 1341311245598728470}
   - component: {fileID: 1341311245598728471}
   - component: {fileID: 1341311245598728468}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6669,7 +6669,7 @@ GameObject:
   - component: {fileID: 1341311245605133696}
   - component: {fileID: 1341311245605133698}
   - component: {fileID: 1341311245605133699}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: AngleWithFloorText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6888,7 +6888,7 @@ GameObject:
   - component: {fileID: 1341311245786773788}
   - component: {fileID: 1341311245786773790}
   - component: {fileID: 1341311245786773791}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7023,7 +7023,7 @@ GameObject:
   - component: {fileID: 1341311245946115732}
   - component: {fileID: 1341311245946115734}
   - component: {fileID: 1341311245946115735}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: CameraPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7099,7 +7099,7 @@ GameObject:
   - component: {fileID: 1341311245993988361}
   - component: {fileID: 1341311245993988363}
   - component: {fileID: 1341311245993988360}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: pedal_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7183,7 +7183,7 @@ GameObject:
   - component: {fileID: 1341311246073989856}
   - component: {fileID: 1341311246073989857}
   - component: {fileID: 1341311246073989886}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: HeartBeat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7442,7 +7442,7 @@ GameObject:
   - component: {fileID: 1341311246212848731}
   - component: {fileID: 1341311246212848733}
   - component: {fileID: 1341311246212848730}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: PanelUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7521,7 +7521,7 @@ GameObject:
   - component: {fileID: 1341311246272844186}
   - component: {fileID: 1341311246272844188}
   - component: {fileID: 1341311246272844189}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7602,7 +7602,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1341311246315886199}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: a7f8e300a664408d9c98dfda43b230f7.fbx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7644,7 +7644,7 @@ GameObject:
   - component: {fileID: 1341311246325549700}
   - component: {fileID: 1341311246325549702}
   - component: {fileID: 1341311246325549703}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: TimeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7780,7 +7780,7 @@ GameObject:
   - component: {fileID: 1341311246362075775}
   - component: {fileID: 1341311246362075745}
   - component: {fileID: 1341311246362075774}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7915,7 +7915,7 @@ GameObject:
   - component: {fileID: 1341311246393379839}
   - component: {fileID: 1341311246393379809}
   - component: {fileID: 1341311246393379838}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: pedal_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8000,7 +8000,7 @@ GameObject:
   - component: {fileID: 1341311246396642115}
   - component: {fileID: 1341311246396642112}
   - component: {fileID: 1341311246396642113}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8288,7 +8288,7 @@ GameObject:
   - component: {fileID: 1341311246597384544}
   - component: {fileID: 1341311246597384546}
   - component: {fileID: 1341311246597384547}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: RawImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8361,7 +8361,7 @@ GameObject:
   - component: {fileID: 1341311246650870534}
   - component: {fileID: 1341311246650870536}
   - component: {fileID: 1341311246650870537}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: TimerPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8437,7 +8437,7 @@ GameObject:
   - component: {fileID: 1341311246731845911}
   - component: {fileID: 1341311246731845913}
   - component: {fileID: 1341311246731845910}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: LifePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8513,7 +8513,7 @@ GameObject:
   - component: {fileID: 1341311246828085406}
   - component: {fileID: 1341311246828085376}
   - component: {fileID: 1341311246828085377}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: cockpit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8596,7 +8596,7 @@ GameObject:
   - component: {fileID: 1341311246839384548}
   - component: {fileID: 1341311246839384550}
   - component: {fileID: 1341311246839384551}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: LifeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8730,7 +8730,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1341311246928087667}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8765,7 +8765,7 @@ GameObject:
   - component: {fileID: 1341311246928705645}
   - component: {fileID: 1341311246928705642}
   - component: {fileID: 1341311246928705643}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: InterfazContador
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8863,7 +8863,7 @@ GameObject:
   - component: {fileID: 1341311246946258631}
   - component: {fileID: 1341311246946258633}
   - component: {fileID: 1341311246946258630}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: monitors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8947,7 +8947,7 @@ GameObject:
   - component: {fileID: 1341311246964596990}
   - component: {fileID: 1341311246964596991}
   - component: {fileID: 1341311246964596988}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: InterfazCamara
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9360,7 +9360,7 @@ GameObject:
   - component: {fileID: 2951736070481255213}
   - component: {fileID: 2951736070481255212}
   - component: {fileID: 2951736070481255208}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9487,7 +9487,7 @@ GameObject:
   - component: {fileID: 3463744523001324331}
   - component: {fileID: 3463744523001324329}
   - component: {fileID: 3463744523001324330}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9622,7 +9622,7 @@ GameObject:
   - component: {fileID: 3463744523857859785}
   - component: {fileID: 3463744523857859791}
   - component: {fileID: 3463744523857859784}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9759,7 +9759,7 @@ GameObject:
   - component: {fileID: 3463744523869060101}
   - component: {fileID: 3463744523869060102}
   - component: {fileID: 3463744523869060103}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9880,7 +9880,7 @@ GameObject:
   - component: {fileID: 3463744523898910419}
   - component: {fileID: 3463744523898910417}
   - component: {fileID: 3463744523898910418}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Text (TMP) (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10015,7 +10015,7 @@ GameObject:
   - component: {fileID: 7427399407914234154}
   - component: {fileID: 5817727118454537871}
   - component: {fileID: 8599694632411155013}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CabinaJugador
   m_TagString: Player
   m_Icon: {fileID: 0}
