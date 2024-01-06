@@ -16,7 +16,7 @@ public class MainGun : MonoBehaviour
     [SerializeField]
     private Transform planeGunPodTrans;
     [SerializeField]
-    private AudioSource firingSound;
+    public AudioSource firingSound;
 
     [SerializeField]
     private GameObject bulletPrefab;
@@ -45,7 +45,7 @@ public class MainGun : MonoBehaviour
         if (cooldownTimer <= 0)
         {
             cooldownTimer = cooldown;
-            firingSound.Play();
+           // firingSound.Play();
             GameObject newBullet = Instantiate(bulletPrefab, planeGunPodTrans);
            // newBullet.transform.localPosition = new Vector3(0, 0, 0);
             newBullet.transform.parent = null;

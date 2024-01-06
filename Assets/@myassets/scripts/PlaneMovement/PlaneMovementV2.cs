@@ -66,7 +66,10 @@ public class PlaneMovementV2 : MonoBehaviour
     private Vector3 lookDirection = Vector3.down;
     public ParticleSystem speedParticles;
 
-
+    private bool audioPlaying = false;
+    private bool startSoundCounter;
+    private float soundCounter;
+    public float soundCooldown;
 
     private float responseModifier {
         get {
@@ -110,7 +113,10 @@ public class PlaneMovementV2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (startSoundCounter)
+        {
+            soundCounter += Time.deltaTime;
+        }
         if (stall)
         {
             if (stallObject.gameObject.active == false) {
@@ -269,15 +275,35 @@ public class PlaneMovementV2 : MonoBehaviour
 
     private void handleShooting() {
         float shooting = SshootAction.ReadValue<float>();
-        
         if (shooting > 0)
         {
             gatlinBehaviour.rotatePlatForm();
             gun.fire();
-        }
-        
 
-    }
+            if (!audioPlaying)
+            {
+                gun.firingSound.Play();  
+                startSoundCounter = true;
+                audioPlaying = true;
+            }
+        }
+        else
+        {
+            if (audioPlaying && soundCounter >= soundCooldown)
+            {
+                gun.firingSound.Stop();  
+                audioPlaying = false;
+                soundCounter = 0;
+                startSoundCounter = false;
+            }
+        }
+    
+
+
+
+
+
+}
 
     public void detectStall()
     {
