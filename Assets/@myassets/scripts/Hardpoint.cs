@@ -24,7 +24,10 @@ public class Hardpoint : MonoBehaviour
         hardpointWeapon = wap.getLockType();
         lockMaxAngle = wap.getLockAngle();
     }
-
+    public void setTarget(Transform transform)
+    {
+        spawnedWeapon.GetComponent<Weapon>().SetTarget(transform);
+    }
 
     public bool launchWeapons(Vector3 speed)
     {

@@ -16,7 +16,12 @@ public class RadarInfo : MonoBehaviour
     string callsign;
     [SerializeField]
     bool revealsTeam;
-    
+
+    private void Start()
+    {
+        FindObjectOfType<UIEnemyShow>().addEnemy(this);
+    }
+
 
     public int getTeam()
     {

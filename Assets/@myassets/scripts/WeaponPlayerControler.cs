@@ -6,6 +6,7 @@ using UnityEngine;
 // - Mitchell "Hunt Down the Freeman Freeman" Shephard
 public class WeaponPlayerControler : MonoBehaviour
 {
+    UIEnemyShow canvasControler;
     [SerializeField]
     private MainGun maGun;
     [SerializeField]
@@ -22,7 +23,8 @@ public class WeaponPlayerControler : MonoBehaviour
     private float lockTime;
     [SerializeField]
     private float lockdistance;
-    private bool locked = true;//TODO CHANGE
+    private bool prevLocked = false;
+    private bool locked = false;//TODO CHANGE
 
 
     [SerializeField]
@@ -49,6 +51,8 @@ public class WeaponPlayerControler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        canvasControler = FindObjectOfType<UIEnemyShow>();
+
         int ammoPerHardpoint = standardAmmo / standardHardpoints.Length;
         foreach(Hardpoint hardpoint in standardHardpoints)
         {
@@ -75,8 +79,8 @@ public class WeaponPlayerControler : MonoBehaviour
             {
                 if (distance <= selectedlockDistance)
                 {
-                    //Debug.Log(Vector3.Angle(transform.forward, (target.transform.position - transform.position)));
-                    if (Vector3.Angle(transform.forward, (target.transform.position - transform.position).normalized) >= selectedLockAngle)
+                    Debug.Log($"{Vector3.Angle(transform.forward, (target.transform.position - transform.position))} < {selectedLockAngle}");
+                    if (Vector3.Angle(transform.forward, (target.transform.position - transform.position).normalized) <= selectedLockAngle)
                     {
                         locked = true;
                     } else
@@ -88,6 +92,18 @@ public class WeaponPlayerControler : MonoBehaviour
                 {
                     locked = false;
                 }
+                if (locked != prevLocked)
+                {
+                    if (locked)
+                    {
+                        canvasControler.setLocked();
+                    }
+                    else
+                    {
+                        canvasControler.setUnlocked();
+                    }
+                }
+                prevLocked = locked;
             }
             if (distance < gunPredictDistance)
             {
@@ -104,10 +120,12 @@ public class WeaponPlayerControler : MonoBehaviour
         {
             return;// If the weapon needs to be locked but it is not we won't let it fire
         }
+        
         Vector3 speed = gameObject.GetComponent<Rigidbody>().velocity;
         if (standardSelected)
         {
-            if(standardAmmo>0 && standardHardpoints[standardCounter].launchWeapons(speed))
+            standardHardpoints[standardCounter].setTarget(target.transform);
+            if (standardAmmo>0 && standardHardpoints[standardCounter].launchWeapons(speed))
             {
                 standardAmmo--;
                 if (++standardCounter >= standardHardpoints.Length)
@@ -116,6 +134,7 @@ public class WeaponPlayerControler : MonoBehaviour
         }
         else
         {
+            specialHardpoints[standardCounter].setTarget(target.transform);
             if (specialAmmo > 0 && specialHardpoints[specialCounter].launchWeapons(speed))
             {
                 specialAmmo--;
@@ -143,6 +162,7 @@ public class WeaponPlayerControler : MonoBehaviour
 
     public void findNewTarget()
     {
+        prevLocked = false;
         locked = false;
         Vector3 scanOrigin;
         if (standardSelected)
@@ -170,6 +190,7 @@ public class WeaponPlayerControler : MonoBehaviour
         if (hasFound == true)
         {
             target = closestEnemy.transform.gameObject;
+            canvasControler.selectEnemy(target.GetInstanceID());
         }
 
     }
