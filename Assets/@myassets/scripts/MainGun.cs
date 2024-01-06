@@ -15,13 +15,42 @@ public class MainGun : MonoBehaviour
     
     [SerializeField]
     private Transform planeGunPodTrans;
+    [SerializeField]
+    private AudioSource firingSound;
 
+    [SerializeField]
+    private GameObject bulletPrefab;
+    [SerializeField]
+    private float bulletSpeed= 600f;
+    [SerializeField]
+    private float cooldown = 0.3f;
+    private float cooldownTimer;
     // Start is called before the first frame update
     void Start()
     {
+        cooldownTimer = 0;
         planeGunPodTrans = transform;
     }
 
+    private void Update()
+    {
+        if (cooldownTimer > 0)
+        {
+            cooldownTimer -= Time.deltaTime;
+        }
+    }
+
+    public void fire()
+    {
+        if (cooldownTimer <= 0)
+        {
+            cooldownTimer = cooldown;
+            firingSound.Play();
+            GameObject newBullet = Instantiate(bulletPrefab, planeGunPodTrans);
+            newBullet.transform.parent = null;
+            newBullet.GetComponent<Rigidbody>().velocity = planeGunPodTrans.forward * bulletSpeed;
+        }
+    }
 
     public float getBulletImpactPoint(out Vector3 lagvector, float planeSpeed)
     {
