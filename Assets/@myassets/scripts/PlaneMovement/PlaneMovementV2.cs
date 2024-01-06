@@ -8,7 +8,7 @@ public class PlaneMovementV2 : MonoBehaviour
 {
     public throttleController throttleObject;
 
-    public  float deltaTimeFixMultiplier = 10f; 
+    public float deltaTimeFixMultiplier = 10f;
 
     public float throttleIncrement = 0.1f;
 
@@ -64,7 +64,7 @@ public class PlaneMovementV2 : MonoBehaviour
     public float stallVelocity = 0f;
     public GameObject stallObject;
     private Vector3 lookDirection = Vector3.down;
-
+    public ParticleSystem speedParticles;
 
 
 
@@ -72,10 +72,13 @@ public class PlaneMovementV2 : MonoBehaviour
         get {
             return (rb.mass / 10f) * responsiveness;
         }
-        
+
     }
 
     Rigidbody rb;
+
+    [SerializeField]
+    MainGun gun;
 
 
     private void Awake()
@@ -148,7 +151,7 @@ public class PlaneMovementV2 : MonoBehaviour
         detectStall();
         float angleDown = Vector3.Angle(Vector3.down, transform.forward);
 
-        float appliedGravityForce = gravity - (rb.velocity.magnitude * 9.8f / 100f);
+        float appliedGravityForce = gravity - (rb.velocity.magnitude * gravity / 100f);
         // appliedGravityForce = Mathf.Clamp(appliedGravityForce, 0f, gravity);
         /*
          if (stall)
@@ -171,9 +174,22 @@ public class PlaneMovementV2 : MonoBehaviour
          }
         */
         //rb.angularDrag = 1.5f;
-        rb.AddTorque(transform.up * yaw * responseModifier * Time.deltaTime * deltaTimeFixMultiplier / 2.2f);
-        rb.AddTorque(-transform.right * pitch * responseModifier * Time.deltaTime * deltaTimeFixMultiplier);
-        rb.AddTorque(-transform.forward * roll * responseModifier * Time.deltaTime * deltaTimeFixMultiplier * 2);
+
+        float appliedTurnForce = (responseModifier * Time.deltaTime * deltaTimeFixMultiplier);
+        float speedFactor = 1f - Mathf.Clamp01(rb.velocity.magnitude / 300f);
+        if (rb.velocity.magnitude >= 120 && !speedParticles.gameObject.active)
+        {
+
+            speedParticles.gameObject.SetActive(true);
+        }
+        else if(rb.velocity.magnitude < 120 && speedParticles.gameObject.active)
+        {
+            speedParticles.gameObject.SetActive(false);
+        }
+        appliedTurnForce *= speedFactor;
+        rb.AddTorque(transform.up * yaw * appliedTurnForce / 2.6f);
+        rb.AddTorque(-transform.right * pitch * appliedTurnForce);
+        rb.AddTorque(-transform.forward * roll * appliedTurnForce * 2);
 
         float throttleAdjusted = Mathf.Pow(throttle, 2) / 100f;
         //float acceleration = CalculateAcceleration(rb.velocity.magnitude);
@@ -257,20 +273,7 @@ public class PlaneMovementV2 : MonoBehaviour
         if (shooting > 0)
         {
             gatlinBehaviour.rotatePlatForm();
-            float rayDistance = 50f; // Puedes ajustar esto según tus necesidades
-
-            // Realizar el raycast
-            RaycastHit hitInfo;
-            if (Physics.Raycast(transform.position, transform.forward, out hitInfo, rayDistance, 10))
-            {
-                Debug.DrawRay(transform.position, transform.forward * rayDistance, Color.green);
-                // Verificar si el objeto golpeado pertenece a la capa objetivo (capa 10)
-                if (hitInfo.collider.gameObject.layer == 10)
-                {
-                    
-                    Destroy(hitInfo.collider.gameObject);
-                }
-            }
+            gun.fire();
         }
         
 
@@ -280,7 +283,7 @@ public class PlaneMovementV2 : MonoBehaviour
     {
         if (stall)
         {
-            if (rb.velocity.magnitude >60)
+            if (rb.velocity.magnitude > stallVelocity + 20)
             {
                 
                 stall = false;
@@ -289,7 +292,7 @@ public class PlaneMovementV2 : MonoBehaviour
         }
         else { 
         
-        if (rb.velocity.magnitude < 40)
+        if (rb.velocity.magnitude < stallVelocity)
         {
             
             stall = true;
@@ -302,10 +305,5 @@ public class PlaneMovementV2 : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == 9)
-            return;
-        Destroy(gameObject);
-    }
+   
 }

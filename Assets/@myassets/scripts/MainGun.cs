@@ -29,7 +29,7 @@ public class MainGun : MonoBehaviour
     void Start()
     {
         cooldownTimer = 0;
-        planeGunPodTrans = transform;
+       
     }
 
     private void Update()
@@ -47,6 +47,7 @@ public class MainGun : MonoBehaviour
             cooldownTimer = cooldown;
             firingSound.Play();
             GameObject newBullet = Instantiate(bulletPrefab, planeGunPodTrans);
+           // newBullet.transform.localPosition = new Vector3(0, 0, 0);
             newBullet.transform.parent = null;
             newBullet.GetComponent<Rigidbody>().velocity = planeGunPodTrans.forward * bulletSpeed;
         }
