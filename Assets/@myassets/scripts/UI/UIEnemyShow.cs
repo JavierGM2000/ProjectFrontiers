@@ -9,6 +9,11 @@ public class UIEnemyShow : MonoBehaviour
     private Canvas canvas;
     [SerializeField]
     private Camera mainCamera;
+    [SerializeField]
+    private MainGun maGun;
+    [SerializeField]
+    private RawImage gunPredictReticle;
+    private bool drawPredict = false;
 
     int currentSelected = -1;
 
@@ -63,11 +68,15 @@ public class UIEnemyShow : MonoBehaviour
                         enemy.Value.distance.text = dist.ToString();
                     }
                 }
+                if (drawPredict)
+                {
+                    //maGun.getBulletImpactPoint();
+                }
                 
             }
             else
             {
-                enemy.Value.sightItem.transform.localPosition = new Vector3(0, 0, -10);
+                enemy.Value.sightItem.transform.localPosition = new Vector3(999, 999, -999);
             }
         }
     }
@@ -106,6 +115,7 @@ public class UIEnemyShow : MonoBehaviour
         enemyList[currentSelected].sight.color = lockedColor;
         enemyList[currentSelected].planeName.color = lockedColor;
         enemyList[currentSelected].distance.color = lockedColor;
+        gunPredictReticle.color = lockedColor;
     }
     public void setUnlocked()
     {
@@ -113,6 +123,7 @@ public class UIEnemyShow : MonoBehaviour
         enemyList[currentSelected].sight.color = selectedColor;
         enemyList[currentSelected].planeName.color = selectedColor;
         enemyList[currentSelected].distance.color = selectedColor;
+        gunPredictReticle.color = selectedColor;
     }
 
 
