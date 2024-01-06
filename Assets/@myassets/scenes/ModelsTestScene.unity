@@ -6881,7 +6881,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 539346249}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -13109,7 +13109,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1010412436
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15364,7 +15364,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575890646}
   m_LocalRotation: {x: -0.73003054, y: -0.06454674, z: -0.059475604, w: 0.677755}
-  m_LocalPosition: {x: -262.27, y: 175.7, z: 21.8}
+  m_LocalPosition: {x: -254.3, y: 175.8, z: 23.2}
   m_LocalScale: {x: 12.425861, y: 19.828506, z: 17.82677}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -15393,7 +15393,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575890646}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -20584,6 +20584,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4141371928653943672, guid: 749fb28a349491f429eee4573143f1fc,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4141371928653943674, guid: 749fb28a349491f429eee4573143f1fc,
         type: 3}
       propertyPath: m_RootOrder
@@ -20660,7 +20665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLife: 0
-  SoundSource: {fileID: 1673786019}
+  SoundSource: {fileID: 0}
   damageSource: {fileID: 8300000, guid: 2f3dbcda06d00d941a617a99f8b3533c, type: 3}
   explosionSource: {fileID: 8300000, guid: 55b194f5a201f424c84e8bae78eaadaa, type: 3}
 --- !u!82 &1673786019
@@ -22120,6 +22125,10 @@ PrefabInstance:
     - target: {fileID: 6146521105488877, guid: 099b8e8d53c3dd04fb030cb731c9af12, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146521105488877, guid: 099b8e8d53c3dd04fb030cb731c9af12, type: 3}
+      propertyPath: m_TagString
+      value: Misil
       objectReference: {fileID: 0}
     - target: {fileID: 819099427530113367, guid: 099b8e8d53c3dd04fb030cb731c9af12,
         type: 3}
