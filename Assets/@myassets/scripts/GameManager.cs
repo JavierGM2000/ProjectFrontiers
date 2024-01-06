@@ -10,13 +10,15 @@ public class GameManager : MonoBehaviour
 
     private bool isPlaying;
 
-    public AudioSource aSource;
+    private bool hasPlayed;
+    public AudioSource SoundSource;
+    public AudioClip timeLeftSource;
 
     // Start is called before the first frame update
     void Start()
     {
         isPlaying = true;
-        aSource.enabled = false;
+        SoundSource = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -31,9 +33,11 @@ public class GameManager : MonoBehaviour
         timeLimit -= Time.deltaTime;
         updateTimer(timeLimit);
 
-        if (timeLimit < 9)
+        if (timeLimit < 60 && !hasPlayed)
         {
-            aSource.enabled = true;
+            SoundSource.PlayOneShot(timeLeftSource);
+            timeText.GetComponent<TextMeshProUGUI>().color = new Color(1f, 0f, 0f, 1f);
+            hasPlayed = true;
         }
 
         if (timeLimit < 0)
