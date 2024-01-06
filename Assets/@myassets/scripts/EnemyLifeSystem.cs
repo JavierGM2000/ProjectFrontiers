@@ -42,13 +42,13 @@ public class EnemyLifeSystem : MonoBehaviour
             currentLife--;
         }*/
 
-        if (other.tag == "Player") //tag de prueba, sería el del proyectil
+        if (other.tag == "Player" || other.tag == "Misil")
         {
             currentLife--;
             SoundSource.PlayOneShot(damageSource);
         }
 
-        if (other.tag == "Player" && currentLife <= 0) //tag de prueba, sería el del proyectil
+        if ((other.tag == "Player" || other.tag == "Misil") && currentLife <= 0) //tag de prueba, sería el del proyectil
         {
             SoundSource.PlayOneShot(explosionSource);
             explosionParticles.gameObject.SetActive(true);

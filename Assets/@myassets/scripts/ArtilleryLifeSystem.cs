@@ -34,7 +34,7 @@ public class ArtilleryLifeSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) //está de prueba, cambiar lo necesario
     {
-        if(other.tag=="proyectil")
+        if(other.tag=="proyectil") //cambiar tag al del proyectil
         {
             life--;
         }
