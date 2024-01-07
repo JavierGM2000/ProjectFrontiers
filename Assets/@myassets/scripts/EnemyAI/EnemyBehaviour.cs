@@ -42,6 +42,7 @@ public class EnemyBehaviour : MonoBehaviour
     private int nextPoint = 0;
     float counter;
     [SerializeField] float pathRefreshCooldown = 10f;
+    
     public Vector3 targetGridPosition = new Vector3(9, 7, 4);
     public GameObject target;
     private Rigidbody targetRigidbody;
@@ -59,6 +60,8 @@ public class EnemyBehaviour : MonoBehaviour
     public float movementForce;
 
     public float patrolMovementForce;
+    [SerializeField]
+    private float minAltitude;
    
 
     private float responseModifier
@@ -97,6 +100,9 @@ public class EnemyBehaviour : MonoBehaviour
         
 
         targetGridPosition = target.transform.position;
+        if (targetGridPosition.y < minAltitude) {
+            targetGridPosition.y = minAltitude;
+        }
         float distance = Vector3.Distance(transform.position, targetGridPosition);
         if (agresivityLevel == 5)
         {
@@ -163,6 +169,10 @@ public class EnemyBehaviour : MonoBehaviour
             return;
 
         Vector3 targetPosition = path[nextPoint].transform.position;
+        if (targetPosition.y < minAltitude)
+        {
+            targetPosition.y = minAltitude;
+        }
 
         adjustRoll(targetPosition);
         adjustPitch(targetPosition, turnForce);
@@ -219,7 +229,7 @@ public class EnemyBehaviour : MonoBehaviour
         Vector3 movementVector = targetPosition - transform.position;
         float angle = Vector3.SignedAngle(transform.forward, movementVector, transform.right);
 
-        Debug.LogWarning(angle);
+       
         angle = Mathf.Abs(angle);
        
         float adjustedAppliedMovementForce = appliedMovementForce * Mathf.Clamp((1-(angle/180)), 0.3f, 1);
@@ -249,6 +259,10 @@ public class EnemyBehaviour : MonoBehaviour
     public void BehaviourApproachPlayer()
     {
         targetGridPosition = target.transform.position;
+        if (targetGridPosition.y < minAltitude)
+        {
+            targetGridPosition.y = minAltitude;
+        }
         Debug.DrawLine(transform.position, targetGridPosition, Color.yellow);
         adjustRoll(targetGridPosition);
         adjustPitch(targetGridPosition, turnForce);
@@ -260,6 +274,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (counter >= pathRefreshCooldown)
         {
             targetGridPosition = target.transform.position;
+            
             CalculatePath(targetGridPosition);
             counter = 0;
         }
@@ -270,6 +285,10 @@ public class EnemyBehaviour : MonoBehaviour
     public void BehaviourDirectAttackPlayer()
     {
         targetGridPosition = target.transform.position + targetRigidbody.velocity;
+        if (targetGridPosition.y < minAltitude)
+        {
+            targetGridPosition.y = minAltitude;
+        }
         Debug.DrawLine(transform.position, targetGridPosition, Color.red);
         adjustRoll(targetGridPosition);
         adjustYaw(targetGridPosition, turnForce);
@@ -286,7 +305,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void BehaviourRunAway()
     {
-        targetGridPosition = new Vector3(0, 0, 0);
+        targetGridPosition = bossPlane.position;
         Debug.DrawLine(transform.position, targetGridPosition, Color.cyan);
         adjustRoll(targetGridPosition);
         adjustPitch(targetGridPosition, turnForce);

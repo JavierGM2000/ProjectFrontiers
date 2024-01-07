@@ -311,6 +311,17 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""f2c6c564-db13-407f-97e8-2b1bd2461ece"",
+                    ""path"": ""<HID::Thrustmaster T.16000M>/button2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""1D Axis"",
                     ""id"": ""3ba92890-caa4-4835-847a-458facdbab6a"",
                     ""path"": ""1DAxis"",

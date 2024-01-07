@@ -161,7 +161,7 @@ public class PlaneMovementV2 : MonoBehaviour
 
         float angleDown = Vector3.Angle(Vector3.down, transform.forward);
         // + " gravForce : " + (gravity - (rb.velocity.magnitude * 9.8f / 30f) + " gravAngle : "+ (gravity - (angleDown * 9.8f / 90)).ToString("F1"));
-        velocityText.text = "Velocity: " + rb.velocity.magnitude /*+ "Potencial: " + potencial*/;
+        velocityText.text = "Velocity: " + (int)rb.velocity.magnitude /*+ "Potencial: " + potencial*/;
         angleWithFloorText.text = "Angle: " + Vector3.Angle(Vector3.down, transform.forward) + "Stall: " + stall;
 
 
@@ -288,7 +288,7 @@ public class PlaneMovementV2 : MonoBehaviour
     }
     private float CalculateAcceleration(float velocityMagnitude)
     {
-        // Ajusta estos valores según tus necesidades
+       
         float a = 1f;  // Altura máxima de la función
         float b = 0.5f;  // Altura mú‹ima de la función
         float k = 1f;  // Pendiente de la curva
@@ -316,7 +316,7 @@ public class PlaneMovementV2 : MonoBehaviour
 
         // Smoothly adjust the current throttle towards the target
         throttle = Mathf.Lerp(throttle, targetThrottle, Time.deltaTime * throttleSmoothSpeed);
-        throttleText.text = "Throttle: " + targetThrottle;
+        throttleText.text = "Throttle: " + (int)targetThrottle ;
     }
 
     private void handleShooting() {
