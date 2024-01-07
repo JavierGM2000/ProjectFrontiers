@@ -37,6 +37,10 @@ public class WeaponStandardMissile : Weapon
     [SerializeField]
     float groundTurnDistance = 10;
 
+    private AudioSource launchSound;
+
+    private GameObject smoke;
+
     float activationY;
     bool groundAttack = false;
 
@@ -51,6 +55,8 @@ public class WeaponStandardMissile : Weapon
     // Start is called before the first frame update
     void Start()
     {
+        launchSound = GetComponent<AudioSource>();
+        smoke = transform.Find("smoke").gameObject;
         aliveTime += activationTime;
         myRigidBody = GetComponent<Rigidbody>();
         if(target)
@@ -88,7 +94,8 @@ public class WeaponStandardMissile : Weapon
 
     private void missileActivate()
     {
-        
+        smoke.SetActive(true);
+        smoke.GetComponent<ParticleSystem>().Play();
         myRigidBody.useGravity = false;
         if (missileType == LockType.GROUND)
         {
@@ -143,13 +150,14 @@ public class WeaponStandardMissile : Weapon
         if (distanceToTarget <= distanceFuze)
         {
             Debug.Log("Distance Fuze Activated");
+            target.GetComponent<Life>().dealDamage(damage);
             Destroy(gameObject);
         }
-        //float currentMaxTurn = (myRigidBody.velocity.magnitude / targetSpeed) * maxTurnRate;
-        float currentMaxTurn =  maxTurnRate;
+        float currentMaxTurn = (myRigidBody.velocity.magnitude / targetSpeed) * maxTurnRate;
+        //float currentMaxTurn =  maxTurnRate;
 
         float distaceToPrevious = (previousPos - transform.position).magnitude;
-        float secondsAway = distaceToPrevious / myRigidBody.velocity.magnitude;
+        float secondsAway = distaceToPrevious / targetSpeed;
 
         Vector3 trackedDirection = targetRigidbody.velocity.normalized; // Where enemy is going
         float trackedSpeed = targetRigidbody.velocity.magnitude; // How fast the enemy is going
@@ -182,6 +190,7 @@ public class WeaponStandardMissile : Weapon
 
     public override void Launch(Vector3 inSpeed)
     {
+        launchSound.Play();
         transform.parent = null;
         myRigidBody.isKinematic = false;
         myRigidBody.velocity = inSpeed;
@@ -221,11 +230,14 @@ public class WeaponStandardMissile : Weapon
 
     private void OnTriggerEnter(Collider other)
     {
+        
         if (hurtsPlayer)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 other.gameObject.GetComponent<Life>().dealDamage(damage);
+                smoke.transform.parent = null;
+                Destroy(smoke, 5f);
                 Destroy(gameObject);
             }
         }
@@ -234,6 +246,8 @@ public class WeaponStandardMissile : Weapon
             if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 other.gameObject.GetComponent<Life>().dealDamage(damage);
+                smoke.transform.parent = null;
+                Destroy(smoke, 5f);
                 Destroy(gameObject);
             }
         }

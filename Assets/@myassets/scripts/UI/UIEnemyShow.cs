@@ -153,7 +153,7 @@ public class UIEnemyShow : MonoBehaviour
 
     public void selectEnemy(int instanceID)
     {
-        if (currentSelected >= 0)
+        if (enemyList.ContainsKey(currentSelected))
         {
             enemyList[currentSelected].isSelected = false;
             enemyList[currentSelected].sight.texture = unSelectedTexture;
