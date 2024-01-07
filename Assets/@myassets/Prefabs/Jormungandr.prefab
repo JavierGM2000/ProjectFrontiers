@@ -37,7 +37,7 @@ Transform:
   - {fileID: 8926518097730623812}
   - {fileID: 8926518098568045730}
   - {fileID: 8926518097338549481}
-  - {fileID: 7081775489131860855}
+  - {fileID: 7636421211404625062}
   m_Father: {fileID: 8173211550458818535}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5527,7 +5527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.98
---- !u!1001 &8016816647155550488
+--- !u!1001 &7276961219270360777
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -5547,7 +5547,7 @@ PrefabInstance:
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.13
+      value: -3.97
       objectReference: {fileID: 0}
     - target: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
         type: 3}
@@ -5601,11 +5601,11 @@ PrefabInstance:
       objectReference: {fileID: 543977535}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7956c6312c6cbd4ab3cdd739b1c4e20, type: 3}
---- !u!4 &7081775489131860855 stripped
+--- !u!4 &7636421211404625062 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 938702612031658607, guid: d7956c6312c6cbd4ab3cdd739b1c4e20,
     type: 3}
-  m_PrefabInstance: {fileID: 8016816647155550488}
+  m_PrefabInstance: {fileID: 7276961219270360777}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8568008023756818863
 PrefabInstance:

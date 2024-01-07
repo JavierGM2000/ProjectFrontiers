@@ -301,8 +301,8 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""357ffa67-3f3e-47dc-80e6-31c5bfab5c58"",
-                    ""path"": ""<HID::Thrustmaster T.16000M>/button2"",
+                    ""id"": ""591d9e31-269f-4204-80a4-e537a344b32f"",
+                    ""path"": ""<HID::Logitech Logitech Extreme 3D>/button2"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

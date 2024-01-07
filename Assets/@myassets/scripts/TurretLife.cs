@@ -53,8 +53,9 @@ public class TurretLife : Life
         checkSmoke();
         if (currentLife <= 0)
         {
+            Destroy(gameObject,0.5f);
             explosionParticles.gameObject.SetActive(true);
-            Destroy(gameObject);
+            
         }
     }
 }
