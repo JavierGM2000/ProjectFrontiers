@@ -37,11 +37,6 @@ public class EnemyLifeSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        /*if (other.tag == "Player")
-        {
-            currentLife--;
-        }*/
-
         if (other.tag == "Player" || other.tag == "Misil")
         {
             currentLife--;

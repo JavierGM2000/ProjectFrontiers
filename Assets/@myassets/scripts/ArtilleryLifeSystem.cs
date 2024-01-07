@@ -10,6 +10,8 @@ public class ArtilleryLifeSystem : MonoBehaviour
     public int life;
     public GameObject torreta;
 
+    public GreatPlaneSystem planeControl;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +19,7 @@ public class ArtilleryLifeSystem : MonoBehaviour
 
         glowParticles = this.transform.Find("Glow");
         explosionParticles = this.transform.Find("Smoke");
+        //planeControl= GameObject.FindGameObjectWithTag("Jormungandr").GetComponent<GreatPlaneSystem>();
     }
 
     // Update is called once per frame
@@ -26,6 +29,8 @@ public class ArtilleryLifeSystem : MonoBehaviour
         {
             glowParticles.gameObject.SetActive(false);
             explosionParticles.gameObject.SetActive(true);
+
+            planeControl.weakPointCounter--;
 
             Destroy(torreta);
             Destroy(this);
