@@ -11,6 +11,15 @@ public class BulletScript : MonoBehaviour
     [SerializeField]
     private int damage = 2;
 
+    public Transform explosionParticles;
+
+
+    void Start()
+    {
+        explosionParticles = this.transform.Find("WFX_Explosion Small");
+        explosionParticles.gameObject.SetActive(false);
+    }
+
     void Update()
     {
         lifetime -= Time.deltaTime;
@@ -25,7 +34,8 @@ public class BulletScript : MonoBehaviour
             if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 other.gameObject.GetComponent<Life>().dealDamage(damage);
-                Destroy(gameObject);
+                explosionParticles.gameObject.SetActive(true);
+                Destroy(gameObject,2);
             }
         }
         else
@@ -33,7 +43,8 @@ public class BulletScript : MonoBehaviour
             if(other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 other.gameObject.GetComponent<Life>().dealDamage(damage);
-                Destroy(gameObject);
+                explosionParticles.gameObject.SetActive(true);
+                Destroy(gameObject,2);
             }
         }
     }
