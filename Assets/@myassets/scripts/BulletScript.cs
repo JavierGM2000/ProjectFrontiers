@@ -25,6 +25,7 @@ public class BulletScript : MonoBehaviour
             if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 other.gameObject.GetComponent<Life>().dealDamage(damage);
+                Destroy(gameObject);
             }
         }
         else
@@ -32,8 +33,8 @@ public class BulletScript : MonoBehaviour
             if(other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 other.gameObject.GetComponent<Life>().dealDamage(damage);
+                Destroy(gameObject);
             }
         }
-        Destroy(gameObject);
     }
 }
