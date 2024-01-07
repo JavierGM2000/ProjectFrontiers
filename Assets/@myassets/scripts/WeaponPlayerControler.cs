@@ -27,6 +27,8 @@ public class WeaponPlayerControler : MonoBehaviour
     private bool locked = false;
     private bool wasinside = false;
 
+    [SerializeField]
+    private Transform mainCamera;
 
     [SerializeField]
     private int standardAmmo;
@@ -172,15 +174,7 @@ public class WeaponPlayerControler : MonoBehaviour
     {
         prevLocked = false;
         locked = false;
-        Vector3 scanOrigin;
-        if (standardSelected)
-        {
-            scanOrigin = standardHardpoints[standardCounter].transform.position;
-        }
-        else
-        {
-            scanOrigin = specialHardpoints[specialCounter].transform.position;
-        }
+        Vector3 scanOrigin = mainCamera.position;
 
 
         int i = 1;
@@ -188,13 +182,13 @@ public class WeaponPlayerControler : MonoBehaviour
         bool hasFound;
         do
         {
-            Debug.Log(LayerMask.GetMask("Enemy"));
+            //Debug.Log(LayerMask.GetMask("Enemy"));
             //hasFound = Physics.CapsuleCast(gunpod.transform.position, gunpod.transform.position + transform.forward * 200, 10, transform.forward, out closestEnemy,Mathf.Infinity);
-            hasFound = Physics.SphereCast(scanOrigin, i * 10, transform.forward, out closestEnemy, 1000, LayerMask.GetMask("Enemy"));
+            hasFound = Physics.SphereCast(scanOrigin, i * 10f, mainCamera.forward, out closestEnemy, 5000, LayerMask.GetMask("Enemy"));
             //hasFound = Physics.Raycast(gunpod.transform.position, gunpod.transform.position + transform.forward * 200, out closestEnemy, Mathf.Infinity);
             //Debug.DrawLine(gunpod.transform.position, gunpod.transform.position + transform.forward * 200, Color.blue, 2f);
             i++;
-        } while (hasFound == false && i < 5);
+        } while (hasFound == false && i < 10);
         if (hasFound == true)
         {
             target = closestEnemy.transform.gameObject;

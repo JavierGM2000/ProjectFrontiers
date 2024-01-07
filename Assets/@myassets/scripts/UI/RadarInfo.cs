@@ -17,9 +17,12 @@ public class RadarInfo : MonoBehaviour
     [SerializeField]
     bool revealsTeam;
 
+    UIEnemyShow canvas;
+
     private void Start()
     {
-        FindObjectOfType<UIEnemyShow>().addEnemy(this);
+        canvas = FindObjectOfType<UIEnemyShow>();
+        canvas.addEnemy(this);
     }
 
 
@@ -50,5 +53,10 @@ public class RadarInfo : MonoBehaviour
     public Transform getTransform()
     {
         return transform;
+    }
+
+    private void OnDestroy()
+    {
+        canvas.removeItem(gameObject.GetInstanceID());
     }
 }

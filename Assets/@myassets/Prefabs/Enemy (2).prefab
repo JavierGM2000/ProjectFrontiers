@@ -9736,6 +9736,8 @@ GameObject:
   - component: {fileID: 5868097625567016176}
   - component: {fileID: 1972614018}
   - component: {fileID: 1972614019}
+  - component: {fileID: 8743076875455153191}
+  - component: {fileID: 2517768872237033267}
   m_Layer: 10
   m_Name: Enemy (2)
   m_TagString: Untagged
@@ -9992,10 +9994,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf28646eb3c88b49a1aedbc30acb295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLife: 0
+  maxLife: 20
   SoundSource: {fileID: 0}
   damageSource: {fileID: 8300000, guid: 2f3dbcda06d00d941a617a99f8b3533c, type: 3}
   explosionSource: {fileID: 8300000, guid: 55b194f5a201f424c84e8bae78eaadaa, type: 3}
+--- !u!114 &8743076875455153191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5868097625567016191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c222dec81c202a1428dfd11275bf0dd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2517768872237033267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5868097625567016191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd97b7038dd332f4e8ff28c306f3b868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 0
+  IFFCode: 
+  planeName: Enemy
+  callsign: 
+  revealsTeam: 0
 --- !u!1 &5868097626528426803
 GameObject:
   m_ObjectHideFlags: 0

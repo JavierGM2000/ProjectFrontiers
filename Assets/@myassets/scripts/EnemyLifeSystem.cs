@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyLifeSystem : Life
 {
-    private float maxLife;
-    public float currentLife;
+    public float maxLife;
+    private float currentLife;
 
     private Transform smokeParticles;
     private Transform explosionParticles;
@@ -18,7 +18,6 @@ public class EnemyLifeSystem : Life
     // Start is called before the first frame update
     void Start()
     {
-        maxLife = 100;
         currentLife = maxLife;
         SoundSource = this.GetComponent<AudioSource>();
         smokeParticles = this.transform.Find("Smoke");

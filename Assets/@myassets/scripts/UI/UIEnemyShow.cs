@@ -92,6 +92,16 @@ public class UIEnemyShow : MonoBehaviour
         }
     }
 
+    public void removeItem(int goID)
+    {
+        if(currentSelected == goID)
+        {
+            currentSelected -= 1;
+        }
+        Destroy(enemyList[goID].sightItem);
+        enemyList.Remove(goID);
+    }
+
     public void removeGunsights()
     {
         gunPredictReticle.transform.position = new Vector3(999, 999, -999);

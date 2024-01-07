@@ -154,6 +154,7 @@ public class PlaneMovementV2 : MonoBehaviour
         handleShooting();
         handleChange();
         handleReset();
+        handleMissile();
         Debug.Log("Velocity = " + rb.velocity.magnitude);
 
         float angleDown = Vector3.Angle(Vector3.down, transform.forward);
@@ -174,8 +175,7 @@ public class PlaneMovementV2 : MonoBehaviour
 
     private void handleMissile()
     {
-        float misiling = missileAction.ReadValue<float>();
-        if (misiling > 0)
+        if (missileAction.WasPressedThisFrame())
         {
             weaponControler.launchWeapon();
         }

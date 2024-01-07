@@ -145,7 +145,8 @@ public class WeaponStandardMissile : Weapon
             Debug.Log("Distance Fuze Activated");
             Destroy(gameObject);
         }
-        float currentMaxTurn = (myRigidBody.velocity.magnitude / targetSpeed) * maxTurnRate;
+        //float currentMaxTurn = (myRigidBody.velocity.magnitude / targetSpeed) * maxTurnRate;
+        float currentMaxTurn =  maxTurnRate;
 
         float distaceToPrevious = (previousPos - transform.position).magnitude;
         float secondsAway = distaceToPrevious / myRigidBody.velocity.magnitude;
@@ -240,7 +241,7 @@ public class WeaponStandardMissile : Weapon
 
     private void OnDestroy()
     {
-        if (isLaunched)
+        if (isLaunched  && targetWarning)
         {
             targetWarning.removeMissiles(this.gameObject.GetInstanceID());
 

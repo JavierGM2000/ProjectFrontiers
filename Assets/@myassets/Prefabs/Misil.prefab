@@ -103,10 +103,10 @@ MonoBehaviour:
   lockDistance: 2800
   activationTime: 0.3
   aliveTime: 10
-  lockAngle: 10
-  maxTurnRate: 30
+  lockAngle: 30
+  maxTurnRate: 60
   distanceFuze: 3
-  targetSpeed: 30
+  targetSpeed: 1500
   acceleration: 10
   missileType: 1
   groundTurnDistance: 0
