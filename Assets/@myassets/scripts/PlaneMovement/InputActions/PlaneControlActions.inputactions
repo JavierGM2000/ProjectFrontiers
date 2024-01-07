@@ -49,6 +49,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ChangeTarget",
+                    "type": "Button",
+                    "id": "3f05a338-6760-4d2a-88f6-6cf82ec1ee57",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ResetCam",
+                    "type": "Button",
+                    "id": "e6c8197d-4167-48f2-84dd-bed9f52eacaf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Missile",
+                    "type": "Button",
+                    "id": "704b341f-4672-4944-96c5-fbfcbe30f9a9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -185,13 +212,46 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "54d77265-2cfa-4c55-83b9-53654de5d738",
-                    "path": "<Joystick>/trigger",
+                    "name": "1D Axis",
+                    "id": "4591d6c1-f1f4-45af-b8e2-5de69b84731d",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shoot",
+                    "action": "Thrust",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "dd5e46d7-20b0-4293-9361-931808a87a82",
+                    "path": "<HID::Logitech Logitech Extreme 3D>/rz",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Thrust",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "e69d23fe-4424-4a57-8ceb-ba52745b042c",
+                    "path": "<HID::Logitech Logitech Extreme 3D>/rz",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Thrust",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "74224072-c049-451f-a4ed-1ce6e41d7ba7",
+                    "path": "<HID::Logitech Logitech Extreme 3D>/slider",
+                    "interactions": "",
+                    "processors": "Invert",
+                    "groups": "",
+                    "action": "Thrust",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -210,6 +270,17 @@
                     "name": "",
                     "id": "88724eac-aeba-4dba-8a2f-321ab4076774",
                     "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "357ffa67-3f3e-47dc-80e6-31c5bfab5c58",
+                    "path": "<HID::Logitech Logitech Extreme 3D>/button2",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -258,6 +329,72 @@
                     "processors": "",
                     "groups": "",
                     "action": "Yaw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "77595e30-2f6e-4bf5-ba7d-a42a07d0ed7f",
+                    "path": "<HID::Logitech Logitech Extreme 3D>/rz",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Yaw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0876f4f0-c99e-4e41-82ee-9f2227d317e7",
+                    "path": "<HID::Logitech Logitech Extreme 3D>/button3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeTarget",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c2540d05-c821-421a-a616-ae9bb0b595e4",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeTarget",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b42be054-1537-461a-8c5d-05082ce367a4",
+                    "path": "<HID::Logitech Logitech Extreme 3D>/button11",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ResetCam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "98d90737-de50-4028-a64c-e817ff66bd24",
+                    "path": "<Keyboard>/r",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ResetCam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c94a47a9-8817-4451-8ab4-f57fd387c042",
+                    "path": "<Joystick>/trigger",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Missile",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

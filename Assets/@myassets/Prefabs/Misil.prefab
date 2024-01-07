@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 819099427530113367}
   - component: {fileID: 4391534119497469682}
   - component: {fileID: 1951512511953467960}
+  - component: {fileID: 2749770776305321401}
+  - component: {fileID: 4571052011726501927}
+  - component: {fileID: 6596925900184508997}
   m_Layer: 0
   m_Name: Misil
   m_TagString: Untagged
@@ -25,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6146521105488877}
-  m_LocalRotation: {x: -0.65280825, y: -0.27173784, z: -0.27173784, w: 0.65280825}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -83,3 +86,57 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2749770776305321401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6146521105488877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deea554c29451164e928d908fca4a437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hurtsPlayer: 0
+  damage: 10
+  lockDistance: 2800
+  activationTime: 0.3
+  aliveTime: 10
+  lockAngle: 10
+  maxTurnRate: 30
+  distanceFuze: 3
+  targetSpeed: 30
+  acceleration: 10
+  missileType: 1
+  groundTurnDistance: 0
+  target: {fileID: 0}
+--- !u!54 &4571052011726501927
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6146521105488877}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &6596925900184508997
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6146521105488877}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.16935222, y: 0.17026508, z: 0.723825}
+  m_Center: {x: 0, y: 0, z: 0.3619125}

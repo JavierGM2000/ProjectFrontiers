@@ -53,7 +53,8 @@ public class UIEnemyShow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Plane canvasPlane = new Plane(mainCamera.transform.forward, mainCamera.transform.position + mainCamera.transform.forward * 10f);
+        Vector3 planePoint = mainCamera.transform.position + mainCamera.transform.forward * 10f;
+        Plane canvasPlane = new Plane(mainCamera.transform.forward, planePoint);
         foreach(KeyValuePair<int, targetClass> enemy in enemyList)
         {
             Vector3 enemyPos = enemy.Value.enemy.transform.position;
@@ -67,12 +68,20 @@ public class UIEnemyShow : MonoBehaviour
                 {
                     //Get the point that is clicked
                     Vector3 hitPoint = ray.GetPoint(enter);
-                    enemy.Value.sightItem.GetComponent<RectTransform>().position = hitPoint;
-                    if (enemy.Value.isSelected)
+                    if (Vector3.Distance(planePoint, hitPoint) >= 10f)
                     {
-                        int dist = Mathf.RoundToInt(Vector3.Distance(mainCamera.transform.position, enemyPos));
-                        enemy.Value.distance.text = dist.ToString();
+                        enemy.Value.sightItem.transform.localPosition = new Vector3(-999, -999, -999);
                     }
+                    else
+                    {
+                        enemy.Value.sightItem.GetComponent<RectTransform>().position = hitPoint;
+                        if (enemy.Value.isSelected)
+                        {
+                            int dist = Mathf.RoundToInt(Vector3.Distance(mainCamera.transform.position, enemyPos));
+                            enemy.Value.distance.text = dist.ToString();
+                        }
+                    }
+                    
                 }
                 
             }

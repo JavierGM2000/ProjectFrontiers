@@ -6,7 +6,10 @@ using UnityEngine;
 // Jeremy
 public class WeaponStandardMissile : Weapon
 {
-
+    [SerializeField]
+    private bool hurtsPlayer = false;
+    [SerializeField]
+    private int damage = 10;
     bool isLaunched = false;
     bool isActive = false;
     bool lostLock = false;
@@ -213,6 +216,26 @@ public class WeaponStandardMissile : Weapon
     private void OnCollisionEnter(Collision collision)
     {
         Destroy(this.gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (hurtsPlayer)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                other.gameObject.GetComponent<Life>().dealDamage(damage);
+                Destroy(gameObject);
+            }
+        }
+        else
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                other.gameObject.GetComponent<Life>().dealDamage(damage);
+                Destroy(gameObject);
+            }
+        }
     }
 
     private void OnDestroy()

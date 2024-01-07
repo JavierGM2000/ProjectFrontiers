@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using Unity.XR.CoreUtils;
 
 public class PlaneMovementV2 : MonoBehaviour
 {
@@ -45,7 +46,12 @@ public class PlaneMovementV2 : MonoBehaviour
     [SerializeField]
     private GameObject gatling;
     private GatlinBehaviour gatlinBehaviour;
-
+    [SerializeField]
+    private WeaponPlayerControler weaponControler;
+    
+    private XROrigin MainCamera;
+    [SerializeField]
+    private Transform cameraCenter;
 
     public PlaneControlActions planeControls;
     public InputAction pitchAction;
@@ -53,6 +59,9 @@ public class PlaneMovementV2 : MonoBehaviour
     public InputAction yawAction;
     public InputAction throttleAction;
     public InputAction SshootAction;
+    public InputAction changeAction;
+    public InputAction resetAction;
+    public InputAction missileAction;
 
     private float throttle;
     private float roll;
@@ -94,11 +103,17 @@ public class PlaneMovementV2 : MonoBehaviour
         yawAction = planeControls.PlaneMap.Yaw;
         throttleAction = planeControls.PlaneMap.Thrust;
         SshootAction = planeControls.PlaneMap.Shoot;
+        changeAction = planeControls.PlaneMap.ChangeTarget;
+        resetAction = planeControls.PlaneMap.ResetCam;
+        missileAction = planeControls.PlaneMap.Missile;
         pitchAction.Enable();
         rollAction.Enable();
         yawAction.Enable();
         throttleAction.Enable();
         SshootAction.Enable();
+        changeAction.Enable();
+        resetAction.Enable();
+        missileAction.Enable();
         rb = GetComponent<Rigidbody>();
         gatlinBehaviour = gatling.GetComponent<GatlinBehaviour>();
     }
@@ -106,6 +121,7 @@ public class PlaneMovementV2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        MainCamera = FindObjectOfType<XROrigin>();
         throttle = 0;
         volumeMultiplier = engine.volume;
     }
@@ -119,8 +135,9 @@ public class PlaneMovementV2 : MonoBehaviour
         }
         if (stall)
         {
-            if (stallObject.gameObject.active == false) {
-               // stallObject.gameObject.active = true;
+            if (stallObject.gameObject.active == false)
+            {
+                // stallObject.gameObject.active = true;
             }
         }
         else
@@ -129,22 +146,24 @@ public class PlaneMovementV2 : MonoBehaviour
             {
                 //stallObject.gameObject.active = false;
             }
-            
+
 
         }
         HandleInput();
         handleThrottle();
         handleShooting();
+        handleChange();
+        handleReset();
         Debug.Log("Velocity = " + rb.velocity.magnitude);
-        
+
         float angleDown = Vector3.Angle(Vector3.down, transform.forward);
         // + " gravForce : " + (gravity - (rb.velocity.magnitude * 9.8f / 30f) + " gravAngle : "+ (gravity - (angleDown * 9.8f / 90)).ToString("F1"));
-        velocityText.text = "Velocity: " + rb.velocity.magnitude /*+ "Potencial: " + potencial*/; 
+        velocityText.text = "Velocity: " + rb.velocity.magnitude /*+ "Potencial: " + potencial*/;
         angleWithFloorText.text = "Angle: " + Vector3.Angle(Vector3.down, transform.forward) + "Stall: " + stall;
-        
-        
-        Vector3 rotation = new Vector3(-45*pitchAction.ReadValue<float>(),45*yawAction.ReadValue<float>()  ,-45 * rollAction.ReadValue<float>() );
-       
+
+
+        Vector3 rotation = new Vector3(-45 * pitchAction.ReadValue<float>(), 45 * yawAction.ReadValue<float>(), -45 * rollAction.ReadValue<float>());
+
         Quaternion newRotation = Quaternion.Euler(rotation);
         joystick.localRotation = newRotation;
 
@@ -152,6 +171,34 @@ public class PlaneMovementV2 : MonoBehaviour
         windSound.volume = rb.velocity.magnitude / 100;
 
     }
+
+    private void handleMissile()
+    {
+        float misiling = missileAction.ReadValue<float>();
+        if (misiling > 0)
+        {
+            weaponControler.launchWeapon();
+        }
+    }
+    private void handleReset()
+    {
+        float reseting = resetAction.ReadValue<float>();
+        if (reseting > 0)
+        {
+
+            MainCamera.MoveCameraToWorldLocation(cameraCenter.position);
+            MainCamera.MatchOriginUpCameraForward(cameraCenter.up, cameraCenter.forward);
+        }
+    }
+    private void handleChange()
+    {
+        float changing = changeAction.ReadValue<float>();
+        if (changing > 0)
+        {
+            weaponControler.findNewTarget();
+        }
+    }
+
     private void FixedUpdate()
     {
         detectStall();
@@ -243,7 +290,7 @@ public class PlaneMovementV2 : MonoBehaviour
     {
         // Ajusta estos valores según tus necesidades
         float a = 1f;  // Altura máxima de la función
-        float b = 0.5f;  // Altura mínima de la función
+        float b = 0.5f;  // Altura mú‹ima de la función
         float k = 1f;  // Pendiente de la curva
         float x0 = 50f;  // Punto medio de la transición
 
