@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3464206000019522161}
   - component: {fileID: 3464206000001173299}
   - component: {fileID: 3464206000001220243}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4857,7 +4857,7 @@ GameObject:
   - component: {fileID: 3464206000019522163}
   - component: {fileID: 3464206000001173309}
   - component: {fileID: 3464206000001220253}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9703,7 +9703,7 @@ GameObject:
   - component: {fileID: 3464206000019522167}
   - component: {fileID: 3464206000001173297}
   - component: {fileID: 3464206000001220241}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14549,7 +14549,7 @@ GameObject:
   - component: {fileID: 3464206000019522169}
   - component: {fileID: 3464206000001173307}
   - component: {fileID: 3464206000001220251}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19395,7 +19395,7 @@ GameObject:
   - component: {fileID: 3464206000019522171}
   - component: {fileID: 3464206000009122683}
   - component: {fileID: 3464206000009718715}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19504,7 +19504,7 @@ GameObject:
   - component: {fileID: 3464206000001173311}
   - component: {fileID: 3464206000001220255}
   - component: {fileID: 5658499140350924583}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WFX_MF 4P RIFLE2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24359,6 +24359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hurtsPlayer: 0
   lifetime: 0.1
+  damage: 2
 --- !u!1 &3464206000019955295
 GameObject:
   m_ObjectHideFlags: 0
@@ -24370,7 +24371,7 @@ GameObject:
   - component: {fileID: 3464206000019522175}
   - component: {fileID: 3464206000001173305}
   - component: {fileID: 3464206000001220249}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -87,72 +87,6 @@
                 },
                 {
                     "name": "1D Axis",
-                    "id": "8d0baf2a-1bba-4b2f-9d3c-ac6fbc17f14a",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Yaw",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "2f08cbc3-adc1-4a25-851f-ab5dc3c2c4fe",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Yaw",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "8d3451c1-7762-4d22-9812-10f0edd8df6d",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Yaw",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "1D Axis",
-                    "id": "ee5833fc-6f41-4e02-a1a6-0bd64ff3564a",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Yaw",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "3063b02e-ad25-4cc1-8b02-210ede2eb276",
-                    "path": "<Joystick>/stick/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Yaw",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "2b50e016-db2a-47bd-aa80-9326f2ae4bec",
-                    "path": "<Joystick>/stick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Yaw",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "1D Axis",
                     "id": "16c11a52-7e11-4b47-87ba-efa4dfd57f3f",
                     "path": "1DAxis",
                     "interactions": "",
@@ -252,17 +186,6 @@
                 },
                 {
                     "name": "",
-                    "id": "4211a9f9-0d26-4b58-bc7b-93560e2f8102",
-                    "path": "<HID::Thrustmaster T.16000M>/rz",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Roll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "54d77265-2cfa-4c55-83b9-53654de5d738",
                     "path": "<Joystick>/trigger",
                     "interactions": "",
@@ -291,6 +214,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "3ba92890-caa4-4835-847a-458facdbab6a",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Roll",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "3fef1b84-8ae4-4e50-a832-fcf430690078",
+                    "path": "<Joystick>/stick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Roll",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "9012745a-1df5-4d88-b939-fbbc40c1e473",
+                    "path": "<Joystick>/stick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Roll",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "edf9778d-bb5a-46c1-9cd2-20e0d94a16b3",
+                    "path": "<HID::Thrustmaster T.16000M>/rz",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Yaw",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

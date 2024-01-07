@@ -274,7 +274,7 @@ public class EnemyBehaviour : MonoBehaviour
         float distance = Vector3.Distance(transform.position, target.transform.position);
         float distanceMultiplier = Mathf.Clamp01(1f - distance / directAttackDistance);
         float appliedTurnForce = directAttackTurnForce * distanceMultiplier;
-        float appliedForce = currentMaxMovementForce * (Mathf.Clamp((distance / directAttackDistance), 0.2f, 1f));
+        float appliedForce = currentMaxMovementForce * (Mathf.Clamp((distance / directAttackDistance), 0.5f, 1f));
         adjustPitch(targetGridPosition, appliedTurnForce);
         Debug.Log("MOvementForce = " + appliedForce);
 

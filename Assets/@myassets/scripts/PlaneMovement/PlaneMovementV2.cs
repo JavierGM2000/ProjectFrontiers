@@ -159,28 +159,6 @@ public class PlaneMovementV2 : MonoBehaviour
 
         float appliedGravityForce = gravity - (rb.velocity.magnitude * gravity / 100f);
         // appliedGravityForce = Mathf.Clamp(appliedGravityForce, 0f, gravity);
-        /*
-         if (stall)
-         {
-
-             rb.AddForce(Vector3.up * -gravity  * Time.deltaTime * deltaTimeFixMultiplier, ForceMode.Acceleration);
-             rb.AddForce(-rb.velocity.normalized * 10f * Time.deltaTime, ForceMode.Acceleration);
-             rb.angularDrag = 4f;
-
-             rb.AddTorque(transform.up * yaw * responseModifier * Time.deltaTime * deltaTimeFixMultiplier / 4.4f);
-             rb.AddTorque(-transform.right * pitch * responseModifier * Time.deltaTime * deltaTimeFixMultiplier/2);
-             rb.AddTorque(-transform.forward * roll * responseModifier * Time.deltaTime * deltaTimeFixMultiplier/2);
-         }
-         else {
-             rb.angularDrag = 1.5f;
-             rb.AddTorque(transform.up * yaw * responseModifier *Time.deltaTime * deltaTimeFixMultiplier/2.2f);
-             rb.AddTorque(-transform.right * pitch * responseModifier *Time.deltaTime * deltaTimeFixMultiplier);
-             rb.AddTorque(-transform.forward * roll * responseModifier * Time.deltaTime * deltaTimeFixMultiplier);
-
-         }
-        */
-        //rb.angularDrag = 1.5f;
-
         float appliedTurnForce = (responseModifier * Time.deltaTime * deltaTimeFixMultiplier);
         float speedFactor = 1f - Mathf.Clamp01(rb.velocity.magnitude / 300f);
         if (rb.velocity.magnitude >= 120 && !speedParticles.gameObject.active)
@@ -193,9 +171,30 @@ public class PlaneMovementV2 : MonoBehaviour
             speedParticles.gameObject.SetActive(false);
         }
         appliedTurnForce *= speedFactor;
-        rb.AddTorque(transform.up * yaw * appliedTurnForce / 2.6f);
-        rb.AddTorque(-transform.right * pitch * appliedTurnForce);
-        rb.AddTorque(-transform.forward * roll * appliedTurnForce * 2);
+         if (stall)
+         {
+
+             rb.AddForce(Vector3.up * -gravity  * Time.deltaTime * deltaTimeFixMultiplier, ForceMode.Acceleration);
+             rb.AddForce(-rb.velocity.normalized * 10f * Time.deltaTime, ForceMode.Acceleration);
+             rb.angularDrag = 4f;
+
+            rb.AddTorque(transform.up * yaw * appliedTurnForce / 4.4f);
+            rb.AddTorque(-transform.right * pitch * appliedTurnForce/2);
+            rb.AddTorque(-transform.forward * roll * appliedTurnForce  /2);
+           
+         }
+         else {
+             rb.angularDrag = 1.5f;
+            rb.AddTorque(transform.up * yaw * appliedTurnForce / 2.6f);
+            rb.AddTorque(-transform.right * pitch * appliedTurnForce);
+            rb.AddTorque(-transform.forward * roll * appliedTurnForce * 3.3f);
+
+        }
+        
+        //rb.angularDrag = 1.5f;
+
+        
+        
 
         float throttleAdjusted = Mathf.Pow(throttle, 2) / 100f;
         //float acceleration = CalculateAcceleration(rb.velocity.magnitude);
@@ -217,14 +216,14 @@ public class PlaneMovementV2 : MonoBehaviour
                 rb.AddForce(Vector3.up * -appliedGravityForce * 2 * Time.deltaTime * deltaTimeFixMultiplier, ForceMode.Acceleration);
             }
 
-            //rb.AddForce(transform.forward * (gravity - (angleDown * 9.8f / 90))*5, ForceMode.Acceleration);
+            rb.AddForce(transform.forward * (gravity - (angleDown * gravity / 90))/2, ForceMode.Acceleration);
         }
         else {
             rb.AddForce(Vector3.up * -appliedGravityForce*2*Time.deltaTime * deltaTimeFixMultiplier, ForceMode.Acceleration);
             rb.AddForce(transform.forward * gravity * potencial * 2 * Time.deltaTime * deltaTimeFixMultiplier);
             
 
-            // rb.AddForce(-rb.velocity.normalized * ((angleDown * 3f / 90)), ForceMode.Acceleration);
+            
 
         }
         if (potencial <=0)
