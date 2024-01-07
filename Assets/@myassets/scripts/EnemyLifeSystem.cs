@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyLifeSystem : MonoBehaviour
+public class EnemyLifeSystem : Life
 {
     private float maxLife;
     public float currentLife;
@@ -27,15 +27,15 @@ public class EnemyLifeSystem : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void checkSmoke()
     {
-        if (currentLife <= (maxLife / 3) && currentLife>=0)
+        if (currentLife <= (maxLife / 2) && currentLife>=0)
         {
             smokeParticles.gameObject.SetActive(true);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player" || other.tag == "Misil")
         {
@@ -43,12 +43,25 @@ public class EnemyLifeSystem : MonoBehaviour
             SoundSource.PlayOneShot(damageSource);
         }
 
-        if ((other.tag == "Player" || other.tag == "Misil") && currentLife <= 0) //tag de prueba, sería el del proyectil
+        if ((other.tag == "Player" || other.tag == "Misil") && currentLife <= 0) //tag de prueba, serú} el del proyectil
         {
             SoundSource.PlayOneShot(explosionSource);
             explosionParticles.gameObject.SetActive(true);
             enemyModel.gameObject.SetActive(false);
+            Destroy(gameObject, explosionSource.length);
+        }
+    }*/
 
+    public override void dealDamage(int damage)
+    {
+        currentLife-= damage;
+        SoundSource.PlayOneShot(damageSource);
+        checkSmoke();
+        if (currentLife <= 0)
+        {
+            SoundSource.PlayOneShot(explosionSource);
+            explosionParticles.gameObject.SetActive(true);
+            enemyModel.gameObject.SetActive(false);
             Destroy(gameObject, explosionSource.length);
         }
     }

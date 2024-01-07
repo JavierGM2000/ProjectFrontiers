@@ -75,7 +75,8 @@ public class MainGun : MonoBehaviour
         Vector3 lagvector = targetDirection * bulletTime * targetVelocity;//test
         indicator = targetTransform.position + lagvector;
         Debug.DrawLine(targetTransform.position, indicator, Color.red);
-        gunPos = planeGunPodTrans.position + planeGunPodTrans.forward * distance;
+        
+        gunPos = planeGunPodTrans.position + planeGunPodTrans.forward * Vector3.Distance(planeGunPodTrans.transform.position, indicator);
         return distance;
     }
 
