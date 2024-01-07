@@ -5421,6 +5421,7 @@ GameObject:
   - component: {fileID: 5098865392629620802}
   - component: {fileID: 7000344547031536776}
   - component: {fileID: 654756141}
+  - component: {fileID: 620809932}
   m_Layer: 0
   m_Name: Jormungandr
   m_TagString: Jormungandr
@@ -5513,6 +5514,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -462981019419857548, guid: fa73b94e67119b349ae1b71e5f730302, type: 3}
+--- !u!114 &620809932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8801938260525315421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c61f12003bd7c4aa9a1c0c363f6601, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1.98
 --- !u!1001 &8568008023756818863
 PrefabInstance:
   m_ObjectHideFlags: 0

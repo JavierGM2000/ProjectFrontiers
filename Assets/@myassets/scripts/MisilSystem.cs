@@ -27,7 +27,7 @@ public class MisilSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" || other.tag == "Enemy")
+        if (other.tag == "Player")
             Destroy(gameObject);
     }
 }
