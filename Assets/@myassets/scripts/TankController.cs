@@ -61,8 +61,6 @@ public class TankController : MonoBehaviour
                                        player.transform.position.z);
         torreta.transform.LookAt(targetPostition);
 
-        print("posicion jugador: " + targetPostition.ToString());
-
 
         /*Quaternion playerRotation = Quaternion.LookRotation(player.transform.position - spawnPoint.transform.position);
         spawnPoint.transform.rotation = Quaternion.Slerp(transform.rotation, playerRotation, 2 * Time.deltaTime);*/
