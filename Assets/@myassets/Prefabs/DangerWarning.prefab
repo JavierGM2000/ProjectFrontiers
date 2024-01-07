@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7092193095107843337}
   - component: {fileID: 7092193095107843336}
   - component: {fileID: 7092193095107843343}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7092193095257106626}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: DangerWarning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 7092193095605278742}
   - component: {fileID: 7092193095605278741}
   - component: {fileID: 7092193095605278740}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
