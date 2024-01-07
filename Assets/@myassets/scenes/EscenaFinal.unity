@@ -2316,6 +2316,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 620809932, guid: 3977e278a7ba50b4683e283bdcf7baf7, type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8173211550458818535, guid: 3977e278a7ba50b4683e283bdcf7baf7,
         type: 3}
       propertyPath: m_RootOrder
@@ -2339,12 +2343,12 @@ PrefabInstance:
     - target: {fileID: 8173211550458818535, guid: 3977e278a7ba50b4683e283bdcf7baf7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 192
+      value: 351
       objectReference: {fileID: 0}
     - target: {fileID: 8173211550458818535, guid: 3977e278a7ba50b4683e283bdcf7baf7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 136.4
+      value: 1220
       objectReference: {fileID: 0}
     - target: {fileID: 8173211550458818535, guid: 3977e278a7ba50b4683e283bdcf7baf7,
         type: 3}
@@ -2837,7 +2841,7 @@ GameObject:
   - component: {fileID: 1368810607}
   - component: {fileID: 1368810606}
   - component: {fileID: 1368810605}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CabinaVerdad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8387,7 +8391,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341311246106957659}
   m_LocalRotation: {x: -0, y: 0.86462575, z: -0, w: 0.50241655}
-  m_LocalPosition: {x: 0, y: 1723, z: 0}
+  m_LocalPosition: {x: -999, y: 1449, z: 569}
   m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000001}
   m_ConstrainProportionsScale: 0
   m_Children:
