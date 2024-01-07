@@ -41,7 +41,8 @@ public class UIEnemyShow : MonoBehaviour
     [SerializeField]
     GameObject finalEnemy;
 
-    
+    [SerializeField]
+    private LevelManager levelManager;
 
     // Start is called before the first frame update
     void Awake()
@@ -98,6 +99,11 @@ public class UIEnemyShow : MonoBehaviour
 
     public void removeItem(int goID)
     {
+        if(goID == finalEnemy.GetInstanceID())
+        {
+            levelManager.changeLevel("VictoryScreen");
+        }
+
         if(currentSelected == goID)
         {
             currentSelected -= 1;
@@ -108,6 +114,11 @@ public class UIEnemyShow : MonoBehaviour
         if (levelTargets.Contains(goID))
         {
             levelTargets.Remove(goID);
+            if (levelTargets.Count == 0)
+            {
+                finalEnemy.GetComponent<RadarInfo>().enabled = true;
+                finalEnemy.GetComponent<CabinaHealth>().canTakeDamage = true;
+            }
         }
     }
 
@@ -240,7 +251,7 @@ public class targetClass
 
         if (!enRadInf.getIsTarget())
         {
-            planeName.gameObject.SetActive(false);
+            TGT.gameObject.SetActive(false);
         }
     }
 }
