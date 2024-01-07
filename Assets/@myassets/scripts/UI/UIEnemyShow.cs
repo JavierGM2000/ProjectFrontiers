@@ -36,14 +36,18 @@ public class UIEnemyShow : MonoBehaviour
     private Color lockedColor;
 
     Dictionary<int, targetClass> enemyList;
+    List<int> levelTargets;
 
+    [SerializeField]
+    GameObject finalEnemy;
 
-
+    
 
     // Start is called before the first frame update
     void Awake()
     {
         //mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        levelTargets = new List<int>();
         canvas = GetComponent<Canvas>();
         enemyList = new Dictionary<int, targetClass>();
         gunPredictReticleImage = gunPredictReticle.GetComponent<RawImage>();
@@ -100,6 +104,11 @@ public class UIEnemyShow : MonoBehaviour
         }
         Destroy(enemyList[goID].sightItem);
         enemyList.Remove(goID);
+
+        if (levelTargets.Contains(goID))
+        {
+            levelTargets.Remove(goID);
+        }
     }
 
     public void removeGunsights()
@@ -149,6 +158,10 @@ public class UIEnemyShow : MonoBehaviour
     public void addEnemy(RadarInfo inEnemy)
     {
         enemyList.Add(inEnemy.gameObject.GetInstanceID(),new targetClass(inEnemy, EnemySightPrefab, transform, unSelectedColor));
+        if (inEnemy.getIsTarget())
+        {
+            levelTargets.Add(inEnemy.gameObject.GetInstanceID());
+        }
     }
 
     public void selectEnemy(int instanceID)
@@ -204,6 +217,7 @@ public class targetClass
     public RawImage sight;
     public TMP_Text planeName;
     public TMP_Text distance;
+    public TMP_Text TGT;
 
     public bool isSelected = false;
 
@@ -215,6 +229,7 @@ public class targetClass
         sight = sightItem.GetComponent<RawImage>();
         planeName = sightItem.transform.GetChild(0).GetComponent<TMP_Text>();
         distance = sightItem.transform.GetChild(1).GetComponent<TMP_Text>();
+        TGT = sightItem.transform.GetChild(2).GetComponent<TMP_Text>();
 
         sight.color = inColor;
         planeName.color = inColor;
@@ -222,5 +237,10 @@ public class targetClass
         distance.color = inColor;
         planeName.gameObject.SetActive(false);
         distance.gameObject.SetActive(false);
+
+        if (!enRadInf.getIsTarget())
+        {
+            planeName.gameObject.SetActive(false);
+        }
     }
 }

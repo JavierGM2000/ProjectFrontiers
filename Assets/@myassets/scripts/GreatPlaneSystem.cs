@@ -27,7 +27,7 @@ public class GreatPlaneSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        weakPointsCounter();
+        //weakPointsCounter();
     }
 
     private void weakPointsCounter()

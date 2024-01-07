@@ -790,6 +790,7 @@ GameObject:
   - component: {fileID: 385393502}
   - component: {fileID: 385393504}
   - component: {fileID: 385393503}
+  - component: {fileID: 385393505}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -855,6 +856,18 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!114 &385393505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385393501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6188b6dee00e5424695ba26f764dce6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &391315473
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3887,7 +3900,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1560660980}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 385393505}
+        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
+        m_MethodName: changeLevel
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: EscenaFinal
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1560660980
 MonoBehaviour:
   m_ObjectHideFlags: 0

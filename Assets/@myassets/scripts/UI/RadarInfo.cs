@@ -16,6 +16,9 @@ public class RadarInfo : MonoBehaviour
     string callsign;
     [SerializeField]
     bool revealsTeam;
+    [SerializeField]
+    bool isTarget = false;
+
 
     UIEnemyShow canvas;
 
@@ -53,6 +56,11 @@ public class RadarInfo : MonoBehaviour
     public Transform getTransform()
     {
         return transform;
+    }
+
+    public bool getIsTarget()
+    {
+        return isTarget;
     }
 
     private void OnDestroy()
