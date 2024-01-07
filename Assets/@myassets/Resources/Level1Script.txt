@@ -1,0 +1,38 @@
+// DEFINE_BGM is used to define the level BGM. First one will be automatically played
+DEFINE_BGM
+// to add a bgm to the list the command is like this (file name)&&(1 or 0: Depending if it must go to the next BGM)
+BGM/showdown&&0
+END_BGM_DEFINE
+
+// We define an event, the first event defined can be played on level start 
+DEFINE_CONVERSATION
+WAIT&&3.0
+Evento0/Line1&&Ally HQ&&<< Get ready for an aerial battle. You know what to do, right? >>&&2&&0&&0
+Evento0/Line2&&Enemy Pilot&&<< Let's give the allied forces a taste of hell >>&&1&&0
+Evento0/Line3&&Enemy Commander &&<< We will carry out our duty as planed >>&&1&&0
+END_EVENT_CONVERSATION
+
+DEFINE_CONVERSATION
+Evento1/Linea1&&Diplomat | 2&&<< God, just shut up! >>&&2&&0&&2
+Evento1/Linea2&&Crimson 1&&<< How dare- >>&&1&&0&&1
+Evento1/Linea3&&Diplomat | 2&&<< Shut up, just shut up, fight us, don't talk, I don't care. >>&&2&&0
+Evento1/Linea4&&AWACS Galaxy&&<< Uh, Dip's radio transceiver is off... >>&&2&&0
+END_EVENT_CONVERSATION
+
+DEFINE_CONVERSATION
+Evento2/Linea1&&Wizard 1&&<< We will carry out the new creation of destruction through the power of righteousness. >>&&1&&0
+Evento2/Linea2&&Wizard 1&&<< Territories, peoples, authorities, all will be liberated. This is the new state, "A World With No Boundaries", we'll create. >>&&1&&0
+Evento2/Linea3&&Wizard 1&&<< Neither nations nor nationalities have meaning. We will erase these unnecessary borders. >>&&1&&0
+Evento2/Linea4&&Wizard 1&&<< The World With No Boundaries will pen a new story. >>&&1&&0
+Evento2/Linea5&&Wizard 1&&<< The world will change. >>&&1&&0
+END_EVENT_CONVERSATION
+
+DEFINE_CONVERSATION
+WAIT&&3.0
+Evento2/Extra0&&AWACS Galaxy&&<< We've got leakers, aircraft type unknown, pushing from bearing 000. >>&&2&&0
+Evento2/Linea1&&Wizard 1&&<< We will carry out the new creation of destruction through the power of righteousness. >>&&1&&0
+Evento2/Linea2&&Wizard 1&&<< Territories, peoples, authorities, all will be liberated. This is the new state, "A World With No Boundaries", we'll create. >>&&1&&0
+Evento2/Linea3&&Wizard 1&&<< Neither nations nor nationalities have meaning. We will erase these unnecessary borders. >>&&1&&0
+Evento2/Linea4&&Wizard 1&&<< The World With No Boundaries will pen a new story. >>&&1&&0
+Evento2/Linea5&&Wizard 1&&<< The world will change. >>&&1&&0
+END_EVENT_CONVERSATION
