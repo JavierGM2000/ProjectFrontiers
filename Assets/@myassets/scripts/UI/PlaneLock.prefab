@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8149450176555076737}
   - component: {fileID: 863517870406501841}
   - component: {fileID: 2786313045615543267}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: EnemyDistance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 1367789448382084467}
   - component: {fileID: 5315561998744075049}
   - component: {fileID: 4966888385907845032}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PlaneLock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 3965619016240149906}
   - component: {fileID: 4913945789355367265}
   - component: {fileID: 8528812507715337525}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: EnemyName
   m_TagString: Untagged
   m_Icon: {fileID: 0}

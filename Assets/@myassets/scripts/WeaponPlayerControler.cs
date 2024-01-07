@@ -24,7 +24,8 @@ public class WeaponPlayerControler : MonoBehaviour
     [SerializeField]
     private float lockdistance;
     private bool prevLocked = false;
-    private bool locked = false;//TODO CHANGE
+    private bool locked = false;
+    private bool wasinside = false;
 
 
     [SerializeField]
@@ -79,7 +80,7 @@ public class WeaponPlayerControler : MonoBehaviour
             {
                 if (distance <= selectedlockDistance)
                 {
-                    Debug.Log($"{Vector3.Angle(transform.forward, (target.transform.position - transform.position))} < {selectedLockAngle}");
+                    //Debug.Log($"{Vector3.Angle(transform.forward, (target.transform.position - transform.position))} < {selectedLockAngle}");
                     if (Vector3.Angle(transform.forward, (target.transform.position - transform.position).normalized) <= selectedLockAngle)
                     {
                         locked = true;
@@ -107,9 +108,16 @@ public class WeaponPlayerControler : MonoBehaviour
             }
             if (distance < gunPredictDistance)
             {
+                wasinside = true;
                 float speed = gameObject.GetComponent<Rigidbody>().velocity.magnitude;
                 Vector3 leadPos;
-               // maGun.getBulletImpactPoint(out leadPos, speed);
+                Vector3 gunPos;
+                Rigidbody targetSpeed = target.GetComponent<Rigidbody>();
+                maGun.getBulletImpactPoint(out leadPos,out gunPos, speed);
+                canvasControler.moveReticles(leadPos,gunPos);
+            }else if (wasinside)
+            {
+                canvasControler.removeGunsights();
             }
         }
     }
@@ -191,6 +199,7 @@ public class WeaponPlayerControler : MonoBehaviour
         {
             target = closestEnemy.transform.gameObject;
             canvasControler.selectEnemy(target.GetInstanceID());
+            maGun.ChangeTarget(target);
         }
 
     }

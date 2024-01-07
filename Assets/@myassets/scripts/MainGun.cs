@@ -60,21 +60,22 @@ public class MainGun : MonoBehaviour
         }
     }
 
-    public float getBulletImpactPoint(out Vector3 lagvector, float planeSpeed)
+    public float getBulletImpactPoint(out Vector3 indicator, out Vector3 gunPos, float planeSpeed)
     {
         Vector3 fromTargetToPlane = targetTransform.position - planeGunPodTrans.transform.position;
         Vector3 targetDirection = targetRigidBody.velocity.normalized;
         float angle = Vector3.Angle(fromTargetToPlane, targetDirection);
         angle = angle * Mathf.Deg2Rad;
         float targetVelocity = targetRigidBody.velocity.magnitude;
-        float bulletVelocity = planeRigidbody.velocity.magnitude + planeSpeed;
+        float bulletVelocity = bulletSpeed;
         float distance = fromTargetToPlane.magnitude;
         float squareRoot = Mathf.Sqrt((distance * distance) * (((targetVelocity * targetVelocity) * Mathf.Pow(Mathf.Cos(angle), 2)) - (targetVelocity * targetVelocity) + (bulletVelocity * bulletVelocity)));
         float bulletTime = (squareRoot + distance * targetVelocity * Mathf.Cos(angle)) / ((bulletVelocity * bulletVelocity) - (targetVelocity * targetVelocity));
         //Debug.Log(angle);
-        lagvector = targetDirection * bulletTime * targetVelocity;
-        Vector3 indicator = targetTransform.position + lagvector;
+        Vector3 lagvector = targetDirection * bulletTime * targetVelocity;//test
+        indicator = targetTransform.position + lagvector;
         Debug.DrawLine(targetTransform.position, indicator, Color.red);
+        gunPos = planeGunPodTrans.position + planeGunPodTrans.forward * distance;
         return distance;
     }
 

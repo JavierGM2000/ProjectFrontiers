@@ -12,7 +12,11 @@ public class UIEnemyShow : MonoBehaviour
     [SerializeField]
     private MainGun maGun;
     [SerializeField]
-    private RawImage gunPredictReticle;
+    private GameObject gunPredictReticle;
+    private RawImage gunPredictReticleImage;
+    [SerializeField]
+    private GameObject gunPointtReticle;
+    private RawImage gunPointtReticleImage;
     private bool drawPredict = false;
 
     int currentSelected = -1;
@@ -42,6 +46,8 @@ public class UIEnemyShow : MonoBehaviour
         //mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         canvas = GetComponent<Canvas>();
         enemyList = new Dictionary<int, targetClass>();
+        gunPredictReticleImage = gunPredictReticle.GetComponent<RawImage>();
+        gunPointtReticleImage = gunPointtReticle.GetComponent<RawImage>();
     }
 
     // Update is called once per frame
@@ -68,10 +74,6 @@ public class UIEnemyShow : MonoBehaviour
                         enemy.Value.distance.text = dist.ToString();
                     }
                 }
-                if (drawPredict)
-                {
-                    //maGun.getBulletImpactPoint();
-                }
                 
             }
             else
@@ -80,6 +82,50 @@ public class UIEnemyShow : MonoBehaviour
             }
         }
     }
+
+    public void removeGunsights()
+    {
+        gunPredictReticle.transform.position = new Vector3(999, 999, -999);
+        gunPointtReticle.transform.position = new Vector3(999, 999, -999);
+    }
+    public void moveReticles(Vector3 leadIndicator, Vector3 gunPosition)
+    {
+        Plane canvasPlane = new Plane(mainCamera.transform.forward, mainCamera.transform.position + mainCamera.transform.forward * 10f);
+        if (canvasPlane.GetSide(leadIndicator))
+        {
+            Vector3 toEnemy = (leadIndicator - mainCamera.transform.position).normalized;
+            Ray ray = new Ray(mainCamera.transform.position, toEnemy);
+            float enter = 0.0f;
+            if (canvasPlane.Raycast(ray, out enter))
+            {
+                Vector3 hitPoint = ray.GetPoint(enter);
+                gunPredictReticle.GetComponent<RectTransform>().position = hitPoint;
+            }
+
+        }
+        else
+        {
+            gunPredictReticle.transform.localPosition = new Vector3(999, -999, -999);
+        }
+        if (canvasPlane.GetSide(gunPosition))
+        {
+            Vector3 toEnemy = (gunPosition - mainCamera.transform.position).normalized;
+            Ray ray = new Ray(mainCamera.transform.position, toEnemy);
+            float enter = 0.0f;
+            if (canvasPlane.Raycast(ray, out enter))
+            {
+                Vector3 hitPoint = ray.GetPoint(enter);
+                gunPointtReticle.GetComponent<RectTransform>().position = hitPoint;
+            }
+
+        }
+        else
+        {
+            gunPointtReticle.transform.localPosition = new Vector3(999, 999, -999);
+        }
+    }
+
+
 
     public void addEnemy(RadarInfo inEnemy)
     {
@@ -115,7 +161,8 @@ public class UIEnemyShow : MonoBehaviour
         enemyList[currentSelected].sight.color = lockedColor;
         enemyList[currentSelected].planeName.color = lockedColor;
         enemyList[currentSelected].distance.color = lockedColor;
-        gunPredictReticle.color = lockedColor;
+        gunPredictReticleImage.color = lockedColor;
+        gunPointtReticleImage.color = lockedColor;
     }
     public void setUnlocked()
     {
@@ -123,7 +170,8 @@ public class UIEnemyShow : MonoBehaviour
         enemyList[currentSelected].sight.color = selectedColor;
         enemyList[currentSelected].planeName.color = selectedColor;
         enemyList[currentSelected].distance.color = selectedColor;
-        gunPredictReticle.color = selectedColor;
+        gunPredictReticleImage.color = selectedColor;
+        gunPointtReticleImage.color = selectedColor;
     }
 
 
