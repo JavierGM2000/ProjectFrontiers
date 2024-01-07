@@ -56,16 +56,16 @@ public class TankController : MonoBehaviour
 
     private void lookAtPlayer()
     {
-        //torreta.transform.LookAt(player.transform.position); //en todos los sentidos
-        //en uno específico
-        /*Vector3 difference = player.transform.position - torreta.transform.position;
-        float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-        torreta.transform.rotation = Quaternion.Euler(0.0f, rotationZ, 0.0f);*/
-
         Vector3 targetPostition = new Vector3(player.transform.position.x,
                                        torreta.transform.position.y,
                                        player.transform.position.z);
         torreta.transform.LookAt(targetPostition);
+
+        print("posicion jugador: " + targetPostition.ToString());
+
+
+        /*Quaternion playerRotation = Quaternion.LookRotation(player.transform.position - spawnPoint.transform.position);
+        spawnPoint.transform.rotation = Quaternion.Slerp(transform.rotation, playerRotation, 2 * Time.deltaTime);*/
     }
 
     private void shootAtPlayer()

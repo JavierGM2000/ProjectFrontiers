@@ -14627,8 +14627,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.8
-  m_Center: {x: 0, y: 0.56, z: 0}
+  m_Radius: 5.33
+  m_Center: {x: 0, y: 2.26, z: 0}
 --- !u!1 &938702612275770322
 GameObject:
   m_ObjectHideFlags: 0
@@ -14776,6 +14776,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 0
   torreta: {fileID: 9022777342490592735}
+  planeControl: {fileID: 0}
 --- !u!1 &6762210684131660536
 GameObject:
   m_ObjectHideFlags: 0
@@ -14785,6 +14786,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6762210684131660539}
+  - component: {fileID: 21214415132932956}
   m_Layer: 0
   m_Name: PosicionDisparo
   m_TagString: Untagged
@@ -14807,6 +14809,18 @@ Transform:
   m_Father: {fileID: 938702612275770333}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &21214415132932956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6762210684131660536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7c697a6bdff34459b58924bac20d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4057871709988467112
 PrefabInstance:
   m_ObjectHideFlags: 0
