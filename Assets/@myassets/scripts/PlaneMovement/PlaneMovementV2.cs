@@ -135,6 +135,7 @@ public class PlaneMovementV2 : MonoBehaviour
         }
         if (stall)
         {
+            gravity = 98.1f * 2;
             if (stallObject.gameObject.active == false)
             {
                 // stallObject.gameObject.active = true;
@@ -142,6 +143,7 @@ public class PlaneMovementV2 : MonoBehaviour
         }
         else
         {
+            gravity = 98.1f * 2;
             if (stallObject.gameObject.active == true)
             {
                 //stallObject.gameObject.active = false;
@@ -207,7 +209,7 @@ public class PlaneMovementV2 : MonoBehaviour
         float appliedGravityForce = gravity - (rb.velocity.magnitude * gravity / 100f);
         // appliedGravityForce = Mathf.Clamp(appliedGravityForce, 0f, gravity);
         float appliedTurnForce = (responseModifier * Time.deltaTime * deltaTimeFixMultiplier);
-        float speedFactor = 1f - Mathf.Clamp01(rb.velocity.magnitude / 300f);
+        float speedFactor = 1f - Mathf.Clamp01(rb.velocity.magnitude / 350f);
         if (rb.velocity.magnitude >= 120 && !speedParticles.gameObject.active)
         {
 
@@ -223,25 +225,23 @@ public class PlaneMovementV2 : MonoBehaviour
 
              rb.AddForce(Vector3.up * -gravity  * Time.deltaTime * deltaTimeFixMultiplier, ForceMode.Acceleration);
              rb.AddForce(-rb.velocity.normalized * 10f * Time.deltaTime, ForceMode.Acceleration);
-             rb.angularDrag = 4f;
+             rb.angularDrag = 2.5f;
 
-            rb.AddTorque(transform.up * yaw * appliedTurnForce / 4.4f);
-            rb.AddTorque(-transform.right * pitch * appliedTurnForce/2);
-            rb.AddTorque(-transform.forward * roll * appliedTurnForce  /2);
+            
            
          }
          else {
              rb.angularDrag = 1.5f;
-            rb.AddTorque(transform.up * yaw * appliedTurnForce / 2.6f);
-            rb.AddTorque(-transform.right * pitch * appliedTurnForce);
-            rb.AddTorque(-transform.forward * roll * appliedTurnForce * 3.3f);
+            
 
         }
-        
-        //rb.angularDrag = 1.5f;
 
-        
-        
+        //rb.angularDrag = 1.5f;
+        rb.AddTorque(transform.up * yaw * appliedTurnForce / 2.6f);
+        rb.AddTorque(-transform.right * pitch * appliedTurnForce);
+        rb.AddTorque(-transform.forward * roll * appliedTurnForce * 3.3f);
+
+
 
         float throttleAdjusted = Mathf.Pow(throttle, 2) / 100f;
         //float acceleration = CalculateAcceleration(rb.velocity.magnitude);

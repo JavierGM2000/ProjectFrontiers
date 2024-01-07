@@ -51,7 +51,7 @@ public class GridMarkerBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" || other.gameObject.layer == 9 || other.gameObject.layer == 10)
+        if (other.gameObject.layer != 11)
             return;
         if (isNavigable)
         {
@@ -65,7 +65,7 @@ public class GridMarkerBehaviour : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == 7 || other.gameObject.layer == 9 || other.gameObject.layer == 10)
+        if (other.gameObject.layer != 11)
             return;
         if (!isNavigable)
         {

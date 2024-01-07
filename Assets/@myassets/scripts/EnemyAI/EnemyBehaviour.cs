@@ -30,7 +30,8 @@ public class EnemyBehaviour : MonoBehaviour
     public float shootingForce;
     public float shootCooldown = 1f;
     float timeSinceLastShot = 0f;
-    
+    Vector3 spawnPoint;
+
 
     ////////////////////
 
@@ -82,6 +83,7 @@ public class EnemyBehaviour : MonoBehaviour
         currentMaxMovementForce = maxMovementForce;
         turnForce = maxTurnForce;
         directAttackTurnForce = turnForce * 1.3f;
+        spawnPoint = transform.position;
     }
 
     void Update()
@@ -377,13 +379,10 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void directShooting()
     {
-        float rayDistance = 100f; // Puedes ajustar esto según tus necesidades
+        
         float shootingAngleThreshold = 20f; // Tu valor específico de ángulo
 
-        Debug.DrawLine(transform.position, transform.position + transform.forward * rayDistance, Color.green);
-  
-
-           
+       
             
                 
                 Vector3 targetDirection = targetGridPosition - transform.position;

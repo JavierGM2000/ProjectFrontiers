@@ -280,7 +280,7 @@
                 {
                     "name": "",
                     "id": "357ffa67-3f3e-47dc-80e6-31c5bfab5c58",
-                    "path": "<HID::Logitech Logitech Extreme 3D>/button2",
+                    "path": "<HID::Thrustmaster T.16000M>/button2",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -367,6 +367,17 @@
                 },
                 {
                     "name": "",
+                    "id": "694ee6fe-4e23-422a-a548-2130dbea4392",
+                    "path": "<HID::Thrustmaster T.16000M>/button3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeTarget",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "b42be054-1537-461a-8c5d-05082ce367a4",
                     "path": "<HID::Logitech Logitech Extreme 3D>/button11",
                     "interactions": "",
@@ -381,6 +392,17 @@
                     "id": "98d90737-de50-4028-a64c-e817ff66bd24",
                     "path": "<Keyboard>/r",
                     "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ResetCam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e51e63a4-7169-4bd2-8b5f-31f1bc1a8d49",
+                    "path": "<HID::Thrustmaster T.16000M>/button4",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "ResetCam",
