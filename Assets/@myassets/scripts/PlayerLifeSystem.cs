@@ -15,9 +15,12 @@ public class PlayerLifeSystem : MonoBehaviour
     public AudioSource SoundSource;
     public AudioClip critDamageSource;
 
+    LevelManager levelMag;
+
     // Start is called before the first frame update
     void Start()
     {
+        levelMag = GameObject.FindObjectOfType<LevelManager>();
         maxLife = 100;
         currentLife = maxLife;
         SoundSource = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioSource>();
@@ -66,9 +69,19 @@ public class PlayerLifeSystem : MonoBehaviour
             currentLife--;
         }
 
-        if ((other.tag == "Player" || other.tag == "Misil") && currentLife <= 0) //tag de prueba, sería el del proyectil
+        if ((other.tag == "Player" || other.tag == "Misil") && currentLife <= 0) //tag de prueba, serú} el del proyectil
         {
-            Destroy(gameObject);
+            levelMag.changeLevel("GameOver");
+        }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground")) //tag de prueba, serú} el del proyectil
+        {
+            levelMag.changeLevel("GameOver");
+        }
+
+        if (currentLife <= 0)
+        {
+            levelMag.changeLevel("GameOver");
         }
     }
 }
