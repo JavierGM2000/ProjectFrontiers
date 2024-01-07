@@ -107,6 +107,7 @@ public class UIEnemyShow : MonoBehaviour
         if(currentSelected == goID)
         {
             currentSelected -= 1;
+            removeGunsights();
         }
         Destroy(enemyList[goID].sightItem);
         enemyList.Remove(goID);
