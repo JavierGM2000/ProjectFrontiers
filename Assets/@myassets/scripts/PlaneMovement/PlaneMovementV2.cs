@@ -155,7 +155,7 @@ public class PlaneMovementV2 : MonoBehaviour
         handleChange();
         handleReset();
         handleMissile();
-        Debug.Log("Velocity = " + rb.velocity.magnitude);
+        
 
         float angleDown = Vector3.Angle(Vector3.down, transform.forward);
         // + " gravForce : " + (gravity - (rb.velocity.magnitude * 9.8f / 30f) + " gravAngle : "+ (gravity - (angleDown * 9.8f / 90)).ToString("F1"));

@@ -57,6 +57,8 @@ public class EnemyBehaviour : MonoBehaviour
     public float currentMaxMovementForce;
     public float movementForce;
 
+   
+
     
     private float responseModifier
     {
@@ -215,7 +217,7 @@ public class EnemyBehaviour : MonoBehaviour
         Vector3 movementVector = targetPosition - transform.position;
         float angle = Vector3.SignedAngle(transform.forward, movementVector, transform.right);
 
-        Debug.LogWarning(angle);
+        
         angle = Mathf.Abs(angle);
        
         float adjustedAppliedMovementForce = appliedMovementForce * Mathf.Clamp((1-(angle/180)), 0.3f, 1);
@@ -238,9 +240,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void BehaviourPatrolling()
     {
-        Debug.DrawLine(transform.position, bossPlane.position, Color.green);
-        adjustRoll(bossPlane.position);
-        adjustPitch(bossPlane.position, turnForce);
+        
         moveForward(bossPlane.position,currentMaxMovementForce);
     }
 
@@ -267,16 +267,16 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void BehaviourDirectAttackPlayer()
     {
-        targetGridPosition = target.transform.position + targetRigidbody.velocity;
+        targetGridPosition = target.transform.position ;
         Debug.DrawLine(transform.position, targetGridPosition, Color.red);
         adjustRoll(targetGridPosition);
         adjustYaw(targetGridPosition, turnForce);
         float distance = Vector3.Distance(transform.position, target.transform.position);
         float distanceMultiplier = Mathf.Clamp01(1f - distance / directAttackDistance);
         float appliedTurnForce = directAttackTurnForce * distanceMultiplier;
-        float appliedForce = currentMaxMovementForce * (Mathf.Clamp((distance / directAttackDistance), 0.5f, 1f));
+        float appliedForce = currentMaxMovementForce * (Mathf.Clamp((distance / directAttackDistance), 0.3f, 1f));
         adjustPitch(targetGridPosition, appliedTurnForce);
-        Debug.Log("MOvementForce = " + appliedForce);
+        
 
         moveForward(targetGridPosition,appliedForce);
        
@@ -360,7 +360,7 @@ public class EnemyBehaviour : MonoBehaviour
         currentMaxMovementForce = maxMovementForce * Mathf.Clamp((currentStamina / maxStamina), 0.7f, 1f);
         turnForce = maxTurnForce * Mathf.Clamp((currentStamina / maxStamina), 0.7f,1f);
         directAttackTurnForce = turnForce * 3f;
-        Debug.Log("Stamina = " + currentStamina);
+       
     }
 
     public void recoverStamina(float staminaGainMultiplier)
@@ -369,7 +369,7 @@ public class EnemyBehaviour : MonoBehaviour
         currentMaxMovementForce = maxMovementForce * Mathf.Clamp((currentStamina / maxStamina), 0.7f, 1f);
         turnForce = maxTurnForce * Mathf.Clamp( (currentStamina / maxStamina), 0.7f, 1f);
         directAttackTurnForce = turnForce * 3f;
-        Debug.Log("Stamina = " + currentStamina);
+        
     }
 
 
