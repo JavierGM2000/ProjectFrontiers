@@ -378,8 +378,8 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""694ee6fe-4e23-422a-a548-2130dbea4392"",
-                    ""path"": ""<HID::Thrustmaster T.16000M>/button3"",
+                    ""id"": ""0876f4f0-c99e-4e41-82ee-9f2227d317e7"",
+                    ""path"": ""<HID::Logitech Logitech Extreme 3D>/button3"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -389,8 +389,8 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0876f4f0-c99e-4e41-82ee-9f2227d317e7"",
-                    ""path"": ""<HID::Logitech Logitech Extreme 3D>/button3"",
+                    ""id"": ""694ee6fe-4e23-422a-a548-2130dbea4392"",
+                    ""path"": ""<HID::Thrustmaster T.16000M>/button3"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -411,8 +411,8 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e51e63a4-7169-4bd2-8b5f-31f1bc1a8d49"",
-                    ""path"": ""<HID::Thrustmaster T.16000M>/button4"",
+                    ""id"": ""b42be054-1537-461a-8c5d-05082ce367a4"",
+                    ""path"": ""<HID::Logitech Logitech Extreme 3D>/button11"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -422,8 +422,8 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b42be054-1537-461a-8c5d-05082ce367a4"",
-                    ""path"": ""<HID::Logitech Logitech Extreme 3D>/button11"",
+                    ""id"": ""e51e63a4-7169-4bd2-8b5f-31f1bc1a8d49"",
+                    ""path"": ""<HID::Thrustmaster T.16000M>/button4"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
