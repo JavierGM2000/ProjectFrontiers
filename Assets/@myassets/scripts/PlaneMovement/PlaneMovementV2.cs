@@ -122,7 +122,7 @@ public class PlaneMovementV2 : MonoBehaviour
     void Start()
     {
         MainCamera = FindObjectOfType<XROrigin>();
-        throttle = 0;
+        throttle = 100;
         volumeMultiplier = engine.volume;
     }
 
@@ -162,7 +162,7 @@ public class PlaneMovementV2 : MonoBehaviour
         float angleDown = Vector3.Angle(Vector3.down, transform.forward);
         // + " gravForce : " + (gravity - (rb.velocity.magnitude * 9.8f / 30f) + " gravAngle : "+ (gravity - (angleDown * 9.8f / 90)).ToString("F1"));
         velocityText.text = "Velocity: " + (int)rb.velocity.magnitude /*+ "Potencial: " + potencial*/;
-        angleWithFloorText.text = "Angle: " + Vector3.Angle(Vector3.down, transform.forward) + "Stall: " + stall;
+       
 
 
         Vector3 rotation = new Vector3(-45 * pitchAction.ReadValue<float>(), 45 * yawAction.ReadValue<float>(), -45 * rollAction.ReadValue<float>());
@@ -225,7 +225,7 @@ public class PlaneMovementV2 : MonoBehaviour
 
              rb.AddForce(Vector3.up * -gravity  * Time.deltaTime * deltaTimeFixMultiplier, ForceMode.Acceleration);
              rb.AddForce(-rb.velocity.normalized * 10f * Time.deltaTime, ForceMode.Acceleration);
-             rb.angularDrag = 2.5f;
+             rb.angularDrag = 1.5f;
 
             
            

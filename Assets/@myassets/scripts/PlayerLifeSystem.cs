@@ -64,9 +64,9 @@ public class PlayerLifeSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag=="Enemy"||other.tag=="Misil")
+        if(other.tag=="Misil")
         {
-            currentLife--;
+            currentLife-=10;
         }
 
         if ((other.tag == "Player" || other.tag == "Misil") && currentLife <= 0) //tag de prueba, serú} el del proyectil

@@ -357,7 +357,6 @@ public class EnemyBehaviour : MonoBehaviour
                 break;
             case 4:
                 BehaviourDirectAttackPlayer();
-                directShooting();
                 reduceStamina(0.7f);
                 break;
             case 5:
