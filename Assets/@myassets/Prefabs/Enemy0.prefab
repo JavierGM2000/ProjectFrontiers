@@ -48769,6 +48769,12 @@ MonoBehaviour:
   currentMaxMovementForce: 0
   movementForce: 0
   patrolMovementForce: 100
+  minAltitude: 0
+  misilePrefab: {fileID: 6146521105488877, guid: ed83d38ba85aeb64ca66c065c0c72c2e,
+    type: 3}
+  distaForMissile: 2000
+  angleForMissile: 20
+  cooldown: 20
 --- !u!82 &2381079645196070706
 AudioSource:
   m_ObjectHideFlags: 0
@@ -48910,6 +48916,7 @@ MonoBehaviour:
   planeName: Enemy
   callsign: 
   revealsTeam: 0
+  isTarget: 0
 --- !u!1 &8098845288984917891
 GameObject:
   m_ObjectHideFlags: 0

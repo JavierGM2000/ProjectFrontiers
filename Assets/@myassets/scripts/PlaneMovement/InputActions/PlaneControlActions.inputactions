@@ -356,6 +356,17 @@
                 },
                 {
                     "name": "",
+                    "id": "694ee6fe-4e23-422a-a548-2130dbea4392",
+                    "path": "<HID::Thrustmaster T.16000M>/button3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeTarget",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "0876f4f0-c99e-4e41-82ee-9f2227d317e7",
                     "path": "<HID::Logitech Logitech Extreme 3D>/button3",
                     "interactions": "",
@@ -378,12 +389,12 @@
                 },
                 {
                     "name": "",
-                    "id": "694ee6fe-4e23-422a-a548-2130dbea4392",
-                    "path": "<HID::Thrustmaster T.16000M>/button3",
+                    "id": "e51e63a4-7169-4bd2-8b5f-31f1bc1a8d49",
+                    "path": "<HID::Thrustmaster T.16000M>/button4",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ChangeTarget",
+                    "action": "ResetCam",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -403,17 +414,6 @@
                     "id": "98d90737-de50-4028-a64c-e817ff66bd24",
                     "path": "<Keyboard>/r",
                     "interactions": "Press",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ResetCam",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e51e63a4-7169-4bd2-8b5f-31f1bc1a8d49",
-                    "path": "<HID::Thrustmaster T.16000M>/button4",
-                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "ResetCam",

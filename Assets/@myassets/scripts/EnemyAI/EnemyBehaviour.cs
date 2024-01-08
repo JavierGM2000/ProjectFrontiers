@@ -62,8 +62,16 @@ public class EnemyBehaviour : MonoBehaviour
     public float patrolMovementForce;
     [SerializeField]
     private float minAltitude;
-   
 
+    [SerializeField]
+    private GameObject misilePrefab;
+    [SerializeField]
+    private float distaForMissile;
+    [SerializeField]
+    private float angleForMissile;
+    [SerializeField]
+    private float cooldown;
+    private float cooldownCounter=0f;
     private float responseModifier
     {
         get
@@ -94,6 +102,25 @@ public class EnemyBehaviour : MonoBehaviour
         if (target == null)
         {
             return;
+        }
+        if (cooldownCounter > 0)
+        {
+            cooldownCounter -= Time.deltaTime;
+        }
+        Vector3 realdistance = target.transform.position - transform.position;
+        if(realdistance.magnitude <= distaForMissile)
+        {
+            if (Vector3.Angle(transform.forward, realdistance.normalized) <= angleForMissile){
+                if (cooldownCounter <= 0)
+                {
+                    cooldownCounter = cooldown;
+                    GameObject newMissile = Instantiate(misilePrefab, transform);
+                    newMissile.transform.parent = null;
+                    WeaponStandardMissile wpm = newMissile.GetComponent<WeaponStandardMissile>();
+                    wpm.SetTarget(target.transform);
+                    wpm.Launch(rigidbody.velocity);
+                }
+            }
         }
 
         timeSinceLastShot += Time.deltaTime;
@@ -399,7 +426,7 @@ public class EnemyBehaviour : MonoBehaviour
     public void directShooting()
     {
         
-        float shootingAngleThreshold = 20f; // Tu valor específico de ángulo
+        float shootingAngleThreshold = 20f; // Tu valor especúƒico de ángulo
 
        
             

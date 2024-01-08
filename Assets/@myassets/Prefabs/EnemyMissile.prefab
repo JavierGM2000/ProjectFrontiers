@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deea554c29451164e928d908fca4a437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hurtsPlayer: 0
+  hurtsPlayer: 1
   damage: 15
   lockDistance: 2800
   activationTime: 0.3

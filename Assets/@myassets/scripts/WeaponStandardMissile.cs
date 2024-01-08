@@ -190,6 +190,14 @@ public class WeaponStandardMissile : Weapon
 
     public override void Launch(Vector3 inSpeed)
     {
+        if (!launchSound)
+        {
+            launchSound = GetComponent<AudioSource>();
+        }
+        if (!myRigidBody)
+        {
+            myRigidBody = GetComponent<Rigidbody>();
+        }
         launchSound.Play();
         transform.parent = null;
         myRigidBody.isKinematic = false;
