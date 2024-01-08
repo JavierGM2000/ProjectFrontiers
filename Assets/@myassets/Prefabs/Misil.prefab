@@ -105,7 +105,7 @@ MonoBehaviour:
   lockDistance: 2800
   activationTime: 0.3
   aliveTime: 15
-  lockAngle: 30
+  lockAngle: 50
   maxTurnRate: 90
   distanceFuze: 3
   targetSpeed: 1000

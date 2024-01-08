@@ -153,8 +153,8 @@ public class WeaponStandardMissile : Weapon
             target.GetComponent<Life>().dealDamage(damage);
             Destroy(gameObject);
         }
-        float currentMaxTurn = (myRigidBody.velocity.magnitude / targetSpeed) * maxTurnRate;
-        //float currentMaxTurn =  maxTurnRate;
+        //float currentMaxTurn = (myRigidBody.velocity.magnitude / targetSpeed) * maxTurnRate;
+        float currentMaxTurn =  maxTurnRate;
 
         float distaceToPrevious = (previousPos - transform.position).magnitude;
         float secondsAway = distaceToPrevious / targetSpeed;
