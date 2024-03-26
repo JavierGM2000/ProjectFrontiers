@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Misil
   - Jormungandr
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Grid
   - NotObstacle
   - Enemy
-  - 
+  - handle
   - 
   - 
   - 
