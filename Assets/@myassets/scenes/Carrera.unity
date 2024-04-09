@@ -1009,6 +1009,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -5111809682509717072, guid: c8157b020d16f2a46bf3933464e19106,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -4291752577544996790, guid: c8157b020d16f2a46bf3933464e19106,
         type: 3}
       propertyPath: m_IsActive
@@ -1025,6 +1030,11 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1252720526128084669, guid: c8157b020d16f2a46bf3933464e19106,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488883695944772243, guid: c8157b020d16f2a46bf3933464e19106,
         type: 3}
       propertyPath: m_IsActive
       value: 0
