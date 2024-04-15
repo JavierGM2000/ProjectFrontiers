@@ -14,9 +14,12 @@ public class GameManager : MonoBehaviour
     public AudioSource SoundSource;
     public AudioClip timeLeftSource;
 
+    LevelManager levelMag;
+
     // Start is called before the first frame update
     void Start()
     {
+        levelMag = GameObject.FindObjectOfType<LevelManager>();
         isPlaying = true;
         SoundSource = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioSource>();
     }
@@ -42,8 +45,7 @@ public class GameManager : MonoBehaviour
 
         if (timeLimit < 0)
         {
-            print("WRYYYYYYYYYYYYYYYYYYYy");
-            isPlaying = false;
+            levelMag.changeLevel("GameOver");
         }
     }
 
