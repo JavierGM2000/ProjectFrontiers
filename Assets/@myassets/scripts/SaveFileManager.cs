@@ -8,9 +8,22 @@ using UnityEngine;
 
 public class SaveFileManager : MonoBehaviour
 {
-    SaveData saveData;   
+    public static SaveFileManager instance;
 
-    // Start is called before the first frame update
+    SaveData saveData;
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+
     void Start()
     {
         checkForJSON();
@@ -21,7 +34,8 @@ public class SaveFileManager : MonoBehaviour
         var jsonTextFile = Resources.Load<TextAsset>("savedata/saveFile");
         if (jsonTextFile == null)
         {
-            createBasicJSON();        }
+            createBasicJSON();       
+        }
         try
         {
             saveData = JsonUtility.FromJson<SaveData>(jsonTextFile.text);
@@ -32,8 +46,6 @@ public class SaveFileManager : MonoBehaviour
             createBasicJSON();
             saveData = JsonUtility.FromJson<SaveData>(jsonTextFile.text);
         }
-        
-
     }
 
     void createBasicJSON()
@@ -41,5 +53,12 @@ public class SaveFileManager : MonoBehaviour
         FileStream fs = File.Create("Resources/savedata/saveFile.json");
         byte[] newJSON = new UTF8Encoding(true).GetBytes("{ \"multiplayerskill\": 0, \"selectedChar\": 0 }");
         fs.Write(newJSON,0, newJSON.Length);
+    }
+
+    void saveToFIle()
+    {
+        FileStream fs = File.Create("Resources/savedata/saveFile.json");
+        byte[] newJSON = new UTF8Encoding(true).GetBytes(JsonUtility.ToJson(saveData));
+        fs.Write(newJSON, 0, newJSON.Length);
     }
 }
