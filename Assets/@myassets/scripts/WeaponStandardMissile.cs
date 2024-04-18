@@ -167,6 +167,7 @@ public class WeaponStandardMissile : Weapon
         {
             Debug.Log("Lost lock");
             lostLock = true;
+            targetWarning.removeMissiles(this.gameObject.GetInstanceID());
             return;
         }
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, newObjectivePost - transform.position, currentMaxTurn * Mathf.Deg2Rad * Time.deltaTime, 0.0f);
@@ -263,7 +264,7 @@ public class WeaponStandardMissile : Weapon
 
     private void OnDestroy()
     {
-        if (isLaunched  && targetWarning)
+        if (isLaunched  && targetWarning && !lostLock)
         {
             targetWarning.removeMissiles(this.gameObject.GetInstanceID());
 

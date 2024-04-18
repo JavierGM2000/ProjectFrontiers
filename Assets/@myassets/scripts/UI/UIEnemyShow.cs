@@ -19,6 +19,8 @@ public class UIEnemyShow : MonoBehaviour
     private RawImage gunPointtReticleImage;
     private bool drawPredict = false;
 
+    ConversationControler convcont;
+
     int currentSelected = -1;
 
     [SerializeField]
@@ -47,6 +49,7 @@ public class UIEnemyShow : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        convcont = FindObjectOfType<ConversationControler>();
         //mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         levelTargets = new List<int>();
         canvas = GetComponent<Canvas>();
@@ -117,6 +120,7 @@ public class UIEnemyShow : MonoBehaviour
             levelTargets.Remove(goID);
             if (levelTargets.Count == 0)
             {
+                convcont.startConversation(1,true,true,true);
                 finalEnemy.GetComponent<RadarInfo>().enabled = true;
                 finalEnemy.GetComponent<CabinaHealth>().canTakeDamage = true;
             }

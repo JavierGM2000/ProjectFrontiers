@@ -9890,8 +9890,8 @@ MonoBehaviour:
   minAltitude: 0
   misilePrefab: {fileID: 6146521105488877, guid: ed83d38ba85aeb64ca66c065c0c72c2e,
     type: 3}
-  distaForMissile: 2000
-  angleForMissile: 30
+  distaForMissile: 4000
+  angleForMissile: 25
   cooldown: 20
 --- !u!82 &1972614018
 AudioSource:

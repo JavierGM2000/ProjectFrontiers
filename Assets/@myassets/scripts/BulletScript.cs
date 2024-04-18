@@ -16,8 +16,12 @@ public class BulletScript : MonoBehaviour
 
     void Start()
     {
-        explosionParticles = this.transform.Find("WFX_Explosion Small");
-        explosionParticles.gameObject.SetActive(false);
+        /*if (!explosionParticles)
+        {
+            explosionParticles = this.transform.Find("WFX_Explosion Small");
+            explosionParticles.gameObject.SetActive(false);
+        }*/
+        
     }
 
     void Update()

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8313467244626032203}
   m_Layer: 0
   m_Name: EnemyMissile
-  m_TagString: Untagged
+  m_TagString: Misil
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,11 +105,11 @@ MonoBehaviour:
   lockDistance: 2800
   activationTime: 0.3
   aliveTime: 15
-  lockAngle: 10
-  maxTurnRate: 20
-  distanceFuze: 0
+  lockAngle: 40
+  maxTurnRate: 30
+  distanceFuze: 1
   targetSpeed: 500
-  acceleration: 500
+  acceleration: 200
   missileType: 1
   groundTurnDistance: 0
   target: {fileID: 0}

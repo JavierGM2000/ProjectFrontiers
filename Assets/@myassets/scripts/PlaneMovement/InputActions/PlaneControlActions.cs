@@ -136,6 +136,39 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""1D Axis"",
+                    ""id"": ""f94c2e76-fda2-40f0-9330-efa4f77003a0"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pitch"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""b1abc45d-2aa6-435d-9f2b-a213c9c53a48"",
+                    ""path"": ""<XInputController>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxControls"",
+                    ""action"": ""Pitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""a0756681-f80f-443e-abc3-b049e515dac4"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxControls"",
+                    ""action"": ""Pitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
                     ""id"": ""16c11a52-7e11-4b47-87ba-efa4dfd57f3f"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
@@ -278,6 +311,39 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""eaa2ef98-2d05-4973-8f03-1c58d39e002e"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Thrust"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""1a2c4097-347c-4589-9ee6-fc081c0cbbec"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxControls"",
+                    ""action"": ""Thrust"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""46ea04b4-cac9-4804-9d39-59720d86df11"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxControls"",
+                    ""action"": ""Thrust"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""c8765c65-369a-4b64-8572-3551499234ee"",
                     ""path"": ""<Keyboard>/space"",
@@ -322,6 +388,17 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""204e4810-967c-44cb-b2e1-af193eddc6a2"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxControls"",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""1D Axis"",
                     ""id"": ""3ba92890-caa4-4835-847a-458facdbab6a"",
                     ""path"": ""1DAxis"",
@@ -355,6 +432,39 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""0ac8280d-d834-4b32-9c33-ab7708abf690"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""fefcc392-5c46-4b6c-a510-68cc5151ab8e"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxControls"",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""06103cc5-142f-48a5-a142-583c35067b54"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxControls"",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""edf9778d-bb5a-46c1-9cd2-20e0d94a16b3"",
                     ""path"": ""<HID::Thrustmaster T.16000M>/rz"",
@@ -375,6 +485,39 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                     ""action"": ""Yaw"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""835e26d5-7ea4-44df-a2ed-7335a9932cc1"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Yaw"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""d90f8dc0-5387-4a36-87f6-bfc38d1a9d5d"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxControls"",
+                    ""action"": ""Yaw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""d867aa73-d90f-48dd-a613-2d667ab662f5"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxControls"",
+                    ""action"": ""Yaw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -405,6 +548,17 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
+                    ""action"": ""ChangeTarget"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""35cf5c4a-2015-41ad-904e-ba6ebfc4d7dd"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxControls"",
                     ""action"": ""ChangeTarget"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -444,6 +598,17 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""cb41ff80-c526-4d0c-9252-fa8878055473"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxControls"",
+                    ""action"": ""ResetCam"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""c94a47a9-8817-4451-8ab4-f57fd387c042"",
                     ""path"": ""<Joystick>/trigger"",
                     ""interactions"": ""Press"",
@@ -452,11 +617,34 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                     ""action"": ""Missile"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""88569443-ae57-4617-b2f6-0cc0a1b3cee2"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxControls"",
+                    ""action"": ""Missile"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""XboxControls"",
+            ""bindingGroup"": ""XboxControls"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<XInputController>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // PlaneMap
         m_PlaneMap = asset.FindActionMap("PlaneMap", throwIfNotFound: true);
@@ -612,6 +800,15 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
         }
     }
     public PlaneMapActions @PlaneMap => new PlaneMapActions(this);
+    private int m_XboxControlsSchemeIndex = -1;
+    public InputControlScheme XboxControlsScheme
+    {
+        get
+        {
+            if (m_XboxControlsSchemeIndex == -1) m_XboxControlsSchemeIndex = asset.FindControlSchemeIndex("XboxControls");
+            return asset.controlSchemes[m_XboxControlsSchemeIndex];
+        }
+    }
     public interface IPlaneMapActions
     {
         void OnPitch(InputAction.CallbackContext context);
