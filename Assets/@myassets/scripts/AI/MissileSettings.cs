@@ -20,9 +20,11 @@ public class MissileSettings : MonoBehaviour
     public float referenceRange = 4000f;
 
     //Enemy
-    public float enemySpeed = 400f;//ms
-    public float spawnPosRand = 300f;
+    /*public float enemySpeed = 400f;//ms
+    public float spawnPosRand = 300f;*/
 
     public Material engineOn;
     public Material engineOff;
+
+
 }

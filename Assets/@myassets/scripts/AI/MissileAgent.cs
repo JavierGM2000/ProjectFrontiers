@@ -22,7 +22,7 @@ public class MissileAgent : Agent
 
     public override void Initialize()
     {
-        m_missileSetting = FindObjectOfType<MissileSettings>();
+        m_missileSetting = gameObject.GetComponent<MissileSettings>();
         missileRigidbody = GetComponent<Rigidbody>();
         missileRigidbody.mass = m_missileSetting.missileMass;
         enemyRigidBody = m_missileSetting.target.gameObject.GetComponent<Rigidbody>();
@@ -162,21 +162,21 @@ public class MissileAgent : Agent
     public override void OnEpisodeBegin()
     {
         // Reset missile pos
-        transform.position = new Vector3(0, 0, 0);
+        //transform.position = new Vector3(0, 0, 0);
         // Random missile roll
-        transform.rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
+        //transform.rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
         //transform.rotation = Quaternion.Euler(0, 0, 0);
 
         m_missileSetting.engine.GetComponent<Renderer>().material = m_missileSetting.engineOn;
 
         velocity = m_missileSetting.initSpeed;
-        missileRigidbody.velocity = new Vector3(0, 0, m_missileSetting.initSpeed);
+        missileRigidbody.velocity = m_missileSetting.transform.forward * m_missileSetting.initSpeed;
         missileRigidbody.angularVelocity = new Vector3(0, 0, 0);
 
         thrustTimer = m_missileSetting.thrustTime;
         batteryTimer = m_missileSetting.lifeTime;
 
-        m_missileSetting.target.position = new Vector3(0, 0, 3000);
+        /*m_missileSetting.target.position = new Vector3(0, 0, 3000);
         float randomx = Random.Range(-m_missileSetting.spawnPosRand, m_missileSetting.spawnPosRand);
         float randomy = Random.Range(-m_missileSetting.spawnPosRand, m_missileSetting.spawnPosRand);
         float randomz = Random.Range(-m_missileSetting.spawnPosRand, m_missileSetting.spawnPosRand);
@@ -185,7 +185,7 @@ public class MissileAgent : Agent
         m_missileSetting.target.position = spawnPos;
         m_missileSetting.target.rotation = Random.rotation;
         missileRigidbody.angularVelocity = new Vector3(0, 0, 0);
-        enemyRigidBody.velocity = m_missileSetting.target.forward * m_missileSetting.enemySpeed;
+        enemyRigidBody.velocity = m_missileSetting.target.forward * m_missileSetting.enemySpeed;*/
 
 
     }
