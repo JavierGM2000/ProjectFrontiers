@@ -2003,6 +2003,7 @@ GameObject:
   - component: {fileID: 743702197}
   - component: {fileID: 743702199}
   - component: {fileID: 743702198}
+  - component: {fileID: 743702200}
   m_Layer: 0
   m_Name: XR Origin UI (2)
   m_TagString: Untagged
@@ -2057,6 +2058,22 @@ MonoBehaviour:
   m_CameraFloorOffsetObject: {fileID: 975049549}
   m_RequestedTrackingOriginMode: 0
   m_CameraYOffset: 1.1176
+--- !u!114 &743702200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743702196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7422e3fa4eb03ff41a2d4fa01d9dda47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root: {fileID: 743702197}
+  head: {fileID: 168112582}
+  leftHand: {fileID: 808680418}
+  rightHand: {fileID: 1164813211}
 --- !u!1001 &766290445
 PrefabInstance:
   m_ObjectHideFlags: 0
