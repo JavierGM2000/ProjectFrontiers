@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 0}
+  SoundSource: {fileID: 0}
+  GoalReachSource: {fileID: 8300000, guid: 997f3215f1c1be64fb5b074794666270, type: 3}
 --- !u!65 &8431960579188224628
 BoxCollider:
   m_ObjectHideFlags: 0
