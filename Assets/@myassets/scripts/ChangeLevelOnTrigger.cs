@@ -36,7 +36,7 @@ public class ChangeLevelOnTrigger : MonoBehaviour
         }
         if (machinegunAction.WasPressedThisFrame())
         {
-            SceneManager.LoadScene("lobyMultiplayer");
+            SceneManager.LoadScene("Carrear");
         }
     }
 }
