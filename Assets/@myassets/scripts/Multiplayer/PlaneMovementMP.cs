@@ -52,6 +52,7 @@ public class PlaneMovementMP : NetworkBehaviour
     [SerializeField]
     private WeaponPlayerControler weaponControler;
 
+    [SerializeField]
     private XROrigin MainCamera;
     [SerializeField]
     private Transform cameraCenter;
@@ -149,7 +150,7 @@ public class PlaneMovementMP : NetworkBehaviour
         VoicelineAction.Enable();
         rb = GetComponent<Rigidbody>();
         gatlinBehaviour = gatling.GetComponent<GatlinBehaviour>();
-        MainCamera = FindObjectOfType<XROrigin>();
+        //MainCamera = FindObjectOfType<XROrigin>();
         
         base.OnNetworkSpawn();
         
@@ -250,7 +251,9 @@ public class PlaneMovementMP : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        detectStall();
+        if (!IsOwner)
+            return;
+        //detectStall();
         float angleDown = Vector3.Angle(Vector3.down, transform.forward);
 
         float appliedGravityForce = gravity - (rb.velocity.magnitude * gravity / 100f);
@@ -421,11 +424,20 @@ public class PlaneMovementMP : NetworkBehaviour
         else
         {
 
-            if (rb.velocity.magnitude < stallVelocity)
+            try
             {
+                if (rb.velocity.magnitude < stallVelocity)
+                {
 
+                    stall = true;
+                }
+            }
+            catch
+            {
                 stall = true;
             }
+
+            
 
 
         }
