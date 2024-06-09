@@ -9,6 +9,8 @@ TagManager:
   - Misil
   - Jormungandr
   - Spawner
+  - Host
+  - Client
   layers:
   - Default
   - TransparentFX
