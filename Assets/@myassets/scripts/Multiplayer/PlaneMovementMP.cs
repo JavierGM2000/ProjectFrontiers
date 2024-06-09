@@ -8,7 +8,8 @@ using Unity.Netcode;
 
 public class PlaneMovementMP : NetworkBehaviour
 {
-
+    public GameObject playerZeroVisual;
+    public GameObject playerOneVisual;
     public GameObject camera;
     //public throttleController throttleObject;
     public static ConnectionManager connectionManager;
@@ -108,17 +109,21 @@ public class PlaneMovementMP : NetworkBehaviour
 
         this.camera.gameObject.active = true;
         
+
+
         connectionManager = FindObjectOfType<ConnectionManager>();
 
         if (OwnerClientId == 0)
         {
             transform.position = connectionManager.startPositionHost.position;
-            
+            playerZeroVisual.gameObject.active = true;
+            this.camera.GetComponent<Camera>().cullingMask = ~(1 << 5 | 1 << 11);
         }
         else {
             transform.position = connectionManager.startPositionClient.position;
-            
-            
+            playerOneVisual.gameObject.active = true;
+            this.camera.GetComponent<Camera>().cullingMask = ~(1 << 5 | 1 << 12);
+
         }
         Debug.Log(OwnerClientId + ": " + transform.position);
         //stallObject.gameObject.active = false;
