@@ -42,6 +42,8 @@ public class PlaneMovementMP : NetworkBehaviour
     [SerializeField]
     private Transform joystick;
 
+    [SerializeField]
+    private MultiplayerVoicelines mpVoicelines;
 
     [SerializeField]
     private GameObject gatling;
@@ -62,6 +64,8 @@ public class PlaneMovementMP : NetworkBehaviour
     public InputAction changeAction;
     public InputAction resetAction;
     public InputAction missileAction;
+    public InputAction VoicelineAction;
+
 
     private float throttle;
     private float roll;
@@ -99,6 +103,9 @@ public class PlaneMovementMP : NetworkBehaviour
     {
         if (!IsOwner)
             return;
+
+        
+
         this.camera.gameObject.active = true;
         
         connectionManager = FindObjectOfType<ConnectionManager>();
@@ -125,6 +132,7 @@ public class PlaneMovementMP : NetworkBehaviour
         changeAction = planeControls.PlaneMap.ChangeTarget;
         resetAction = planeControls.PlaneMap.ResetCam;
         missileAction = planeControls.PlaneMap.Missile;
+        VoicelineAction = planeControls.PlaneMap.Voiceline;
         pitchAction.Enable();
         rollAction.Enable();
         yawAction.Enable();
@@ -133,9 +141,11 @@ public class PlaneMovementMP : NetworkBehaviour
         changeAction.Enable();
         resetAction.Enable();
         missileAction.Enable();
+        VoicelineAction.Enable();
         rb = GetComponent<Rigidbody>();
         gatlinBehaviour = gatling.GetComponent<GatlinBehaviour>();
         MainCamera = FindObjectOfType<XROrigin>();
+        
         base.OnNetworkSpawn();
         
     }
@@ -143,7 +153,7 @@ public class PlaneMovementMP : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        mpVoicelines = FindObjectOfType<MultiplayerVoicelines>();
         //MainCamera = FindObjectOfType<XROrigin>();
         //throttle = 100;
         //volumeMultiplier = engine.volume;
@@ -154,6 +164,11 @@ public class PlaneMovementMP : NetworkBehaviour
     {
         if (!IsOwner)
             return;
+
+        if (VoicelineAction.WasPressedThisFrame())
+        {
+            mpVoicelines.soundTimeServerRpc();
+        }
 
         if (startSoundCounter)
         {

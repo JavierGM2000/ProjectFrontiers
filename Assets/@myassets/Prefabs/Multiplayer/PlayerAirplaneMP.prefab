@@ -28743,6 +28743,7 @@ MonoBehaviour:
   velocityText: {fileID: 6066888390116394042}
   angleWithFloorText: {fileID: 0}
   joystick: {fileID: 6066888389193239460}
+  mpVoicelines: {fileID: 0}
   gatling: {fileID: 6066888389154557143}
   weaponControler: {fileID: 0}
   cameraCenter: {fileID: 5092622989147328777}
@@ -28814,6 +28815,15 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: cd7aed9f-013d-416a-8cf1-3b27dbd89350
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  VoicelineAction:
+    m_Name: Voiceline
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 4a95b2a6-de52-4a05-976d-108f66205d7e
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []

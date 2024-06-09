@@ -6,13 +6,14 @@ using UnityEngine;
 public class MultiplayerVoicelines : NetworkBehaviour
 {
     float cooldown = 0;
-    float cooldownRes = 10f;
+    float cooldownRes = 5f;
 
     int numOfLines;
     Character chara;
 
     List<AudioClip> audios;
 
+    [SerializeField]
     AudioSource myAudioSource;
 
     // Start is called before the first frame update
@@ -22,6 +23,8 @@ public class MultiplayerVoicelines : NetworkBehaviour
         chara = JsonUtility.FromJson<Character>(targetFile.text);
 
         numOfLines = chara.insultLines.Length;
+
+        audios = new List<AudioClip>();
         audios.Add(loadFromVoiceline(chara.introLine));
 
         foreach(VoicelineClass vc in chara.insultLines)
@@ -37,24 +40,21 @@ public class MultiplayerVoicelines : NetworkBehaviour
         return Resources.Load<AudioClip>(voicein.path);
     }
 
-    [ServerRpc]
-    void playRandomAudioServerRpc()
+    [ServerRpc(RequireOwnership = false)]
+    public void soundTimeServerRpc()
     {
-        if (cooldown <= 0)
-        {
-            cooldown = cooldownRes;
-            int selected = Random.Range(1, numOfLines);
-
-            myAudioSource.PlayOneShot(audios[selected]);
-        }
+        cooldown = cooldownRes;
+        int selected = Random.Range(1, numOfLines);
+        playRandomAudioClientRpc(selected);
     }
 
-    // Update is called once per frame
-    void Update()
+    [ClientRpc]
+    public void playRandomAudioClientRpc(int audio)
     {
-        if (cooldown > 0)
-        {
-            cooldown -= Time.deltaTime;
-        }
+
+            
+
+            myAudioSource.PlayOneShot(audios[audio]);
     }
+
 }

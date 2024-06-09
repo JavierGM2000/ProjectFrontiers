@@ -98,6 +98,15 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Voiceline"",
+                    ""type"": ""Button"",
+                    ""id"": ""be81fa98-01d3-4705-95d8-d05de08c6ca4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -163,6 +172,39 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""XboxControls"",
+                    ""action"": ""Pitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""69ea6925-e479-491a-8617-c7e42fe4d09c"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pitch"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""2f491180-bc6b-4638-a683-eccf9ef50862"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""513743f1-4a5b-4713-a3f3-c8733cf56f14"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Pitch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -628,6 +670,28 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                     ""action"": ""Missile"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4082386e-2617-451b-9f62-96536d4b35e8"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Voiceline"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""309ad06e-78c9-42f0-83b0-8f9f783e78ca"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Voiceline"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -656,6 +720,7 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
         m_PlaneMap_ChangeTarget = m_PlaneMap.FindAction("ChangeTarget", throwIfNotFound: true);
         m_PlaneMap_ResetCam = m_PlaneMap.FindAction("ResetCam", throwIfNotFound: true);
         m_PlaneMap_Missile = m_PlaneMap.FindAction("Missile", throwIfNotFound: true);
+        m_PlaneMap_Voiceline = m_PlaneMap.FindAction("Voiceline", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -723,6 +788,7 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlaneMap_ChangeTarget;
     private readonly InputAction m_PlaneMap_ResetCam;
     private readonly InputAction m_PlaneMap_Missile;
+    private readonly InputAction m_PlaneMap_Voiceline;
     public struct PlaneMapActions
     {
         private @PlaneControlActions m_Wrapper;
@@ -735,6 +801,7 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
         public InputAction @ChangeTarget => m_Wrapper.m_PlaneMap_ChangeTarget;
         public InputAction @ResetCam => m_Wrapper.m_PlaneMap_ResetCam;
         public InputAction @Missile => m_Wrapper.m_PlaneMap_Missile;
+        public InputAction @Voiceline => m_Wrapper.m_PlaneMap_Voiceline;
         public InputActionMap Get() { return m_Wrapper.m_PlaneMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -768,6 +835,9 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                 @Missile.started -= m_Wrapper.m_PlaneMapActionsCallbackInterface.OnMissile;
                 @Missile.performed -= m_Wrapper.m_PlaneMapActionsCallbackInterface.OnMissile;
                 @Missile.canceled -= m_Wrapper.m_PlaneMapActionsCallbackInterface.OnMissile;
+                @Voiceline.started -= m_Wrapper.m_PlaneMapActionsCallbackInterface.OnVoiceline;
+                @Voiceline.performed -= m_Wrapper.m_PlaneMapActionsCallbackInterface.OnVoiceline;
+                @Voiceline.canceled -= m_Wrapper.m_PlaneMapActionsCallbackInterface.OnVoiceline;
             }
             m_Wrapper.m_PlaneMapActionsCallbackInterface = instance;
             if (instance != null)
@@ -796,6 +866,9 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
                 @Missile.started += instance.OnMissile;
                 @Missile.performed += instance.OnMissile;
                 @Missile.canceled += instance.OnMissile;
+                @Voiceline.started += instance.OnVoiceline;
+                @Voiceline.performed += instance.OnVoiceline;
+                @Voiceline.canceled += instance.OnVoiceline;
             }
         }
     }
@@ -819,5 +892,6 @@ public partial class @PlaneControlActions : IInputActionCollection2, IDisposable
         void OnChangeTarget(InputAction.CallbackContext context);
         void OnResetCam(InputAction.CallbackContext context);
         void OnMissile(InputAction.CallbackContext context);
+        void OnVoiceline(InputAction.CallbackContext context);
     }
 }
