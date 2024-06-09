@@ -3,6 +3,8 @@ using System;
 [Serializable]
 public class VoicelineClass
 {
-    string subtitle;
-    string path;
+    public string subtitle;
+    public string path;
+
+     
 }

@@ -1,12 +1,3 @@
-using System;
-
-public class Character
-{
-    public VoicelineClass introLine;
-    public VoicelineClass[] insultLines;
-}
-/*
- 
 {
     "introLine": {
         "subtitle":"You solely, are responsible for this",
@@ -35,4 +26,3 @@ public class Character
         }
     ]
 }
-*/
