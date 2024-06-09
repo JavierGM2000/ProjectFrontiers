@@ -5,24 +5,27 @@ using UnityEngine;
 
 public class ConnectionManager : NetworkBehaviour
 {
-
+    public Transform startPositionHost;
+    public Transform startPositionClient;
     bool started = false;
 
     public void StartHost()
     {
         NetworkManager.Singleton.StartHost();
+        
     }
 
     public void StartClient()
     {
         NetworkManager.Singleton.StartClient();
+        
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
             StartHost();
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
             StartClient();
 
         if (!IsServer)
@@ -33,7 +36,7 @@ public class ConnectionManager : NetworkBehaviour
         {
             started = true;
 
-            NetworkManager.Singleton.SceneManager.LoadScene("Carrera", UnityEngine.SceneManagement.LoadSceneMode.Single);
+           // NetworkManager.Singleton.SceneManager.LoadScene("Carrera", UnityEngine.SceneManagement.LoadSceneMode.Single);
         }
 
 

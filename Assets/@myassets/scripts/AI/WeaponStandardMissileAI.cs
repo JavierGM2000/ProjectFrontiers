@@ -20,7 +20,7 @@ public class WeaponStandardMissileAI : Weapon
     private MissileWarning targetWarning;
 
     [SerializeField]
-    private float lockDistance = 4000;
+    private float lockDistance = 2800;
     [SerializeField]
     float activationTime = 0.5f;
     float activationTimer;
